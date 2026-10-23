@@ -68,6 +68,7 @@
               "modul/lintas-garis",
               "modul/berdiam-terlalu-lama",
               "modul/larangan-parkir",
+              "modul/penyusupan-zona",
               "modul/kepadatan-berlebih",
               "modul/penghitung-pengunjung",
               "modul/perundungan-fisik"
