@@ -12,6 +12,18 @@
 - Use the Mintlify MCP server, `https://mcp.mintlify.com`, to edit content and settings via MCP
 - Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information about using Mintlify via MCP
 
+## Sync with the application
+
+Docs changes usually arrive as part of an application task in `jagaind/core`. That repository's `docs/agents/documentation-sync.md` owns the procedure; the rules that bind this repository:
+
+- Work on a branch with the same name as the application branch. CI in the application repo checks its contracts against that branch
+- Describe the behaviour after the change. Remove or rewrite the old behaviour rather than adding a note beside it
+- When a feature ships or a known gap closes, update the "Verified feature set" and "Known gaps" lists in `.mintlify/product-brief.md`
+- A new page goes into `docs.json` navigation. A moved or deleted page that was already published gets a `redirects` entry in `docs.json`
+- A changed screen with an outdated screenshot: retake it from sanitized demo data, or list it as pending in the task report
+- `main` publishes on push, so a docs PR merges after the application PR it describes
+- Before you finish, run `node scripts/check-navigation.mjs`, `mint validate`, and `mint broken-links`. CI runs the same three
+
 ## Language
 
 - Write in Indonesian. Address the reader as "Anda"

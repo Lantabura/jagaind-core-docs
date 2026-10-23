@@ -1,0 +1,27 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Pasang Mintlify CLI
+        # Versi dipin agar hasil validasi tidak berubah tanpa perubahan di repo ini.
+        run: npm install --global mint@4.2.1106
+      - name: Navigasi, frontmatter, dan gambar
+        run: node scripts/check-navigation.mjs
+      - name: Validasi build Mintlify
+        run: mint validate
+      - name: Tautan rusak
+        run: mint broken-links
