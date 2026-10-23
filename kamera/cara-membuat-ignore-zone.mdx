@@ -1,0 +1,64 @@
+---
+title: "Cara membuat Ignore Zone"
+description: "Gambar area yang diabaikan modul terpilih, misalnya layar TV atau jalan di luar pagar, untuk mengurangi alarm palsu."
+keywords: ["ignore zone", "zona abaikan", "alarm palsu", "mask"]
+---
+
+Ignore Zone adalah area di video yang diabaikan oleh modul yang Anda pilih. Objek yang titik kakinya berada di dalam zona tidak dihitung oleh modul tersebut dan tidak membuat kamera naik ke kecepatan analisis penuh. Modul lain di kamera yang sama tetap melihat objek itu.
+
+Gunakan Ignore Zone untuk area yang sering memicu deteksi palsu, misalnya layar TV, poster bergambar orang, cermin, atau jalan di luar pagar.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola modul kamera**.
+- Minimal satu modul sudah terpasang di kamera. Ignore Zone hanya bisa dipasang ke modul yang sudah terpasang. Lihat [Cara memasang modul](/modul/cara-memasang-modul).
+
+## Langkah-langkah
+
+<Steps>
+  <Step title="Buka tab Zona">
+    Buka halaman kamera, lalu pilih tab **Zona**. Pilih **Tambah zona**. Alat gambar di video langsung aktif.
+  </Step>
+  <Step title="Gambar poligon di video">
+    Klik setiap titik sudut area di video. Tutup zona dengan mengeklik titik pertama, menekan `Enter`, atau memilih **Selesai zona**. Zona butuh minimal 3 titik.
+
+    Tekan `Esc` atau pilih **Batal gambar** untuk membatalkan. Setelah zona tertutup, seret titik sudut untuk merapikan bentuknya. Pilih **Gambar ulang zona** untuk mulai dari awal.
+  </Step>
+  <Step title="Isi nama dan pilih modul">
+    Di panel kanan, isi **Nama zona**, misalnya "Layar TV lobi". Di **Berlaku untuk modul**, centang modul yang harus mengabaikan area ini. Semua modul yang terpasang tercentang secara bawaan.
+
+    ![Ignore Zone baru sedang digambar di video, dengan isian Nama zona dan pilihan modul](/images/kamera/ignore-zone.png)
+  </Step>
+  <Step title="Simpan">
+    Pilih **Simpan zona**.
+  </Step>
+</Steps>
+
+## Hasil
+
+Zona tampil di daftar **Ignore Zone** dengan nama dan daftar modul tempatnya berlaku. Jumlah zona tampil di label tab **Zona**.
+
+## Mengubah atau menghapus zona
+
+- Pilih **Ubah** di baris zona untuk mengganti nama, modul, atau bentuknya.
+- Pilih **Hapus**, lalu konfirmasi dengan **Hapus zona**. Modul yang memakai zona ini kembali menghitung objek di area tersebut.
+
+## Batasan
+
+- Modul yang Anda pasang ke kamera setelah zona dibuat tidak otomatis ikut. Ubah zona dan centang modul baru itu bila perlu.
+- Ignore Zone dinilai dari titik kaki objek, yaitu bagian tengah bawah kotak objek. Objek yang sebagian tubuhnya masuk zona tetapi kakinya di luar tetap dihitung.
+- Ignore Zone hanya terlihat di video saat **Mode debug** menyala. Lihat [Cara memakai mode debug](/kamera/cara-memakai-mode-debug).
+
+## Masalah umum
+
+| Pesan | Solusi |
+| --- | --- |
+| Nama zona belum diisi. | Isi **Nama zona**. |
+| Gambar poligon zona di video (minimal 3 titik). | Gambar zona dengan minimal 3 titik sudut. |
+| Pilih minimal satu modul. | Centang minimal satu modul di **Berlaku untuk modul**. |
+| Tombol **Tambah zona** tidak aktif | Pasang modul lebih dulu. |
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara mengatasi insiden tidak muncul](/bantuan/cara-mengatasi-insiden-tidak-muncul)

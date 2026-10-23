@@ -1,0 +1,62 @@
+---
+title: "Katalog modul"
+description: "Kenali modul analitik yang tersedia di JagaInd, bedanya modul peringatan dan modul statistik, serta cara membaca halaman setiap modul."
+keywords: ["katalog modul", "modul analitik", "module hub", "daftar modul"]
+---
+
+Modul analitik adalah kemampuan yang membuat kamera mengenali kejadian tertentu. Daftar modul diumumkan oleh AI Worker saat tersambung, jadi katalog hanya tampil bila AI Worker berjalan.
+
+## Modul yang tersedia
+
+| Modul | Hasil | Perlu digambar | Panduan |
+| --- | --- | --- | --- |
+| **Lintas Garis** | Peringatan | Garis (Tripwire) | [Lintas Garis](/modul/lintas-garis) |
+| **Berdiam Terlalu Lama** | Peringatan | Area | [Berdiam Terlalu Lama](/modul/berdiam-terlalu-lama) |
+| **Larangan Parkir** | Peringatan | Area | [Larangan Parkir](/modul/larangan-parkir) |
+| **Kepadatan Berlebih** | Peringatan | Area | [Kepadatan Berlebih](/modul/kepadatan-berlebih) |
+| **Penghitung Pengunjung** | Statistik | Garis atau area | [Penghitung Pengunjung](/modul/penghitung-pengunjung) |
+| **Perundungan Fisik** | Peringatan | Tidak perlu | [Perundungan Fisik](/modul/perundungan-fisik) |
+| **Pengenalan Wajah** | Peringatan | Tidak perlu | [Pengenalan Wajah](/modul/pengenalan-wajah) |
+
+- **Modul peringatan** mencatat kejadian yang dapat menjadi insiden melalui aturan alarm.
+- **Modul statistik** hanya menghasilkan angka dan grafik. Modul ini tidak pernah membuat insiden.
+
+## Membuka Katalog Modul
+
+Pilih **Katalog Modul** di menu kiri. Anda butuh izin **Lihat kamera**.
+
+![Halaman Katalog Modul dengan ringkasan pemakaian dan kartu setiap modul](/images/modul/katalog-modul.png)
+
+Halaman ini menampilkan:
+
+- Ringkasan **Modul tersedia**, **Sudah dipakai kamera**, **Belum dipakai**, dan **Total pemasangan**.
+- Filter **Pemakaian modul**: **Semua**, **Terpasang**, atau **Belum terpasang**.
+- Kartu setiap modul dengan ilustrasi, jenis hasil, contoh penggunaan di **Cocok untuk**, jumlah kamera yang memakainya, dan jumlah aturan serta insiden terbuka.
+
+Pilih **Buka Modul** di kartu untuk membuka halaman modul. Modul juga dapat dibuka langsung dari daftar di bawah **Modul Analitik** di menu kiri.
+
+## Halaman modul
+
+Halaman modul merangkum pemakaian satu modul di semua kamera.
+
+![Halaman modul Lintas Garis dengan tab Kamera Terpasang](/images/modul/hub-modul.png)
+
+- **Panduan** membuka penjelasan cara kerja modul, contoh penggunaan, dan **Info teknis**.
+- **Buka Kamera** membuka halaman Kamera untuk memasang modul.
+- Baris status menampilkan jumlah kamera terpasang, aturan aktif, dan kamera bermasalah.
+- Tab **Kamera Terpasang** menampilkan setiap kamera beserta status modul dan aturan peringatannya. Pilih **Atur di Kamera** untuk mengubahnya.
+- Tab **Kejadian Belum Diakui** menampilkan insiden terbuka dari modul ini. Tab ini hanya ada untuk modul peringatan dan pengguna dengan izin **Lihat insiden**.
+
+Beberapa modul punya tab tambahan:
+
+- **Penghitung Pengunjung**: tab **Statistik**.
+- **Pengenalan Wajah**: tab **Orang Terdaftar** dan **Wajah Tak Dikenal**.
+
+## Bila katalog kosong
+
+Bila AI Worker belum tersambung, halaman menampilkan **Katalog modul belum tersedia** dan menu kiri menampilkan **Belum ada modul terhubung**. Kamera tetap bisa ditambahkan, tetapi modul baru bisa dipasang setelah AI Worker tersambung. Lihat [Cara memeriksa kesehatan server](/admin/cara-memeriksa-kesehatan-server).
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara mengubah modul](/modul/cara-mengubah-modul)

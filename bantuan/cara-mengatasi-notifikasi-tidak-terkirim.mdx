@@ -1,0 +1,57 @@
+---
+title: "Cara mengatasi notifikasi tidak terkirim"
+description: "Periksa kanal, target, sesi WhatsApp, token Telegram, dan antrean bila notifikasi insiden tidak sampai."
+keywords: ["notifikasi gagal", "telegram tidak terkirim", "whatsapp terputus", "pesan tidak sampai"]
+---
+
+Gunakan halaman ini bila insiden muncul di dashboard tetapi pesan tidak sampai ke Telegram atau WhatsApp.
+
+## Pemeriksaan umum
+
+<Steps>
+  <Step title="Pastikan insiden benar-benar ada">
+    Notifikasi hanya dikirim untuk insiden. Bila insiden tidak muncul di dashboard, lihat [Cara mengatasi insiden tidak muncul](/bantuan/cara-mengatasi-insiden-tidak-muncul).
+  </Step>
+  <Step title="Buka Pengaturan > Notifikasi">
+    Periksa kartu kanal:
+
+    - Kanal harus aktif. Bila tidak, pilih **Aktifkan kanal**.
+    - Status kanal harus **Terhubung**.
+    - Target tujuan harus berstatus **Aktif**.
+  </Step>
+  <Step title="Kirim pesan tes">
+    Pilih **Kirim tes** pada target. Pesan galat yang muncul menunjukkan penyebabnya.
+  </Step>
+  <Step title="Periksa koneksi internet server">
+    Telegram dan WhatsApp membutuhkan internet. Pesan yang tertahan lebih lama dari batas umur antrean, bawaannya 30 menit, ditandai gagal dan tidak dikirim.
+  </Step>
+</Steps>
+
+## Telegram
+
+| Gejala | Penyebab | Solusi |
+| --- | --- | --- |
+| Kartu bertuliskan **Belum dikonfigurasi** | `TELEGRAM_BOT_TOKEN` belum diisi. | Minta admin server mengisinya dan memulai ulang Core. |
+| Status **Galat** dengan **Pengiriman Telegram gagal** | Token bot dicabut atau chat ID salah. | Periksa galat terakhir di kartu. Perbaiki token atau ganti target. Status kembali normal setelah ada pengiriman berhasil. |
+| kanal menolak pesan tes: ... | Telegram menolak pesan, misalnya bot belum ada di grup. | Tambahkan bot ke grup tujuan, lalu kirim tes lagi. |
+
+## WhatsApp
+
+| Status | Tindakan |
+| --- | --- |
+| **Terputus** | Pilih **Sambungkan ulang**. Tautan masih tersimpan, jadi tidak perlu pairing ulang. |
+| **Galat** | Gangguan sementara. Server terus mencoba. Pilih **Sambungkan ulang** bila tidak pulih. |
+| **Keluar** | Perangkat tertaut dilepas dari HP. Pilih **Tautkan ulang**. |
+| **Nonaktif** dengan tulisan "dinonaktifkan di server" | Fitur WhatsApp mati. Minta admin server mengisi `WHATSAPP_ENABLED=true`. |
+
+Penyebab lain yang perlu diperiksa:
+
+- **HP pengirim offline terlalu lama.** WhatsApp dapat melepas perangkat tertaut. Nyalakan HP, buka WhatsApp, dan periksa daftar perangkat tertaut.
+- **Dua server JagaInd memakai database yang sama.** Keduanya saling memutus sesi. Hentikan salah satu, lalu tautkan ulang.
+- **Batas laju terlampaui.** Pesan WhatsApp dibatasi per menit (bawaan 20). Pesan berlebih dijadwalkan ulang otomatis.
+- **Nomor diblokir WhatsApp.** Nonaktifkan kanal, jangan ulangi pairing berkali-kali, lalu siapkan nomor baru. Lihat [Cara menghubungkan WhatsApp](/notifikasi/cara-menghubungkan-whatsapp#bila-nomor-diblokir-whatsapp).
+
+## Lihat juga
+
+- [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi)
+- [Cara mengirim notifikasi ke Telegram](/notifikasi/cara-mengirim-notifikasi-telegram)

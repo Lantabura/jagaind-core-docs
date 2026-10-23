@@ -1,0 +1,47 @@
+---
+title: "Kepadatan Berlebih"
+description: "Beri tanda saat jumlah orang di suatu area mencapai batas dan bertahan cukup lama."
+keywords: ["kepadatan berlebih", "overcrowding", "kerumunan", "antrean", "zona"]
+---
+
+Modul **Kepadatan Berlebih** memberi tanda saat jumlah orang di suatu area mencapai batas dan bertahan cukup lama.
+
+**Cocok untuk:**
+
+- Area antrean loket atau kasir
+- Lobi dan ruang tunggu
+- Pintu darurat yang harus tetap lega
+
+## Cara kerja
+
+1. Anda menandai area yang ingin dijaga kepadatannya.
+2. Modul menghitung jumlah orang yang terlihat di dalam zona setiap saat.
+3. Bila jumlahnya mencapai **Ambang jumlah orang** dan bertahan selama **Durasi minimum**, modul mencatat satu kejadian.
+4. Kejadian berikutnya baru mungkin setelah zona kembali normal, yaitu jumlah orang berada di bawah ambang selama durasi yang sama.
+
+Penurunan jumlah yang sangat singkat, kurang dari sekitar 3 detik, tidak mengatur ulang hitungan waktu.
+
+## Jenis kejadian
+
+| Kejadian | Arti |
+| --- | --- |
+| **Memadati area** | Jumlah orang di zona mencapai ambang dan bertahan selama durasi minimum. |
+
+## Yang perlu digambar
+
+Minimal satu **zona** berupa poligon dengan minimal 3 titik.
+
+## Pengaturan
+
+| Pengaturan | Bawaan | Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Ambang jumlah orang** | 5 | 2–100 | Jumlah orang minimum di zona agar dianggap padat. |
+| **Ambang jumlah orang** per zona | Kosong | 2–100 | Isian di samping nama zona. Kosongkan untuk memakai nilai modul. |
+| **Durasi minimum (detik)** | 30 | 5–600 | Lama jumlah orang harus bertahan sebelum dilaporkan. |
+
+Modul ini hanya mengamati orang.
+
+## Lihat juga
+
+- [Penghitung Pengunjung](/modul/penghitung-pengunjung) untuk statistik jumlah orang tanpa alarm.
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)

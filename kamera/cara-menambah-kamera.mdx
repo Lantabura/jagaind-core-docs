@@ -1,0 +1,96 @@
+---
+title: "Cara menambah kamera"
+description: "Hubungkan kamera RTSP atau kamera uji ke JagaInd, lalu atur kecepatan dan resolusi analisisnya."
+keywords: ["tambah kamera", "rtsp", "sub-stream", "kamera uji", "nvr", "resolusi analisis"]
+---
+
+Kamera adalah sumber video untuk semua analitik JagaInd. Admin menambahkan kamera sekali di awal, lalu memasang modul analitik di kamera tersebut.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola kamera**.
+- Untuk kamera sungguhan, siapkan **alamat RTSP** dari pengaturan kamera atau NVR. Alamat ini biasanya memuat nama pengguna dan kata sandi kamera, misalnya `rtsp://pengguna:sandi@192.168.1.100:554/stream1`.
+- Bila kamera punya **sub-stream**, siapkan juga alamatnya. Sub-stream membuat analitik lebih hemat.
+- Server JagaInd harus dapat menjangkau alamat kamera di jaringan.
+
+<Note>
+  Format alamat RTSP berbeda untuk setiap merek kamera dan NVR. Lihat manual perangkat Anda untuk alamat stream utama dan sub-stream.
+</Note>
+
+## Langkah-langkah
+
+<Steps>
+  <Step title="Buka halaman Kamera">
+    Pilih **Kamera** di menu kiri, lalu pilih **Tambah kamera**.
+  </Step>
+  <Step title="Isi identitas kamera">
+    - **Nama kamera**: nama yang dibaca operator di layar Pantau, misalnya "Gerbang Depan".
+    - **Lokasi**: gedung, lantai, atau area. Boleh dikosongkan.
+  </Step>
+  <Step title="Pilih sumber video">
+    Di **Sumber video**, pilih salah satu:
+
+    <Tabs>
+      <Tab title="Kamera RTSP">
+        Isi:
+
+        - **Alamat stream utama**: stream resolusi penuh untuk tampilan langsung. Wajib diisi dan harus diawali `rtsp://` atau `rtsps://`.
+        - **Alamat sub-stream (disarankan)**: stream resolusi rendah untuk analitik. Kosongkan bila kamera tidak punya sub-stream.
+      </Tab>
+      <Tab title="Kamera uji">
+        Kamera uji membangkitkan gambar sintetis untuk mencoba modul tanpa kamera sungguhan. Tidak perlu alamat stream.
+      </Tab>
+    </Tabs>
+  </Step>
+  <Step title="Atur analisis">
+    - **Kecepatan analisis**: jumlah gambar per detik yang dianalisis AI, antara 1 dan 30. Nilai bawaan 10 cukup untuk orang berjalan. Nilai lebih tinggi lebih teliti tetapi lebih berat untuk server.
+    - **Resolusi analisis**:
+      - **Standar**: gambar 640 px dari sub-stream. Cukup untuk menghitung orang, garis, dan area, serta paling hemat.
+      - **Tinggi**: gambar 1280 px dari stream utama. Wajib untuk Pengenalan Wajah, tetapi lebih berat untuk server.
+
+    ![Formulir Tambah kamera dengan kolom nama, lokasi, sumber video, alamat stream, kecepatan, dan resolusi analisis](/images/kamera/form-tambah-kamera.png)
+  </Step>
+  <Step title="Simpan">
+    Pilih **Simpan kamera**.
+  </Step>
+</Steps>
+
+## Hasil
+
+Anda langsung diarahkan ke halaman pengaturan kamera baru. Kamera juga tampil di halaman **Kamera** dan layar **Pantau**. Status **Aktif** berarti kamera tersambung dan mengirim video.
+
+Langkah berikutnya adalah [memasang modul analitik](/modul/cara-memasang-modul).
+
+## Halaman Kamera
+
+Halaman **Kamera** menampilkan semua kamera beserta ringkasan:
+
+- **Kamera**: jumlah kamera.
+- **Aktif**: kamera yang tersambung.
+- **Perlu perhatian**: kamera yang diaktifkan tetapi berstatus Mati atau Gangguan.
+- **Modul terpasang**: jumlah pemasangan modul dan di berapa kamera.
+
+Gunakan kolom **Cari nama atau lokasi…** dan filter status atau sumber untuk menemukan kamera. Pilih ikon kartu atau daftar untuk mengganti tampilan. Pilih kartu kamera untuk membuka pengaturannya.
+
+![Halaman Kamera dengan ringkasan, filter, dan satu kartu kamera uji](/images/kamera/daftar-kamera.png)
+
+## Batasan
+
+- Formulir hanya menyediakan sumber **Kamera RTSP** dan **Kamera uji**.
+- Alamat stream tersimpan tidak pernah ditampilkan ulang lengkap dengan kata sandinya.
+- Bila AI Worker belum terhubung, kamera tetap bisa ditambahkan, tetapi modul baru bisa dipasang setelah AI Worker tersambung.
+
+## Masalah umum
+
+| Pesan atau gejala | Penyebab | Solusi |
+| --- | --- | --- |
+| Isi nama kamera. | Nama kosong. | Isi **Nama kamera**. |
+| Isi alamat stream utama kamera. | Sumber RTSP tanpa alamat utama. | Isi **Alamat stream utama**. |
+| Alamat stream harus diawali rtsp:// | Format alamat salah. | Mulai alamat dengan `rtsp://`. |
+| Kecepatan analisis harus 1–30 gambar per detik. | Nilai di luar rentang. | Isi angka antara 1 dan 30. |
+| Kamera berstatus **Gangguan** | Alamat, nama pengguna, atau kata sandi kamera salah, atau kamera tidak terjangkau. | Lihat [Cara mengatasi video tidak tampil](/bantuan/cara-mengatasi-video-tidak-tampil). |
+
+## Lihat juga
+
+- [Cara mengubah dan menghapus kamera](/kamera/cara-mengubah-dan-menghapus-kamera)
+- [Cara memasang modul](/modul/cara-memasang-modul)

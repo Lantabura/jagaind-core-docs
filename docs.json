@@ -1,55 +1,123 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "JagaInd",
+  "description": "Panduan pengguna dan admin JagaInd, platform analitik video CCTV berbasis AI yang berjalan di server lokal.",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#16803F",
+    "light": "#34B36B",
+    "dark": "#16803F"
   },
   "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart",
-          "testing"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+  "icons": {
+    "library": "lucide"
   },
   "logo": {
     "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "dark": "/logo/dark.svg",
+    "href": "/"
   },
-  "navbar": {
-    "links": [
+  "navigation": {
+    "groups": [
       {
-        "label": "Support",
-        "href": "mailto:support@mintlify.com"
+        "group": "Mulai",
+        "pages": [
+          "index",
+          "mulai/konsep-dasar",
+          "mulai/panduan-cepat-admin",
+          "mulai/panduan-cepat-operator"
+        ]
+      },
+      {
+        "group": "Akun dan akses",
+        "pages": [
+          "akun/cara-masuk",
+          "akun/cara-mengganti-kata-sandi",
+          "akun/peran-dan-izin",
+          "akun/cara-mengelola-pengguna",
+          "akun/cara-membuat-peran-kustom"
+        ]
+      },
+      {
+        "group": "Pemantauan",
+        "pages": [
+          "pemantauan/cara-memantau-kamera",
+          "pemantauan/cara-menanggapi-insiden",
+          "pemantauan/cara-melihat-riwayat-insiden",
+          "pemantauan/cara-mengatur-bunyi-alarm"
+        ]
+      },
+      {
+        "group": "Kamera",
+        "pages": [
+          "kamera/cara-menambah-kamera",
+          "kamera/cara-mengubah-dan-menghapus-kamera",
+          "kamera/cara-membuat-ignore-zone",
+          "kamera/cara-memakai-mode-debug"
+        ]
+      },
+      {
+        "group": "Modul analitik",
+        "pages": [
+          "modul/katalog-modul",
+          "modul/cara-memasang-modul",
+          "modul/cara-mengubah-modul",
+          {
+            "group": "Panduan per modul",
+            "pages": [
+              "modul/lintas-garis",
+              "modul/berdiam-terlalu-lama",
+              "modul/larangan-parkir",
+              "modul/kepadatan-berlebih",
+              "modul/penghitung-pengunjung",
+              "modul/perundungan-fisik"
+            ]
+          },
+          {
+            "group": "Pengenalan Wajah",
+            "pages": [
+              "modul/pengenalan-wajah",
+              "modul/cara-mendaftarkan-wajah",
+              "modul/cara-meninjau-wajah-tak-dikenal"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Aturan alarm",
+        "pages": [
+          "aturan/cara-membuat-aturan-alarm",
+          "aturan/cara-mengelola-aturan-alarm"
+        ]
+      },
+      {
+        "group": "Notifikasi",
+        "pages": [
+          "notifikasi/cara-kerja-notifikasi",
+          "notifikasi/cara-mengirim-notifikasi-telegram",
+          "notifikasi/cara-menghubungkan-whatsapp"
+        ]
+      },
+      {
+        "group": "Administrasi server",
+        "pages": [
+          "admin/cara-memasang-jagaind",
+          "admin/konfigurasi-server",
+          "admin/cara-memeriksa-kesehatan-server",
+          "admin/penyimpanan-dan-retensi-data"
+        ]
+      },
+      {
+        "group": "Bantuan",
+        "pages": [
+          "bantuan/cara-mengatasi-gagal-masuk",
+          "bantuan/cara-mengatasi-video-tidak-tampil",
+          "bantuan/cara-mengatasi-insiden-tidak-muncul",
+          "bantuan/cara-mengatasi-notifikasi-tidak-terkirim",
+          "bantuan/faq"
+        ]
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
@@ -64,10 +132,20 @@
     ]
   },
   "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    "links": [
+      {
+        "header": "Bantuan",
+        "items": [
+          {
+            "label": "Pertanyaan umum",
+            "href": "/bantuan/faq"
+          },
+          {
+            "label": "Gagal masuk",
+            "href": "/bantuan/cara-mengatasi-gagal-masuk"
+          }
+        ]
+      }
+    ]
   }
 }

@@ -1,0 +1,81 @@
+---
+title: "Cara melihat riwayat insiden"
+sidebarTitle: "Melihat riwayat insiden"
+description: "Cari insiden lama berdasarkan periode, tingkat, status, dan kamera, lalu buka detailnya untuk melihat foto bukti dan siapa yang mengakuinya."
+keywords: ["riwayat insiden", "insiden", "bukti", "snapshot", "filter insiden"]
+---
+
+Halaman **Insiden** menyimpan semua insiden, baik yang belum maupun sudah diakui. Gunakan halaman ini untuk meninjau kejadian, memeriksa foto bukti, dan melihat siapa yang mengakui insiden.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Lihat insiden**.
+- Untuk melihat foto bukti, Anda butuh izin **Lihat bukti (foto dan klip)**.
+- Untuk mengakui insiden dari halaman ini, Anda butuh izin **Akui insiden**.
+
+## Mencari insiden
+
+<Steps>
+  <Step title="Buka halaman Insiden">
+    Pilih **Insiden** di menu kiri. Secara bawaan, halaman menampilkan insiden **Hari ini**.
+  </Step>
+  <Step title="Atur filter">
+    Gunakan filter di bagian atas:
+
+    - **Periode**: Hari ini, Kemarin, 7 hari, atau Semua.
+    - **Tingkat**: Semua, Kritis, Peringatan, atau Info.
+    - **Status**: Semua, Belum diakui, atau Sudah diakui.
+    - **Kamera**: Semua kamera atau satu kamera.
+
+    Pilih **Atur ulang** untuk kembali ke filter bawaan.
+  </Step>
+  <Step title="Telusuri garis waktu">
+    Grafik per jam di atas daftar menunjukkan sebaran insiden. Di bawahnya, insiden tersusun sebagai garis waktu. Setiap halaman memuat hingga 50 insiden. Pilih **Sebelumnya** atau **Berikutnya** untuk berpindah halaman.
+  </Step>
+</Steps>
+
+Kepala halaman menampilkan jumlah insiden di halaman yang sedang tampil dan berapa yang belum diakui.
+
+<Note>
+  Daftar riwayat tidak bergeser sendiri saat insiden baru masuk, agar Anda tidak kehilangan posisi. Bila ada insiden baru, tombol **N insiden baru · Tampilkan** muncul. Pilih tombol itu untuk memuat ulang daftar.
+</Note>
+
+## Membuka detail insiden
+
+Pilih insiden di garis waktu. Panel detail terbuka di kanan, atau memenuhi layar di perangkat kecil. Panel ini berisi:
+
+- Tingkat dan kalimat kejadian, nama kamera, dan waktu.
+- Foto bukti dengan garis atau area yang terkait.
+- Status pengakuan: **Belum diakui** dengan tombol **Akui**, atau "Diakui &lt;waktu&gt; oleh &lt;nama pengguna&gt;".
+- Rincian: **Waktu**, **Kamera**, **Objek**, **Modul**, **Aturan**, dan **Keyakinan**.
+
+Rincian tambahan tampil sesuai modulnya:
+
+| Rincian | Muncul untuk |
+| --- | --- |
+| **Tripwire** dan arah masuk atau keluar | Lintas Garis |
+| **Zona** | Modul berbasis zona |
+| **Hadir minimal** | Berdiam Terlalu Lama |
+| **Pelaku**, **Korban**, **Orang di sekitar**, **Skor agresi** | Perundungan Fisik |
+| **Orang terdaftar** beserta foto wajahnya | Pengenalan Wajah, untuk pengguna dengan izin **Lihat Orang Terdaftar** |
+
+Gunakan tombol panah atas dan bawah di kanan atas panel untuk berpindah ke insiden sebelumnya atau berikutnya. Tekan `Esc` atau pilih ikon silang untuk menutup panel.
+
+## Batasan
+
+- Bukti saat ini berupa foto (snapshot). Klip video belum tersedia.
+- Bukti lama dapat dihapus otomatis untuk menghemat disk. Insidennya tetap ada, tetapi panel menampilkan "Bukti sudah dihapus otomatis". Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data).
+- Menghapus kamera juga menghapus riwayat insidennya.
+
+## Masalah umum
+
+| Pesan | Solusi |
+| --- | --- |
+| Tidak ada insiden untuk filter ini | Ubah **Periode** menjadi **Semua** atau longgarkan filter lain. |
+| Foto bukti tidak tersedia | Foto tidak tersimpan untuk insiden ini, atau akun Anda tidak punya izin **Lihat bukti (foto dan klip)**. |
+| Insiden tidak dapat dimuat | Pilih **Coba lagi**. Bila tetap gagal, periksa koneksi ke server. |
+
+## Lihat juga
+
+- [Cara menanggapi insiden](/pemantauan/cara-menanggapi-insiden)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)

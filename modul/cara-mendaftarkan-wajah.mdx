@@ -1,0 +1,91 @@
+---
+title: "Cara mendaftarkan wajah"
+description: "Tambahkan Orang Terdaftar, lalu daftarkan 3–5 foto wajahnya dari berkas atau dari kamera agar dikenali modul Pengenalan Wajah."
+keywords: ["daftarkan wajah", "orang terdaftar", "enrollment", "foto wajah", "pengenalan wajah"]
+---
+
+Orang Terdaftar adalah orang yang sengaja didaftarkan agar wajahnya dikenali. Pendaftaran terdiri dari dua langkah: mengisi identitas, lalu menambahkan foto wajah.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola Orang Terdaftar**.
+- Status Galeri Wajah **Galeri tersinkron**. Pendaftaran ditolak bila galeri belum siap.
+- Orang yang didaftarkan sudah memberi persetujuan. Lihat [Privasi](/modul/pengenalan-wajah#privasi).
+- Siapkan 3–5 foto wajah berformat JPEG atau PNG, atau minta orangnya berdiri di depan kamera.
+
+## Langkah 1: Isi identitas
+
+<Steps>
+  <Step title="Buka tab Orang Terdaftar">
+    Pilih **Pengenalan Wajah** di bawah **Modul Analitik** di menu kiri, lalu tab **Orang Terdaftar**. Pilih **Tambah orang**.
+  </Step>
+  <Step title="Isi formulir">
+    Dialog **Tambah Orang Terdaftar** berisi:
+
+    - **Nama**: wajib, maksimal 120 karakter.
+    - **ID eksternal (opsional)**: misalnya NIS, NIK, atau ID karyawan. Maksimal 255 karakter.
+    - **Kategori**: label bebas, misalnya Karyawan, Siswa, Guru, atau Tamu. Maksimal 64 karakter.
+    - **Catatan**: maksimal 1000 karakter.
+  </Step>
+  <Step title="Simpan">
+    Pilih **Simpan lalu tambah foto**. Detail orang terbuka otomatis untuk langkah 2.
+  </Step>
+</Steps>
+
+## Langkah 2: Tambah foto wajah
+
+Isi 3–5 slot foto, maksimal 5. Slot kosong memberi saran sudut: **Lurus ke depan**, **Sedikit menoleh ke kiri**, **Sedikit menoleh ke kanan**, **Cahaya berbeda**, dan **Dari kamera pengenalan**.
+
+<Tabs>
+  <Tab title="Unggah foto">
+    1. Pilih **Unggah foto** atau klik slot kosong. Anda dapat memilih beberapa berkas sekaligus, atau menyeret berkas ke area slot.
+    2. Gunakan foto JPEG atau PNG, maksimal 25 MiB per foto.
+  </Tab>
+  <Tab title="Ambil dari kamera">
+    1. Pilih **Ambil dari kamera**, lalu pilih kamera.
+    2. Minta orangnya berdiri 1–2 m dari kamera dengan wajah di dalam bingkai putus-putus.
+    3. Pilih **Ambil foto**. Dialog tetap terbuka, jadi Anda dapat mengambil foto dari sudut lain.
+  </Tab>
+</Tabs>
+
+Setiap foto masuk antrean dan diperiksa satu per satu:
+
+| Status di antrean | Arti | Tindakan |
+| --- | --- | --- |
+| Memeriksa wajah… | Foto sedang diperiksa AI Worker. | Tunggu. |
+| Foto hilang dari antrean | Wajah terdaftar dan tampil di slot sebagai potongan wajah. | – |
+| Mirip dengan ... (xx%) | Wajah mirip orang lain yang sudah terdaftar. | Pilih **Tetap daftarkan** bila memang orang yang sama atau kembar, atau **Buang foto**. |
+| Pesan merah dengan **Coba lagi** | AI Worker offline, belum menjawab, atau Galeri Wajah belum siap. | Pilih **Coba lagi** setelah AI Worker atau galeri siap. |
+| Pesan merah tanpa **Coba lagi** | Foto ditolak, misalnya tidak ada wajah, lebih dari satu wajah, buram, gelap, atau menoleh. | Ganti foto sesuai alasannya. |
+
+<Tip>
+  Foto yang diambil dari kamera pengenalan sendiri memberi hasil terbaik, karena cahaya dan sudutnya sama dengan saat orang itu lewat.
+</Tip>
+
+## Hasil
+
+Foto wajah tampil di slot sebagai potongan wajah. Orang tersebut mulai dikenali di kamera yang memasang modul Pengenalan Wajah setelah galeri tersinkron.
+
+## Mengelola Orang Terdaftar
+
+Pilih orang di daftar untuk membuka detailnya.
+
+- **Ubah**: ubah identitas, lalu pilih **Simpan perubahan**.
+- **Nonaktifkan**: wajah orang ini tidak lagi dipakai untuk pencocokan, tetapi datanya tetap tersimpan. Pilih **Aktifkan** untuk memakainya lagi.
+- **Hapus permanen**: orang beserta seluruh data wajahnya dihapus dan tidak dapat dikembalikan. Ketik namanya untuk melanjutkan.
+- Hapus satu foto wajah dari slotnya bila foto itu kurang baik. Data orang tetap tersimpan.
+
+Gunakan kolom **Cari nama atau ID eksternal…** serta filter kategori dan status untuk menemukan orang.
+
+## Masalah umum
+
+| Pesan | Solusi |
+| --- | --- |
+| Isi nama orang. | Isi **Nama**. |
+| Foto berformat HEIC/HEIF belum didukung. ... | Ubah foto ke JPEG. Di iPhone: Pengaturan kamera → Format → Paling Kompatibel. |
+| Ukuran foto maksimal 25 MiB. | Perkecil ukuran foto. |
+
+## Lihat juga
+
+- [Pengenalan Wajah](/modul/pengenalan-wajah)
+- [Cara meninjau wajah tak dikenal](/modul/cara-meninjau-wajah-tak-dikenal)

@@ -1,0 +1,121 @@
+---
+title: "Cara memasang JagaInd di server"
+sidebarTitle: "Memasang JagaInd"
+description: "Jalankan JagaInd di server edge dengan Docker Compose, siapkan model AI, dan masuk sebagai admin pertama."
+keywords: ["instalasi", "docker compose", "server edge", "gpu", "cpu", "deployment"]
+---
+
+Halaman ini untuk admin atau teknisi yang memasang JagaInd di server lokal. Cara yang didukung adalah **Docker Compose** dari repositori aplikasi JagaInd.
+
+## Sebelum mulai
+
+<AccordionGroup>
+  <Accordion title="Perangkat lunak">
+    - Docker 24 atau lebih baru dengan Docker Compose v2.
+    - Untuk server dengan GPU NVIDIA: driver NVIDIA dan NVIDIA Container Toolkit.
+    - Untuk menyiapkan model AI: Python 3.11 atau lebih baru dan `uv`.
+    - Salinan repositori aplikasi JagaInd.
+  </Accordion>
+  <Accordion title="Perangkat keras">
+    - Untuk produksi, gunakan server atau mini PC dengan GPU NVIDIA. Server tanpa GPU cocok untuk pengujian dan sedikit kamera.
+    - Disk yang cukup untuk menyimpan foto bukti insiden.
+    - Server berada di jaringan yang sama dengan kamera dan perangkat petugas.
+  </Accordion>
+  <Accordion title="Jaringan">
+    - Port TCP `8080` untuk dashboard.
+    - Port UDP `40000`–`40050` untuk video langsung (WebRTC).
+  </Accordion>
+</AccordionGroup>
+
+## Langkah-langkah
+
+<Steps>
+  <Step title="Siapkan berkas konfigurasi">
+    Di folder repositori aplikasi, salin contoh konfigurasi:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Lalu ubah nilai berikut di `.env`:
+
+    - `POSTGRES_PASSWORD`: ganti kata sandi bawaan database.
+    - `JAGAIND_ADMIN_USERNAME` dan `JAGAIND_ADMIN_PASSWORD`: akun admin pertama. Isi keduanya.
+    - `INFERENCE_BACKEND`: untuk profil CPU, isi `cpu`, atau `mock` untuk mencoba tanpa model AI. Profil GPU selalu memakai `gpu`.
+    - `WHEP_NAT_IPS`: alamat IP server yang dapat dijangkau peramban petugas, misalnya IP LAN server. Pisahkan beberapa alamat dengan koma.
+
+    Penjelasan semua variabel ada di [Konfigurasi server](/admin/konfigurasi-server).
+  </Step>
+  <Step title="Siapkan model AI">
+    Untuk `INFERENCE_BACKEND` `gpu` atau `cpu`, model deteksi objek wajib ada di `models/object_detection/model.onnx`. Ekspor modelnya dengan:
+
+    ```bash
+    make export-model
+    ```
+
+    Model tambahan dibutuhkan untuk modul tertentu:
+
+    - **Pengenalan Wajah** butuh model deteksi dan embedding wajah. Unduh dengan `make download-face-models MODEL=sface` (hemat CPU) atau `MODEL=auraface` (butuh GPU).
+    - **Perundungan Fisik** butuh model pose di `models/yolo_pose/`. Lihat `docs/development/adding-models.md` di repositori aplikasi.
+  </Step>
+  <Step title="Jalankan layanan">
+    Pilih profil sesuai perangkat keras:
+
+    <CodeGroup>
+
+    ```bash GPU NVIDIA
+    docker compose --profile gpu up -d --build
+    ```
+
+    ```bash Hanya CPU
+    docker compose --profile cpu up -d --build
+    ```
+
+    </CodeGroup>
+
+    Docker Compose menjalankan database PostgreSQL, migrasi skema, Core, dan AI Worker.
+  </Step>
+  <Step title="Periksa status">
+    ```bash
+    docker compose ps
+    ```
+
+    Buka `http://<alamat-server>:8080/healthz`. Respons berisi `"status":"HEALTHY"` dan `"ai_worker":"CONNECTED"` bila semua berjalan.
+  </Step>
+  <Step title="Masuk sebagai admin">
+    Buka `http://<alamat-server>:8080`, lalu masuk dengan `JAGAIND_ADMIN_USERNAME` dan `JAGAIND_ADMIN_PASSWORD`. Segera ganti kata sandi admin. Lihat [Cara mengganti kata sandi](/akun/cara-mengganti-kata-sandi).
+  </Step>
+</Steps>
+
+<Warning>
+  Ganti semua kata sandi bawaan di `.env` sebelum server dipakai di lokasi. Jangan membagikan berkas `.env` karena berisi kata sandi dan token.
+</Warning>
+
+## Hasil
+
+Dashboard JagaInd dapat dibuka dari peramban di jaringan lokal, dan lampu **Core** serta **Worker** berwarna hijau. Lanjutkan ke [Panduan cepat untuk admin](/mulai/panduan-cepat-admin).
+
+## Perintah operasional
+
+| Tujuan | Perintah |
+| --- | --- |
+| Melihat status layanan | `docker compose ps` |
+| Melihat log Core | `docker logs -f jagaind-core` |
+| Melihat log AI Worker | `docker logs -f jagaind-ai-worker` |
+| Menghentikan semua layanan | `docker compose down` |
+
+Perubahan pada `.env` baru berlaku setelah layanan dimulai ulang.
+
+## Masalah umum
+
+| Gejala | Penyebab | Solusi |
+| --- | --- | --- |
+| `could not select device driver "" with capabilities: [[gpu]]` | Profil GPU dipakai di server tanpa driver NVIDIA atau NVIDIA Container Toolkit. | Pasang toolkit, atau gunakan `--profile cpu`. |
+| AI Worker gagal memuat `model.onnx` | Model belum diekspor. | Jalankan `make export-model`, atau setel `INFERENCE_BACKEND=mock` untuk percobaan. |
+| Video di dashboard hitam | `WHEP_NAT_IPS` tidak berisi IP yang dapat dijangkau peramban, atau port UDP tertutup. | Lihat [Cara mengatasi video tidak tampil](/bantuan/cara-mengatasi-video-tidak-tampil). |
+| Core tidak mau berjalan dan log menyebut nama variabel | Nilai variabel di `.env` tidak valid. | Perbaiki variabel yang disebutkan. |
+
+## Lihat juga
+
+- [Konfigurasi server](/admin/konfigurasi-server)
+- [Cara memeriksa kesehatan server](/admin/cara-memeriksa-kesehatan-server)

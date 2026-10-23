@@ -1,0 +1,91 @@
+---
+title: "Cara menanggapi insiden"
+description: "Gunakan panel Perlu ditanggapi di layar Pantau untuk melihat insiden baru, menyorot kameranya, dan mengakui insiden."
+keywords: ["insiden", "akui", "acknowledge", "antrean", "perlu ditanggapi", "alarm"]
+---
+
+Insiden baru masuk ke panel **Perlu ditanggapi** di layar Pantau secara langsung. Petugas menangani kejadiannya, lalu mengakui insiden agar keluar dari antrean.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Lihat insiden** dan **Akui insiden**. Peran bawaan **Operator** dan **Admin** sudah memilikinya.
+- Klik sekali di halaman setelah masuk agar bunyi alarm Kritis dapat berbunyi. Lihat [Cara mengatur bunyi alarm](/pemantauan/cara-mengatur-bunyi-alarm).
+
+## Membaca antrean
+
+Panel **Perlu ditanggapi** berada di kanan layar Pantau. Di layar sempit, antrean tampil sebagai bilah di bagian bawah. Ketuk bilah itu untuk membukanya.
+
+Setiap insiden menampilkan:
+
+- Foto bukti kecil.
+- Tingkat (**Kritis** atau **Peringatan**) dan kalimat kejadian, misalnya "Orang masuk melewati Pintu utama".
+- Nama kamera.
+- Lama menunggu, misalnya "menunggu 3 mnt".
+
+Antrean diurutkan dari tingkat tertinggi, lalu dari insiden yang paling lama menunggu.
+
+### Target waktu tanggap
+
+Label waktu tunggu ditandai bila insiden melewati target tanggap:
+
+| Tingkat | Target |
+| --- | --- |
+| Kritis | 5 menit |
+| Peringatan | 15 menit |
+
+### Insiden Info
+
+Insiden **Info** tidak perlu ditanggapi. Insiden ini tampil di bagian bawah panel dengan judul **Info · N tidak perlu ditanggapi**, tanpa tombol **Akui**. Bila jumlahnya lebih dari dua, pilih **Lihat N info lainnya** untuk membukanya di halaman Insiden.
+
+## Menanggapi satu insiden
+
+<Steps>
+  <Step title="Pilih insiden">
+    Pilih foto atau kalimat insiden. Layar Pantau menggulir ke kamera terkait dan menyorotnya.
+  </Step>
+  <Step title="Tangani kejadiannya">
+    Periksa video langsung dan lakukan tindakan sesuai prosedur lokasi Anda.
+  </Step>
+  <Step title="Akui insiden">
+    Pilih **Akui** pada insiden tersebut.
+  </Step>
+</Steps>
+
+Insiden langsung hilang dari antrean dan tersimpan di [riwayat insiden](/pemantauan/cara-melihat-riwayat-insiden) beserta nama Anda dan waktu pengakuan. Bila server menolak, insiden kembali ke antrean dan pesan galat tampil di atas antrean.
+
+## Mengakui semua insiden sekaligus
+
+Gunakan ini hanya bila semua insiden di antrean sudah ditangani.
+
+1. Pilih menu titik tiga (**Aksi antrean**) di kanan judul panel.
+2. Pilih **Akui semua…**. Menu ini aktif bila ada minimal dua insiden yang perlu ditanggapi.
+3. Periksa jumlah insiden Kritis dan Peringatan di dialog, lalu pilih **Akui semua**.
+
+<Warning>
+  **Akui semua** juga mengakui insiden Info di antrean. Tindakan ini tidak bisa dibatalkan.
+</Warning>
+
+## Menciutkan panel antrean
+
+Pilih ikon panel di kiri judul, atau tekan `]` atau `Ctrl+J`, untuk menciutkan antrean menjadi bilah sempit. Bilah ini tetap menampilkan jumlah insiden, lama tunggu insiden tertua, dan komposisi tingkatnya.
+
+Panel terbuka kembali secara otomatis saat insiden **Kritis** baru tiba.
+
+## Tanda insiden di bagian lain dashboard
+
+- **Spanduk alarm** di bilah atas menampilkan tingkat terburuk, nama kamera, dan jumlah insiden yang belum diakui. Pilih **Tanggapi** untuk membuka antrean.
+- **Angka di menu Pantau** menunjukkan jumlah insiden Kritis dan Peringatan yang belum diakui.
+- **Bunyi alarm** berbunyi untuk insiden Kritis bila tidak disenyapkan.
+
+## Masalah umum
+
+| Gejala | Penyebab | Solusi |
+| --- | --- | --- |
+| Pesan "Akun Anda tidak punya izin untuk tindakan ini." saat memilih Akui | Peran Anda tidak punya izin **Akui insiden**. | Minta admin mengubah peran Anda. |
+| Antrean tidak bertambah padahal ada kejadian | Belum ada aturan alarm, aturan nonaktif, atau di luar jam aktif. | Lihat [Cara mengatasi insiden tidak muncul](/bantuan/cara-mengatasi-insiden-tidak-muncul). |
+| Lampu **Live** di bilah atas kuning | Koneksi langsung ke server terputus. Insiden baru tertunda sampai tersambung. | Periksa jaringan. Dashboard menyambung ulang sendiri. |
+
+## Lihat juga
+
+- [Cara melihat riwayat insiden](/pemantauan/cara-melihat-riwayat-insiden)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)

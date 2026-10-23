@@ -1,0 +1,71 @@
+---
+title: "Panduan cepat untuk admin"
+description: "Siapkan JagaInd dari awal: masuk, tambah kamera, pasang modul, buat aturan alarm, lalu periksa hasilnya."
+keywords: ["memulai", "admin", "setup awal", "quickstart"]
+---
+
+Panduan ini membawa Anda dari dashboard kosong sampai kamera pertama menghasilkan insiden. Panduan ditujukan untuk admin atau teknisi yang memasang JagaInd di lokasi.
+
+## Sebelum mulai
+
+- Server JagaInd sudah berjalan. Bila belum, lihat [Cara memasang JagaInd](/admin/cara-memasang-jagaind).
+- Anda punya akun dengan peran **Admin**. Akun admin pertama dibuat dari konfigurasi server.
+- Anda tahu alamat RTSP kamera, termasuk nama pengguna dan kata sandi kamera. Alamat ini biasanya ada di pengaturan kamera atau NVR.
+
+<Tip>
+  Belum punya kamera untuk dicoba? Pilih **Kamera uji** saat menambah kamera. Kamera uji membuat gambar sintetis sehingga Anda bisa mencoba alur pemasangan modul tanpa kamera sungguhan.
+</Tip>
+
+## Langkah-langkah
+
+<Steps>
+  <Step title="Masuk ke dashboard">
+    Buka alamat dashboard di peramban, misalnya `http://<alamat-server>:8080`. Isi nama pengguna dan kata sandi, lalu pilih **Masuk**.
+
+    Lihat [Cara masuk dan keluar](/akun/cara-masuk).
+  </Step>
+  <Step title="Periksa kesehatan server">
+    Pastikan lampu **Core** dan **Worker** di kanan atas berwarna hijau. Bila Worker tidak hijau, katalog modul belum tersedia dan modul belum bisa dipasang.
+
+    Lihat [Cara memeriksa kesehatan server](/admin/cara-memeriksa-kesehatan-server).
+  </Step>
+  <Step title="Tambahkan kamera">
+    Buka **Kamera**, pilih **Tambah kamera**, isi nama dan alamat stream, lalu pilih **Simpan kamera**. Anda langsung diarahkan ke halaman pengaturan kamera tersebut.
+
+    Lihat [Cara menambah kamera](/kamera/cara-menambah-kamera).
+  </Step>
+  <Step title="Pasang modul analitik">
+    Di halaman kamera, pilih **Pasang modul**, pilih modul, gambar garis atau area di video, atur modul, lalu pilih **Pasang modul**.
+
+    Pada langkah **Peringatan**, biarkan **Kirim peringatan ke petugas** tercentang agar aturan alarm langsung dibuat.
+
+    Lihat [Cara memasang modul](/modul/cara-memasang-modul).
+  </Step>
+  <Step title="Sesuaikan aturan alarm">
+    Buka modul di halaman kamera, lalu tab **Aturan**. Atur tingkat, jeda antar alarm, keyakinan minimum, serta hari dan jam aktif sesuai kebutuhan lokasi.
+
+    Lihat [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm).
+  </Step>
+  <Step title="Tambahkan akun petugas">
+    Buka **Pengguna & Peran**, lalu tambahkan akun untuk setiap operator dengan peran **Operator**.
+
+    Lihat [Cara mengelola pengguna](/akun/cara-mengelola-pengguna).
+  </Step>
+  <Step title="Siapkan notifikasi (opsional)">
+    Bila petugas perlu menerima insiden di luar dashboard, hubungkan Telegram atau WhatsApp di **Pengaturan** > **Notifikasi**.
+
+    Lihat [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi).
+  </Step>
+  <Step title="Uji hasilnya">
+    Minta seseorang berjalan melewati garis atau masuk ke area yang Anda gambar. Insiden baru muncul di panel **Perlu ditanggapi** di layar **Pantau**.
+  </Step>
+</Steps>
+
+## Hasil
+
+Kamera tampil di layar Pantau lengkap dengan garis atau area yang diawasi. Kejadian yang cocok dengan aturan alarm masuk ke antrean petugas.
+
+## Bila ada masalah
+
+- Video hitam atau kamera berstatus **Gangguan**: lihat [Cara mengatasi video tidak tampil](/bantuan/cara-mengatasi-video-tidak-tampil).
+- Tidak ada insiden padahal ada orang lewat: lihat [Cara mengatasi insiden tidak muncul](/bantuan/cara-mengatasi-insiden-tidak-muncul).

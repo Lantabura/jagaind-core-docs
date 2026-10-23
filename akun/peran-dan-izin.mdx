@@ -1,0 +1,91 @@
+---
+title: "Peran dan izin"
+description: "Daftar izin JagaInd, isi peran bawaan Admin, Operator, dan Viewer, serta halaman yang dapat dibuka setiap izin."
+keywords: ["peran", "izin", "role", "permission", "admin", "operator", "viewer", "rbac"]
+---
+
+Setiap pengguna JagaInd memegang tepat satu peran. Peran adalah kumpulan izin yang menentukan halaman dan tindakan yang boleh dipakai pengguna. Izin diperiksa oleh server, jadi pengguna tanpa izin tidak dapat melakukan tindakan tersebut walaupun membuka alamat halamannya langsung.
+
+## Peran bawaan
+
+JagaInd punya tiga peran bawaan yang selalu ada dan tidak dapat diubah atau dihapus.
+
+| Peran | Untuk siapa | Ringkasan |
+| --- | --- | --- |
+| **Admin** | Admin atau teknisi | Semua izin, termasuk mengelola kamera, modul, aturan, notifikasi, pengguna, dan melihat kondisi server. |
+| **Operator** | Petugas jaga atau satpam | Memantau kamera, melihat dan mengakui insiden, melihat bukti dan statistik, tanpa mengubah konfigurasi. |
+| **Viewer** | Pengamat | Hanya melihat daftar kamera, insiden, dan statistik. Tidak dapat melihat video langsung. |
+
+Bila Anda butuh kombinasi izin lain, buat peran kustom. Lihat [Cara membuat peran kustom](/akun/cara-membuat-peran-kustom).
+
+## Daftar izin
+
+Nama izin di bawah sama dengan yang tampil di editor peran.
+
+| Area | Izin | Admin | Operator | Viewer |
+| --- | --- | :---: | :---: | :---: |
+| Kamera | Lihat kamera | Ya | Ya | Ya |
+| Kamera | Kelola kamera | Ya | – | – |
+| Modul | Kelola modul kamera | Ya | – | – |
+| Aturan | Kelola aturan alarm | Ya | – | – |
+| Insiden | Lihat insiden | Ya | Ya | Ya |
+| Insiden | Akui insiden | Ya | Ya | – |
+| Statistik | Lihat statistik | Ya | Ya | Ya |
+| Statistik | Reset hitungan okupansi | Ya | Ya | – |
+| Siaran Langsung | Lihat siaran langsung | Ya | Ya | – |
+| Bukti | Lihat bukti (foto dan klip) | Ya | Ya | – |
+| Notifikasi | Lihat kanal dan target notifikasi | Ya | Ya | – |
+| Notifikasi | Kelola kanal dan target notifikasi | Ya | – | – |
+| Orang Terdaftar | Lihat Orang Terdaftar | Ya | Ya | – |
+| Orang Terdaftar | Kelola Orang Terdaftar | Ya | – | – |
+| Pengguna | Kelola pengguna dan peran | Ya | – | – |
+| Sistem | Lihat kondisi server | Ya | – | – |
+
+## Apa yang dibuka setiap izin
+
+| Izin | Halaman atau tindakan |
+| --- | --- |
+| Lihat kamera | Menu **Pantau**, **Kamera**, **Katalog Modul**, dan halaman setiap modul. |
+| Kelola kamera | Menambah, mengubah, dan menghapus kamera. |
+| Kelola modul kamera | Memasang, mengatur, menjeda, dan melepas modul; membuat Ignore Zone; memakai **Mode debug**. |
+| Kelola aturan alarm | Membuat, mengubah, mengaktifkan, dan menghapus aturan alarm. |
+| Lihat insiden | Menu **Insiden** dan **Aturan Alarm**, panel **Perlu ditanggapi**, dan bunyi alarm. |
+| Akui insiden | Tombol **Akui** dan **Akui semua…**. |
+| Lihat statistik | Tab **Statistik** pada modul Penghitung Pengunjung. |
+| Reset hitungan okupansi | Tombol **Reset Occupancy** di tab Statistik. |
+| Lihat siaran langsung | Video langsung di layar Pantau dan halaman kamera. |
+| Lihat bukti (foto dan klip) | Foto bukti insiden. |
+| Lihat kanal dan target notifikasi | Tab **Notifikasi** di Pengaturan, hanya baca. |
+| Kelola kanal dan target notifikasi | Mengaktifkan kanal, menautkan WhatsApp, serta menambah, mengubah, dan menguji target. |
+| Lihat Orang Terdaftar | Tab **Orang Terdaftar** dan **Wajah Tak Dikenal**, serta nama orang yang dikenali di video. |
+| Kelola Orang Terdaftar | Menambah orang, mendaftarkan wajah, dan mereset Galeri Wajah. |
+| Kelola pengguna dan peran | Menu **Pengguna & Peran**. |
+| Lihat kondisi server | Menu **Sistem**. |
+
+Menu **Pengaturan** selalu tampil untuk semua pengguna. Isi tab **Notifikasi** di dalamnya tetap membutuhkan izin notifikasi.
+
+## Ketergantungan izin
+
+Di editor peran, mencentang izin tulis otomatis mencentang izin baca yang dibutuhkannya. Izin baca itu terkunci selama izin tulisnya masih tercentang dan diberi keterangan **Dibutuhkan izin tulis**.
+
+| Izin tulis | Izin baca yang ikut tercentang |
+| --- | --- |
+| Kelola kamera | Lihat kamera |
+| Kelola modul kamera | Lihat kamera |
+| Kelola aturan alarm | Lihat insiden |
+| Akui insiden | Lihat insiden |
+| Reset hitungan okupansi | Lihat statistik |
+| Kelola kanal dan target notifikasi | Lihat kanal dan target notifikasi |
+| Kelola Orang Terdaftar | Lihat Orang Terdaftar |
+
+## Bila izin tidak cukup
+
+- Halaman yang tidak diizinkan tidak tampil di menu. Bila Anda membuka alamatnya langsung, dashboard menampilkan **Halaman tidak tersedia** dengan pesan "Akun Anda tidak punya izin untuk membuka halaman ini."
+- Beberapa tombol tetap tampil walaupun Anda tidak punya izinnya. Saat dipilih, server menolak dan dashboard menampilkan "Akun Anda tidak punya izin untuk tindakan ini."
+
+Perubahan peran berlaku pada permintaan berikutnya, tanpa perlu keluar dan masuk lagi.
+
+## Lihat juga
+
+- [Cara mengelola pengguna](/akun/cara-mengelola-pengguna)
+- [Cara membuat peran kustom](/akun/cara-membuat-peran-kustom)

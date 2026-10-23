@@ -1,0 +1,45 @@
+---
+title: "Konsep dasar"
+description: "Istilah yang dipakai di dashboard JagaInd: kamera, modul analitik, Tripwire, zona, observasi, aturan alarm, insiden, dan bukti."
+keywords: ["istilah", "glosarium", "tripwire", "ignore zone", "insiden", "observasi"]
+---
+
+Halaman ini menjelaskan istilah yang muncul di dashboard JagaInd. Istilah yang sama dipakai di seluruh dokumentasi.
+
+## Kamera dan video
+
+- **Kamera**: Sumber video yang terhubung ke JagaInd. Kamera bisa berupa kamera RTSP (kamera IP atau kanal NVR) atau **Kamera uji** yang membuat gambar sintetis untuk percobaan.
+- **Stream utama dan sub-stream**: Stream utama adalah video resolusi penuh untuk tampilan langsung. Sub-stream adalah video resolusi rendah dari kamera yang sama. JagaInd memakai sub-stream untuk analitik agar server tidak terbebani.
+- **Resolusi analisis**: Ukuran gambar yang dianalisis AI. **Standar** memakai gambar 640 px dari sub-stream. **Tinggi** memakai gambar 1280 px dari stream utama dan dibutuhkan modul Pengenalan Wajah.
+- **Kecepatan analisis**: Jumlah gambar per detik yang dianalisis, antara 1 dan 30. Nilai bawaannya 10.
+- **Live view**: Video langsung dari kamera di layar Pantau dan halaman kamera.
+
+## Analitik
+
+- **Modul analitik**: Kemampuan yang membuat kamera mengenali kejadian tertentu, misalnya orang melewati garis atau kendaraan parkir di area larangan. Modul dipasang per kamera. Lihat [Katalog modul](/modul/katalog-modul).
+- **Tripwire**: Garis virtual yang Anda gambar di video. Satu sisinya ditandai sebagai sisi **MASUK**. Perlintasan dinilai dari titik kaki objek, yaitu bagian tengah bawah kotak objek.
+- **Zona**: Area berbentuk poligon yang Anda gambar di video untuk modul tertentu, misalnya area larangan parkir.
+- **Ignore Zone**: Area yang diabaikan modul terpilih. Objek yang titik kakinya berada di dalam zona tidak dihitung oleh modul tersebut. Contohnya layar TV, poster, atau jalan di luar pagar. Lihat [Cara membuat Ignore Zone](/kamera/cara-membuat-ignore-zone).
+- **Observasi (kejadian)**: Fakta yang dicatat modul, misalnya "Masuk melewati garis". Observasi belum tentu menjadi alarm.
+- **Metrik (statistik)**: Angka yang dihitung modul per periode, misalnya jumlah orang masuk dan keluar. Metrik tampil sebagai grafik dan tidak pernah menjadi insiden.
+
+## Alarm dan insiden
+
+- **Aturan alarm**: Kebijakan untuk satu modul di satu kamera yang menentukan kapan observasi menjadi insiden. Aturan mengatur jenis kejadian, tingkat, jeda antar alarm, keyakinan minimum, serta hari dan jam aktif. Tanpa aturan, kejadian dari modul hanya tercatat dan tidak menjadi insiden. Lihat [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm).
+- **Insiden**: Kejadian yang lolos aturan alarm dan perlu ditanggapi petugas. Setiap insiden punya tingkat, waktu, kamera, dan foto bukti.
+- **Tingkat**: Seberapa penting insiden. Ada tiga tingkat:
+    - **Kritis**: menyalakan pelat merah dan bunyi alarm di layar Pantau.
+    - **Peringatan**: menyalakan pelat kuning.
+    - **Info**: hanya untuk dibaca dan tidak perlu ditanggapi.
+- **Akui**: Tindakan petugas untuk menandai insiden sudah ditanggapi. Insiden yang sudah diakui keluar dari antrean dan tetap tersimpan di riwayat.
+- **Bukti**: Foto (snapshot) saat insiden terjadi. Bukti lama dapat dihapus otomatis bila disk hampir penuh atau melewati masa simpan. Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data).
+
+## Akun
+
+- **Pengguna**: Orang yang masuk ke dashboard dengan nama pengguna dan kata sandi. Pengguna yang tidak lagi berhak masuk dinonaktifkan, bukan dihapus.
+- **Peran dan izin**: Setiap pengguna memegang satu peran. Peran adalah kumpulan izin, misalnya "Lihat kamera" atau "Akui insiden". Ada tiga peran bawaan: Admin, Operator, dan Viewer. Lihat [Peran dan izin](/akun/peran-dan-izin).
+
+## Komponen server
+
+- **Core**: Layanan utama JagaInd yang menyajikan dashboard, menerima video, dan menyimpan data.
+- **AI Worker**: Layanan yang menjalankan model AI dan modul analitik. Bila AI Worker terputus, video tetap tampil tetapi tidak ada analitik dan insiden baru.

@@ -1,0 +1,129 @@
+---
+title: "Pengenalan Wajah"
+description: "Kenali wajah Orang Terdaftar di video dan beri tahu saat ada wajah yang belum terdaftar. Termasuk persiapan kamera, pengaturan, dan privasi."
+keywords: ["pengenalan wajah", "face recognition", "orang terdaftar", "galeri wajah", "biometrik"]
+---
+
+Modul **Pengenalan Wajah** mengenali wajah Orang Terdaftar pada orang yang terlihat di video. Modul juga mencatat wajah yang belum terdaftar sebagai **Wajah Tak Dikenal**.
+
+**Cocok untuk:**
+
+- Pintu masuk kantor dengan kamera setinggi wajah
+- Gerbang sekolah yang dilalui siswa dan guru
+- Lobi yang perlu dicatat siapa yang datang
+
+<Warning>
+  Ambang kemiripan bawaan **belum dikalibrasi**. Uji modul dengan kondisi kamera Anda sebelum mengandalkan hasilnya, dan jangan mengklaim tingkat akurasi tanpa data uji.
+</Warning>
+
+## Alur penggunaan
+
+<Steps>
+  <Step title="Siapkan kamera">
+    - Pasang kamera menghadap wajah pada ketinggian 2–2,5 m dengan sudut ke bawah yang landai. Kamera langit-langit yang melihat ubun-ubun tidak dapat mengenali wajah.
+    - Setel **Resolusi analisis** kamera ke **Tinggi**. Lihat [Cara mengubah kamera](/kamera/cara-mengubah-dan-menghapus-kamera#mengganti-resolusi-analisis-untuk-pengenalan-wajah).
+  </Step>
+  <Step title="Pasang modul">
+    Di halaman kamera, pilih **Pasang modul**, lalu **Pengenalan Wajah**. Modul ini tidak perlu digambar. Nilai bawaan cukup untuk mulai.
+  </Step>
+  <Step title="Daftarkan orang">
+    Tambahkan orang beserta 3–5 foto wajahnya. Lihat [Cara mendaftarkan wajah](/modul/cara-mendaftarkan-wajah).
+  </Step>
+  <Step title="Buat aturan alarm bila perlu">
+    Modul ini tidak membuat insiden sendiri. Buat aturan alarm untuk kejadian **Wajah dikenal** atau **Wajah tidak dikenal** bila petugas perlu diberi tahu. Lihat [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm).
+  </Step>
+  <Step title="Tinjau wajah tak dikenal">
+    Daftarkan wajah yang Anda kenali dari tab **Wajah Tak Dikenal** agar pengenalan makin akurat. Lihat [Cara meninjau wajah tak dikenal](/modul/cara-meninjau-wajah-tak-dikenal).
+  </Step>
+</Steps>
+
+## Halaman modul
+
+Buka **Pengenalan Wajah** di bawah **Modul Analitik** di menu kiri.
+
+| Tab | Isi | Izin |
+| --- | --- | --- |
+| **Orang Terdaftar** | Status Galeri Wajah, daftar orang, tambah orang, dan foto wajah | Lihat: **Lihat Orang Terdaftar**. Ubah: **Kelola Orang Terdaftar** |
+| **Wajah Tak Dikenal** | Wajah yang tidak cocok dengan galeri | Sama seperti di atas |
+| **Kamera Terpasang** | Kamera yang memasang modul ini | **Lihat kamera** |
+| **Kejadian Belum Diakui** | Insiden dari aturan alarm wajah | **Lihat insiden** |
+
+Halaman ini memperingatkan kamera terpasang yang masih memakai resolusi analisis **Standar**.
+
+## Jenis kejadian
+
+| Kejadian | Arti |
+| --- | --- |
+| **Wajah dikenal** | Wajah cocok dengan salah satu Orang Terdaftar. Dikirim sekali per orang yang terlihat. |
+| **Wajah tidak dikenal** | Wajah tidak cocok dengan Orang Terdaftar mana pun. |
+
+Jeda antar alarm pada aturan **Wajah dikenal** berlaku per orang. Orang kedua yang lewat selama jeda orang pertama tetap menjadi insiden.
+
+## Nama di video langsung
+
+Orang yang dikenali diberi kotak dan nama di video layar Pantau dan halaman kamera. Nama biasanya muncul kurang dari satu detik setelah wajah terlihat jelas, dan hilang saat orangnya keluar dari gambar.
+
+Nama hanya tampil untuk pengguna dengan izin **Lihat Orang Terdaftar** dan **Lihat siaran langsung**.
+
+## Status Galeri Wajah
+
+Galeri Wajah adalah kumpulan wajah dari semua Orang Terdaftar yang aktif. Statusnya tampil di tab **Orang Terdaftar**.
+
+| Status | Arti |
+| --- | --- |
+| **Galeri tersinkron** | Galeri siap dipakai AI Worker. |
+| **Galeri belum sinkron** | AI Worker belum menerima galeri terbaru, misalnya karena terputus. Pengenalan berhenti sampai galeri tersinkron. |
+| **Galeri perlu didaftarkan ulang** | Model wajah di AI Worker berganti. Galeri harus direset dan wajah didaftarkan ulang. |
+| **Galeri bermasalah** | Ada galat. Pilih status untuk melihat rinciannya. |
+
+**Reset galeri** menghapus semua Wajah Terdaftar dan pin model, tetapi Orang Terdaftar tetap tersimpan. Gunakan hanya saat model wajah berganti, karena semua wajah harus didaftarkan ulang. Tindakan ini butuh izin **Kelola Orang Terdaftar** dan tercatat di log audit.
+
+## Pengaturan
+
+Semua ambang belum dikalibrasi. Ubah sedikit demi sedikit dan amati hasilnya.
+
+| Pengaturan | Bawaan | Naikkan bila | Turunkan bila |
+| --- | --- | --- | --- |
+| **Ambang kemiripan** | 0,50 | Ada orang yang salah dikenali | Orang terdaftar sering tidak dikenali |
+| **Kemiripan untuk langsung dikenali** | 0,65 | Ada salah kenal dari sekali lihat | Nama terlalu lama muncul |
+| **Selisih minimum juara pertama dan kedua** | 0,08 | Dua orang mirip sering tertukar | – |
+| **Ukuran wajah minimum (piksel)** | 40 | Banyak wajah jauh atau kecil yang salah | Wajah ukuran sedang tidak pernah diperiksa |
+| **Skor deteksi wajah minimum** | 0,7 | – | – |
+| **Kualitas wajah minimum** | 0,4 | Wajah berkualitas pas-pasan sering ikut dikenali | Wajah layak malah ditolak |
+| **Jeda percobaan pengenalan (detik)** | 0,5 | Server terlalu sibuk saat ramai | – |
+| **Jeda coba ulang wajah tak dikenal (detik)** | 5 | – | – |
+| **Jumlah suara minimum** / **Jumlah percobaan untuk voting** | 2 / 3 | Ada salah kenal pada kemiripan menengah | Pengenalan lambat |
+| **Kirim peristiwa wajah tak dikenal** | Aktif | – | Matikan bila area ramai membanjiri daftar Wajah Tak Dikenal |
+
+**Jumlah suara minimum** tidak boleh melebihi **Jumlah percobaan untuk voting**.
+
+## Privasi
+
+Data wajah adalah data biometrik. Perlakukan sebagai data sensitif.
+
+- Dapatkan persetujuan orang yang bersangkutan sebelum mendaftarkannya.
+- JagaInd tidak menyimpan foto asli. JagaInd menyimpan potongan wajah berukuran 112×112 piksel dan representasi wajahnya.
+- Wajah Tak Dikenal dihapus otomatis setelah masa simpan tertentu. Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data).
+- Hapus Orang Terdaftar yang tidak lagi diperlukan. Menonaktifkan orang hanya mengeluarkan wajahnya dari galeri, datanya tetap tersimpan.
+- Batasi izin **Lihat Orang Terdaftar** dan **Kelola Orang Terdaftar** hanya untuk peran yang berwenang.
+
+## Batasan
+
+- Modul tidak berjalan bila model wajah belum dimuat di AI Worker. Pesan galatnya tampil di panel modul.
+- Modul tidak mengirim kejadian apa pun sebelum Galeri Wajah tersinkron.
+- Pengenalan wajah cukup berat untuk server, terutama tanpa GPU. Mulai dari 1–2 kamera, lalu tambah satu per satu sambil memantau halaman [Sistem](/admin/cara-memeriksa-kesehatan-server).
+
+## Masalah umum
+
+| Gejala | Kemungkinan penyebab | Solusi |
+| --- | --- | --- |
+| Nama lama sekali muncul atau hanya saat orang sangat dekat | Resolusi analisis masih Standar. | Setel kamera ke **Tinggi**. |
+| Nama tidak pernah muncul, wajah tercatat sebagai Wajah Tak Dikenal | Foto pendaftaran tidak mirip kondisi kamera (cahaya, sudut, kacamata). | Daftarkan wajah dari tab **Wajah Tak Dikenal**, atau tambah foto dari sudut lain. |
+| Label nama tidak muncul padahal insiden **Wajah dikenal** ada | Akun tanpa izin **Lihat Orang Terdaftar** atau **Lihat siaran langsung**. | Periksa peran pengguna. |
+| Status **Galeri belum sinkron** atau **Galeri perlu didaftarkan ulang** | AI Worker terputus atau model wajah berganti. | Periksa AI Worker. Bila model berganti, reset galeri lalu daftarkan ulang wajah. |
+| Semua kamera ikut tersendat saat orang lewat | Pengenalan wajah di CPU berat. | Kurangi jumlah kamera dengan modul ini, atau gunakan server dengan GPU. |
+
+## Lihat juga
+
+- [Cara mendaftarkan wajah](/modul/cara-mendaftarkan-wajah)
+- [Cara meninjau wajah tak dikenal](/modul/cara-meninjau-wajah-tak-dikenal)

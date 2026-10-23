@@ -1,0 +1,77 @@
+---
+title: "Penghitung Pengunjung"
+description: "Hitung orang yang masuk dan keluar lewat garis serta jumlah orang di dalam area, lalu lihat hasilnya sebagai grafik di tab Statistik."
+keywords: ["penghitung pengunjung", "people counting", "footfall", "occupancy", "statistik", "ekspor csv"]
+---
+
+Modul **Penghitung Pengunjung** menghitung orang yang masuk dan keluar lewat garis, serta jumlah orang di dalam area, setiap 5 menit. Hasilnya berupa statistik dan tidak memicu peringatan.
+
+**Cocok untuk:**
+
+- Pintu masuk toko atau mal
+- Ruang pameran dan acara
+- Kantin atau ruang tunggu
+
+## Cara kerja
+
+1. Anda menggambar garis di pintu masuk, menandai area yang ingin dihitung isinya, atau keduanya.
+2. Dari setiap garis, modul menjumlahkan orang yang masuk dan keluar. Angka ini disebut **Footfall**.
+3. Dari setiap zona, modul mencatat jumlah orang yang terlihat di dalamnya. Angka ini disebut **Zone Count**.
+4. Dari garis, modul juga memperkirakan **Occupancy**, yaitu jumlah orang di dalam ruangan: total masuk dikurangi total keluar sejak reset terakhir. Occupancy tidak pernah kurang dari nol.
+
+Modul ini hanya mengamati orang dan tidak punya pengaturan tambahan di luar garis dan zona.
+
+## Yang perlu digambar
+
+Minimal satu **Tripwire** atau satu **zona**. Anda boleh menggambar keduanya.
+
+## Melihat statistik
+
+<Steps>
+  <Step title="Buka tab Statistik">
+    Pilih **Penghitung Pengunjung** di bawah **Modul Analitik** di menu kiri, lalu tab **Statistik**. Anda butuh izin **Lihat statistik**.
+  </Step>
+  <Step title="Baca nilai sekarang">
+    Bagian **Sekarang** menampilkan satu kartu per kamera dengan nilai yang diperbarui otomatis: **Occupancy sekarang**, **Masuk hari ini**, **Keluar hari ini**, dan **Zone Count sekarang**.
+  </Step>
+  <Step title="Baca riwayat">
+    Di bagian **Riwayat**, pilih rentang **Hari ini**, **7 hari**, **30 hari**, atau **Kustom** (isi **Dari** dan **Sampai**). Saring dengan **Kamera** dan **Tripwire / zona** bila perlu.
+
+    - Grafik **Footfall** menampilkan orang yang melintasi Tripwire, masuk dan keluar. Bila lebih dari satu Tripwire dipilih, nilainya dijumlahkan.
+    - Grafik **Zone Count** menampilkan jumlah orang di dalam zona: maksimum (garis penuh) dan rata-rata (garis putus-putus).
+
+    Rentang hingga 7 hari ditampilkan per jam. Rentang lebih panjang ditampilkan per hari.
+  </Step>
+  <Step title="Ekspor data (opsional)">
+    Pilih **Ekspor CSV (semua seri)**, atau **Ekspor CSV (seri terpilih)** bila Anda menyaring Tripwire atau zona, untuk mengunduh data sebagai berkas CSV.
+  </Step>
+</Steps>
+
+## Mereset Occupancy
+
+Occupancy bisa melenceng bila ada perlintasan yang terlewat. JagaInd mereset Occupancy otomatis setiap hari pukul 00.00 waktu server. Anda juga dapat meresetnya manual.
+
+1. Di kartu kamera pada bagian **Sekarang**, pilih **Reset Occupancy**.
+2. Konfirmasi dengan **Reset**.
+
+Hitungan masuk dikurangi keluar kembali ke nol mulai saat itu. Tindakan ini tercatat di log audit. Tombol hanya tampil untuk pengguna dengan izin **Reset hitungan okupansi**.
+
+## Batasan
+
+- Modul ini tidak membuat insiden dan tidak punya tab **Aturan**.
+- **Masuk hari ini** dan **Keluar hari ini** selalu dihitung sejak pukul 00.00 waktu server, tidak terpengaruh reset manual.
+- Data statistik disimpan dalam periode 5 menit.
+
+## Masalah umum
+
+| Pesan | Solusi |
+| --- | --- |
+| minimal satu Tripwire atau zona harus dikonfigurasi | Gambar minimal satu garis atau zona sebelum menyimpan. |
+| Belum ada kamera yang memasang modul ini. | Pasang modul di kamera. Lihat [Cara memasang modul](/modul/cara-memasang-modul). |
+| Tidak ada data Footfall pada rentang ini. | Pilih rentang lain, atau pastikan ada Tripwire dan orang yang melintas. |
+| Isi tanggal mulai dan akhir. Tanggal akhir tidak boleh sebelum tanggal mulai. | Perbaiki rentang **Kustom**. |
+
+## Lihat juga
+
+- [Kepadatan Berlebih](/modul/kepadatan-berlebih) untuk peringatan saat area terlalu ramai.
+- [Lintas Garis](/modul/lintas-garis) untuk peringatan saat orang melewati garis.

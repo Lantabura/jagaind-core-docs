@@ -1,0 +1,52 @@
+---
+title: "Larangan Parkir"
+description: "Catat kendaraan yang berhenti di area larangan parkir lebih lama dari batas waktu."
+keywords: ["larangan parkir", "no parking", "parkir liar", "kendaraan", "zona"]
+---
+
+Modul **Larangan Parkir** mencatat kendaraan yang berhenti di area larangan parkir lebih lama dari batas waktu.
+
+**Cocok untuk:**
+
+- Depan pintu garasi atau gerbang
+- Jalur mobil pemadam kebakaran
+- Area bongkar muat barang
+
+## Cara kerja
+
+1. Anda menandai area larangan parkir di video.
+2. Modul memantau kendaraan yang diam di dalam area. Kendaraan dianggap diam bila posisinya hampir tidak bergeser.
+3. Bila kendaraan diam lebih lama dari **Durasi diam**, modul mencatat satu pelanggaran.
+
+Kendaraan yang sekadar melintas, antre, atau berhenti lebih singkat dari batas waktu bukan pelanggaran. Setiap kendaraan dilaporkan sekali per kali parkir. Bila kendaraan bergerak lagi, hitungannya dimulai dari awal.
+
+## Jenis kejadian
+
+| Kejadian | Arti |
+| --- | --- |
+| **Kendaraan parkir di area larangan** | Kendaraan diam di zona melewati durasi diam. |
+
+## Yang perlu digambar
+
+Minimal satu **zona** berupa poligon dengan minimal 3 titik.
+
+## Pengaturan
+
+| Pengaturan | Bawaan | Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Durasi diam (detik)** | 60 | 10–3600 | Lama kendaraan diam sebelum dianggap parkir. |
+| **Jenis objek** | – | – | Jenis kendaraan yang diawasi, misalnya `car`, `motorcycle`, `bus`, `truck`. |
+
+<Warning>
+  Isi **Jenis objek** saat memasang modul, misalnya `car` dan `motorcycle`. Bila dibiarkan kosong, modul tidak mengawasi kendaraan apa pun.
+</Warning>
+
+## Tips
+
+- Atur **Durasi diam** sesuai kebutuhan lokasi, misalnya 60 detik untuk memberi waktu menurunkan penumpang.
+- Gunakan [Ignore Zone](/kamera/cara-membuat-ignore-zone) untuk jalan di luar area yang terlihat kamera.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)

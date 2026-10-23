@@ -1,0 +1,96 @@
+---
+title: "Cara membuat aturan alarm"
+description: "Tentukan kapan kejadian dari modul menjadi insiden: jenis kejadian, tingkat, jeda antar alarm, keyakinan minimum, serta hari dan jam aktif."
+keywords: ["aturan alarm", "event rule", "cooldown", "jadwal", "tingkat", "keyakinan"]
+---
+
+Modul hanya mencatat kejadian. **Aturan alarm** menentukan kapan kejadian itu menjadi insiden untuk operator. Tanpa aturan, kejadian dari modul tidak menjadi insiden dan tidak dikirim sebagai notifikasi.
+
+Setiap aturan berlaku untuk satu modul di satu kamera. Satu modul boleh punya beberapa aturan, misalnya aturan **Kritis** untuk malam hari dan aturan **Info** untuk siang hari.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola aturan alarm**.
+- Modul peringatan sudah terpasang di kamera. Modul statistik, seperti Penghitung Pengunjung, tidak punya aturan alarm.
+
+<Info>
+  Saat memasang modul, langkah **Peringatan** dapat membuat aturan pertama secara otomatis. Lihat [Cara memasang modul](/modul/cara-memasang-modul).
+</Info>
+
+## Langkah-langkah
+
+<Steps>
+  <Step title="Buka tab Aturan modul">
+    Buka halaman kamera, pilih modul di tab **Modul**, lalu tab **Aturan**. Pilih **Tambah aturan**.
+
+    Dari halaman **Aturan Alarm**, pilih **Buat Aturan di Kamera** untuk membuka daftar kamera lebih dulu.
+  </Step>
+  <Step title="Pilih jenis kejadian">
+    Di **Saat &lt;objek&gt;**, pilih jenis kejadian yang memicu aturan, misalnya **Masuk melewati garis**. Tidak memilih apa pun berarti semua jenis kejadian dari modul ini.
+  </Step>
+  <Step title="Pilih tingkat">
+    Di **Beri tingkat**, pilih **Info**, **Peringatan**, atau **Kritis**. Kritis menyalakan pelat merah dan bunyi di layar Pantau.
+  </Step>
+  <Step title="Atur jeda antar alarm">
+    Di **Jeda antar alarm**, isi berapa detik kejadian serupa diabaikan setelah alarm. Nilai bawaannya 30 detik.
+  </Step>
+  <Step title="Atur keyakinan minimum">
+    Geser **Keyakinan minimum**. Kejadian dengan keyakinan AI di bawah angka ini diabaikan. Nilai bawaannya 50%. Naikkan bila banyak alarm palsu.
+  </Step>
+  <Step title="Atur hari dan jam aktif">
+    - **Hari aktif**: pilih hari aturan berlaku. Semua hari tercentang berarti setiap hari.
+    - **Jam aktif**: pilih jam mulai dan jam selesai.
+  </Step>
+  <Step title="Beri nama (opsional)">
+    Isi **Nama aturan**. Bila dikosongkan, nama dibuat otomatis dari jenis kejadian atau nama modul dan tingkatnya, misalnya "Lintas Garis · Peringatan".
+  </Step>
+  <Step title="Periksa kalimat aturan dan simpan">
+    Kotak di bawah formulir merangkum aturan dalam satu kalimat, misalnya "Saat objek teramati apa pun → Peringatan, jeda 30 dtk, keyakinan min. 50%, setiap hari sepanjang hari". Pilih **Buat aturan**.
+
+    ![Formulir Tambah aturan dengan jenis kejadian, tingkat, jeda, keyakinan, hari, dan jam aktif](/images/aturan/form-aturan.png)
+  </Step>
+</Steps>
+
+## Hasil
+
+Aturan tampil di tab **Aturan** modul dan di halaman **Aturan Alarm**, dengan status aktif. Kejadian berikutnya yang cocok menjadi insiden di antrean **Perlu ditanggapi**.
+
+## Cara aturan dievaluasi
+
+Sebuah kejadian menjadi insiden bila semua syarat ini terpenuhi:
+
+1. Kejadian berasal dari kamera dan modul aturan, dan jenisnya termasuk jenis kejadian yang dipilih.
+2. Aturan aktif, dan waktu kejadian berada di hari dan jam aktif.
+3. Keyakinan AI sama dengan atau di atas keyakinan minimum.
+4. Jeda antar alarm sudah lewat sejak insiden terakhir dari aturan ini di area yang sama.
+
+### Jeda antar alarm berlaku per area
+
+Jeda dihitung terpisah untuk setiap Tripwire atau zona. Bila kejadian terjadi di garis "Pintu utama" lalu di garis "Pintu samping", keduanya dapat menjadi insiden walaupun masih dalam jeda. Untuk modul tanpa garis atau zona, jeda berlaku untuk seluruh aturan. Khusus aturan **Wajah dikenal**, jeda berlaku per orang.
+
+<Warning>
+  Jeda di bawah 5 detik dapat membanjiri operator dengan alarm berulang untuk kejadian yang sama. Formulir menampilkan peringatan bila Anda mengisi jeda sependek itu.
+</Warning>
+
+### Jam aktif
+
+| Pengaturan | Arti |
+| --- | --- |
+| Jam mulai sama dengan jam selesai, misalnya 00.00 sampai 00.00 | Sepanjang hari. |
+| Jam mulai lebih kecil dari jam selesai, misalnya 08.00 sampai 17.00 | Aktif mulai 08.00 hingga sebelum 17.00. |
+| Jam mulai lebih besar dari jam selesai, misalnya 20.00 sampai 06.00 | Melewati tengah malam: aktif mulai 20.00 hingga sebelum 06.00. |
+
+Jadwal mengikuti waktu server JagaInd.
+
+## Masalah umum
+
+| Pesan | Solusi |
+| --- | --- |
+| Pilih minimal satu hari aktif. | Centang minimal satu hari di **Hari aktif**. |
+| Aturan sudah dibuat tetapi insiden tidak muncul | Lihat [Cara mengatasi insiden tidak muncul](/bantuan/cara-mengatasi-insiden-tidak-muncul). |
+| Terlalu banyak alarm untuk kejadian yang sama | Perpanjang **Jeda antar alarm** atau naikkan **Keyakinan minimum**. |
+
+## Lihat juga
+
+- [Cara mengelola aturan alarm](/aturan/cara-mengelola-aturan-alarm)
+- [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi)

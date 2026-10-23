@@ -1,0 +1,68 @@
+---
+title: "Cara kerja notifikasi"
+description: "Pahami kapan JagaInd mengirim notifikasi insiden ke Telegram atau WhatsApp, isi pesannya, dan apa yang terjadi saat internet terputus."
+keywords: ["notifikasi", "telegram", "whatsapp", "outbox", "pesan insiden"]
+---
+
+JagaInd dapat mengirim setiap insiden ke Telegram atau WhatsApp agar petugas tetap mendapat kabar walaupun tidak sedang melihat dashboard. Pengaturannya ada di **Pengaturan** > **Notifikasi**.
+
+![Tab Notifikasi dengan kartu Telegram dan WhatsApp](/images/pengaturan/notifikasi.png)
+
+## Kanal dan target
+
+- **Kanal** adalah saluran pengiriman. Ada dua kanal: **Telegram** dan **WhatsApp**. Setiap kanal dapat diaktifkan atau dinonaktifkan admin.
+- **Target** adalah tujuan pengiriman di sebuah kanal, misalnya chat atau grup Telegram, atau grup atau nomor WhatsApp. Setiap target punya label dan dapat diaktifkan atau dinonaktifkan.
+
+Setiap kanal aktif mengirim satu pesan ke setiap target aktifnya untuk setiap insiden. Perubahan kanal dan target langsung berlaku tanpa memulai ulang server.
+
+## Insiden mana yang dikirim
+
+Semua insiden dikirim, apa pun tingkatnya: **Info**, **Peringatan**, dan **Kritis**. Saat ini belum ada penyaringan per tingkat atau per kamera.
+
+Untuk mengurangi jumlah pesan, atur aturan alarmnya: perpanjang **Jeda antar alarm**, batasi jenis kejadian, atau batasi hari dan jam aktif. Lihat [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm).
+
+## Isi pesan
+
+Pesan insiden berisi foto bukti beserta teks berikut:
+
+```text
+🚨 [<TINGKAT>] <nama aturan>
+📍 Kamera: <nama kamera>
+⏱ Waktu: <tanggal dan jam>
+🎯 Objek: <jenis objek> (Confidence: <nilai>%)
+```
+
+- Tingkat ditulis dalam bahasa Inggris: `INFO`, `WARNING`, atau `CRITICAL`.
+- Bila foto bukti tidak tersedia, pesan dikirim sebagai teks saja.
+
+<Warning>
+  Pesan dan foto insiden dikirim ke server Telegram atau WhatsApp di internet. Pertimbangkan kebijakan privasi organisasi Anda sebelum mengaktifkan notifikasi, terutama untuk kamera yang merekam wajah.
+</Warning>
+
+## Bila internet terputus
+
+Notifikasi masuk antrean lokal lebih dulu, lalu dikirim oleh server.
+
+- Bila pengiriman gagal sementara, JagaInd mencoba lagi dengan jeda yang makin panjang, hingga 10 menit.
+- Pesan yang tertahan lebih lama dari batas umur, bawaannya **30 menit**, ditandai gagal dan tidak dikirim. Ini mencegah alarm basi terkirim setelah koneksi pulih.
+- Bila kanal dinonaktifkan, pesan yang masih antre ditandai gagal.
+
+Jumlah pesan gagal dalam 24 jam terakhir tampil di kartu kanal.
+
+## Izin
+
+| Tindakan | Izin |
+| --- | --- |
+| Melihat kanal, target, dan status | **Lihat kanal dan target notifikasi** |
+| Mengaktifkan kanal, menautkan WhatsApp, serta menambah, mengubah, menghapus, dan menguji target | **Kelola kanal dan target notifikasi** |
+
+## Langkah berikutnya
+
+<Columns cols={2}>
+  <Card title="Telegram" icon="send" href="/notifikasi/cara-mengirim-notifikasi-telegram">
+    Kirim insiden ke chat atau grup Telegram.
+  </Card>
+  <Card title="WhatsApp" icon="message-circle" href="/notifikasi/cara-menghubungkan-whatsapp">
+    Tautkan nomor WhatsApp organisasi dan kirim ke grup atau nomor.
+  </Card>
+</Columns>

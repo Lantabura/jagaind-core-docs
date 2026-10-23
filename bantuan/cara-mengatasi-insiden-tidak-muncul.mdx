@@ -1,0 +1,53 @@
+---
+title: "Cara mengatasi insiden tidak muncul"
+description: "Periksa satu per satu mengapa kejadian di kamera tidak menjadi insiden: AI Worker, modul, jenis objek, Ignore Zone, dan aturan alarm."
+keywords: ["insiden tidak muncul", "tidak terdeteksi", "modul tidak bekerja", "alarm tidak bunyi"]
+---
+
+Ikuti urutan pemeriksaan ini bila ada kejadian di kamera, misalnya orang melewati garis, tetapi tidak ada insiden di antrean.
+
+<Steps>
+  <Step title="Periksa AI Worker">
+    Lampu **Worker** di kanan atas harus hijau. Bila AI Worker terputus, video tetap tampil tetapi tidak ada analitik dan insiden baru. Lihat [Cara memeriksa kesehatan server](/admin/cara-memeriksa-kesehatan-server).
+  </Step>
+  <Step title="Periksa status modul">
+    Buka halaman kamera, tab **Modul**. Status modul harus **Aktif**, bukan **Dijeda**, **Gagal diaktifkan**, atau **Perlu dikonfigurasi ulang**. Lihat [Status modul](/modul/cara-mengubah-modul#status-modul).
+  </Step>
+  <Step title="Periksa Jenis objek">
+    Untuk **Lintas Garis** dan **Larangan Parkir**, buka tab **Pengaturan** modul dan pastikan **Jenis objek** tidak kosong, misalnya berisi orang (`person`) atau mobil (`car`). Bila kosong, modul tidak menghitung objek apa pun.
+  </Step>
+  <Step title="Lihat apa yang dilihat AI">
+    Nyalakan **Mode debug** di bawah video. Pastikan objek tampil dengan kotak dan nomor track. Bila tidak ada kotak, objek tidak terdeteksi, misalnya karena terlalu kecil, terlalu gelap, atau terhalang. Lihat [Cara memakai mode debug](/kamera/cara-memakai-mode-debug).
+  </Step>
+  <Step title="Periksa garis, zona, dan Ignore Zone">
+    - Untuk Tripwire, titik kaki objek (tengah bawah kotak) harus benar-benar berpindah ke sisi seberang garis.
+    - Pastikan objek tidak berada di dalam Ignore Zone yang berlaku untuk modul ini.
+  </Step>
+  <Step title="Periksa aturan alarm">
+    Buka tab **Aturan** modul. Pastikan:
+
+    - Ada aturan dan statusnya aktif. Tanpa aturan, kejadian tidak menjadi insiden.
+    - Jenis kejadian di aturan mencakup kejadian yang terjadi, misalnya **Masuk melewati garis**.
+    - Kejadian terjadi di hari dan jam aktif aturan.
+    - **Keyakinan minimum** tidak terlalu tinggi.
+    - **Jeda antar alarm** sudah lewat sejak insiden sebelumnya di garis atau zona yang sama.
+
+    Lihat [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm#cara-aturan-dievaluasi).
+  </Step>
+  <Step title="Periksa izin dan koneksi langsung">
+    Akun Anda butuh izin **Lihat insiden**. Lampu **Live** di kanan atas harus hijau agar insiden baru muncul seketika. Bila kuning, insiden baru tertunda sampai koneksi pulih.
+  </Step>
+</Steps>
+
+## Insiden tingkat Info tidak muncul di antrean utama
+
+Insiden **Info** tidak perlu ditanggapi dan tampil di bagian bawah panel **Perlu ditanggapi**, bukan di daftar utama. Ubah tingkat aturan menjadi **Peringatan** atau **Kritis** bila petugas perlu menanggapinya.
+
+## Untuk Pengenalan Wajah
+
+Lihat bagian [Masalah umum](/modul/pengenalan-wajah#masalah-umum) di halaman Pengenalan Wajah, terutama soal resolusi analisis dan status Galeri Wajah.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara menanggapi insiden](/pemantauan/cara-menanggapi-insiden)

@@ -1,0 +1,110 @@
+---
+title: "Cara memasang modul di kamera"
+sidebarTitle: "Memasang modul"
+description: "Pilih modul analitik, gambar garis atau area di video, atur modul, lalu buat peringatan untuk petugas dalam satu alur pemasangan."
+keywords: ["pasang modul", "tripwire", "gambar zona", "modul analitik", "wizard"]
+---
+
+Modul dipasang per kamera lewat alur pemasangan bertahap: pilih modul, gambar di video, atur modul, lalu atur peringatan. Tidak ada yang tersimpan sampai Anda memilih **Pasang modul** di langkah terakhir.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola modul kamera**. Untuk membuat peringatan sekaligus, Anda juga butuh izin **Kelola aturan alarm**.
+- Kamera sudah ditambahkan dan videonya tampil. Lihat [Cara menambah kamera](/kamera/cara-menambah-kamera).
+- AI Worker tersambung. Bila tidak, katalog modul kosong.
+- Baca panduan modul yang ingin Anda pasang di [Katalog modul](/modul/katalog-modul).
+
+## Langkah-langkah
+
+<Steps>
+  <Step title="Buka galeri modul">
+    Buka halaman kamera, tab **Modul**, lalu pilih **Pasang modul**.
+  </Step>
+  <Step title="Pilih modul">
+    Dialog **Pasang modul di &lt;nama kamera&gt;** menampilkan semua modul. Cari dengan kata kunci, misalnya "parkir" atau "pintu", atau saring dengan **Mengirim peringatan** dan **Statistik**.
+
+    Setiap kartu menjelaskan modul, contoh penggunaan di **Cocok untuk**, dan apa yang **Perlu digambar**. Modul yang sudah terpasang di kamera ini ditandai **Sudah terpasang** dan tidak dapat dipilih lagi.
+
+    Pilih satu modul, lalu pilih tombol lanjut di kanan bawah. Label tombol menyesuaikan langkah berikutnya, misalnya **Lanjut: gambar di video**.
+
+    ![Dialog Pasang modul dengan kartu modul dan Lintas Garis terpilih](/images/modul/pilih-modul.png)
+  </Step>
+  <Step title="Gambar di video">
+    Langkah ini hanya muncul untuk modul yang butuh garis atau area. Alat gambar langsung terbuka di bawah video. Garis dan area modul lain disembunyikan selama pemasangan.
+
+    <Tabs>
+      <Tab title="Menggambar garis (Tripwire)">
+        1. Pilih **Gambar Tripwire baru**.
+        2. Klik lalu seret di video, atau klik titik awal lalu titik akhir.
+        3. Panah **MASUK** menunjuk sisi masuk. Pilih **Balik arah** untuk menukarnya.
+        4. Ganti nama garis di kolom nama, misalnya "Pintu utama".
+      </Tab>
+      <Tab title="Menggambar area (zona)">
+        1. Pilih **Gambar zona baru**.
+        2. Klik setiap titik sudut area.
+        3. Tutup zona dengan mengeklik titik pertama, menekan `Enter`, atau memilih **Selesai zona**.
+        4. Ganti nama zona di kolom nama.
+      </Tab>
+    </Tabs>
+
+    Seret titik ujung atau titik sudut untuk merapikan. Tekan `Esc` atau pilih **Batal gambar** untuk membatalkan gambar yang sedang dibuat. Pilih **Hapus** di baris garis atau zona untuk menghapusnya.
+
+    ![Tripwire Pintu utama digambar di video dengan panah MASUK, di samping langkah pemasangan](/images/modul/gambar-tripwire.png)
+
+    Pilih **Lanjut** di panel kanan setelah selesai.
+  </Step>
+  <Step title="Atur modul">
+    Langkah ini muncul bila modul punya pengaturan, misalnya batas waktu, jumlah orang, atau jenis objek. Penjelasan setiap pengaturan ada di halaman panduan modulnya. Pilih **Lanjut**.
+
+    <Warning>
+      Untuk **Lintas Garis** dan **Larangan Parkir**, isi **Jenis objek** sebelum melanjutkan, misalnya `person` untuk orang atau `car` untuk mobil. Ketik nilainya atau pilih dari saran, lalu pilih **Tambah**. Bila **Jenis objek** dibiarkan kosong, modul tidak menghitung objek apa pun.
+    </Warning>
+  </Step>
+  <Step title="Atur peringatan">
+    Untuk modul peringatan, langkah terakhir berjudul **Peringatan**:
+
+    - Biarkan **Kirim peringatan ke petugas** tercentang agar JagaInd membuat aturan alarm untuk modul ini.
+    - Pilih tingkat peringatan: **Info**, **Peringatan**, atau **Kritis**.
+    - Buka **Pengaturan lanjutan** untuk mengatur **Jeda antar peringatan** (bawaan 30 detik) dan **Keyakinan minimum** (bawaan 60%).
+
+    Bila Anda tidak punya izin **Kelola aturan alarm**, atau modulnya modul statistik, langkah ini berjudul **Periksa dan pasang** dan tidak membuat aturan.
+
+    ![Langkah Peringatan dengan pilihan tingkat dan ringkasan sebelum memasang modul](/images/modul/peringatan-modul.png)
+  </Step>
+  <Step title="Pasang modul">
+    Periksa ringkasan **Modul**, **Gambar**, dan **Peringatan**, lalu pilih **Pasang modul**.
+  </Step>
+</Steps>
+
+## Hasil
+
+Pesan **&lt;Nama modul&gt; aktif di &lt;nama kamera&gt;** muncul. Pilih **Selesai** untuk kembali ke daftar modul kamera, atau **Pasang modul lain** untuk memasang modul berikutnya.
+
+![Pesan Lintas Garis aktif di Gerbang Depan setelah pemasangan](/images/modul/modul-terpasang.png)
+
+Garis atau area tampil di video kamera dan layar Pantau. Bila Anda membuat peringatan, aturan alarmnya tampil di tab **Aturan** modul dan di halaman **Aturan Alarm**.
+
+## Membatalkan pemasangan
+
+Pilih **Batal** di kanan atas panel pemasangan. Bila Anda sudah menggambar, dialog **Batalkan pemasangan ...?** meminta konfirmasi. Pilih **Buang gambar** untuk membuang gambar yang belum tersimpan.
+
+## Batasan
+
+- Satu modul hanya dapat dipasang satu kali per kamera. Satu pemasangan dapat berisi beberapa garis atau zona.
+- Admin server dapat membatasi jumlah modul aktif per kamera. Lihat [Konfigurasi server](/admin/konfigurasi-server).
+- Modul tidak dapat dipasang atau diubah saat AI Worker terputus.
+
+## Masalah umum
+
+| Pesan | Penyebab | Solusi |
+| --- | --- | --- |
+| Gambar dulu garis di video sebelum melanjutkan. | Modul butuh garis atau area. | Gambar minimal satu garis atau zona. |
+| kamera sudah mencapai batas N modul aktif | Batas modul aktif per kamera tercapai. | Jeda atau lepas modul lain, atau minta admin server menaikkan batas. |
+| AI Worker sedang tidak terhubung, konfigurasi modul tidak dapat diubah | AI Worker terputus. | Tunggu sampai AI Worker tersambung. Lihat [Cara memeriksa kesehatan server](/admin/cara-memeriksa-kesehatan-server). |
+| Modul sudah terpasang, tetapi peringatan gagal dibuat: ... | Modul tersimpan, tetapi aturan alarm gagal dibuat. | Buat aturannya dari tab **Aturan** modul. Lihat [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm). |
+
+## Lihat juga
+
+- [Cara mengubah modul](/modul/cara-mengubah-modul)
+- [Cara membuat Ignore Zone](/kamera/cara-membuat-ignore-zone)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)

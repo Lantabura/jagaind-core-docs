@@ -1,0 +1,71 @@
+---
+title: "Cara masuk dan keluar"
+description: "Masuk ke dashboard JagaInd dengan akun dari admin, pahami masa berlaku sesi, dan keluar saat pergantian jaga."
+keywords: ["login", "masuk", "keluar", "logout", "sesi"]
+---
+
+Semua pengguna masuk ke dashboard JagaInd dengan nama pengguna dan kata sandi dari admin. JagaInd tidak menyediakan pendaftaran mandiri.
+
+## Sebelum mulai
+
+- Anda punya akun aktif. Minta admin membuatkan akun bila belum punya.
+- Perangkat Anda berada di jaringan yang sama dengan server JagaInd, atau dapat menjangkau alamatnya.
+- Anda tahu alamat dashboard, misalnya `http://<alamat-server>:8080`.
+
+## Cara masuk
+
+<Steps>
+  <Step title="Buka alamat dashboard">
+    Buka alamat dashboard di peramban. Halaman **Masuk** tampil.
+
+    ![Halaman Masuk JagaInd dengan kolom Nama pengguna dan Kata sandi](/images/masuk/halaman-masuk.png)
+  </Step>
+  <Step title="Isi nama pengguna dan kata sandi">
+    Isi **Nama pengguna** dan **Kata sandi**. Pilih ikon mata untuk menampilkan atau menyembunyikan kata sandi.
+  </Step>
+  <Step title="Pilih Masuk">
+    Pilih **Masuk**. Setelah berhasil, Anda diarahkan ke halaman yang Anda buka, biasanya **Pantau**.
+  </Step>
+</Steps>
+
+<Info>
+  Kepala halaman Masuk menampilkan status **CORE** dan **WORKER**. Bila status sistem bukan **NORMAL**, Anda tetap bisa masuk, tetapi sebagian fitur mungkin terganggu. Lihat [Cara memeriksa kesehatan server](/admin/cara-memeriksa-kesehatan-server).
+</Info>
+
+## Masa berlaku sesi
+
+Setelah masuk, sesi Anda tersimpan di peramban.
+
+- Sesi berakhir paling lama **7 hari** setelah masuk.
+- Sesi juga berakhir bila tidak dipakai selama **12 jam**.
+- Sesi langsung berakhir bila admin menonaktifkan akun Anda, mereset kata sandi Anda, atau mengeluarkan Anda dari semua perangkat.
+
+Bila sesi berakhir, dashboard kembali ke halaman Masuk.
+
+## Cara keluar
+
+Pilih salah satu:
+
+- Pilih **Keluar** di bagian bawah menu kiri, di samping nama pengguna Anda.
+- Buka **Pengaturan** > **Akun & sesi**, lalu pilih **Keluar** di bagian **Akhiri sesi**.
+
+<Tip>
+  Keluar setiap kali pergantian jaga. Dengan begitu, setiap insiden yang diakui tercatat atas nama petugas yang benar.
+</Tip>
+
+## Masalah umum
+
+| Pesan | Penyebab | Solusi |
+| --- | --- | --- |
+| Nama pengguna wajib diisi. | Kolom nama pengguna kosong. | Isi nama pengguna. |
+| Kata sandi wajib diisi. | Kolom kata sandi kosong. | Isi kata sandi. |
+| Nama pengguna atau kata sandi salah. | Nama pengguna atau kata sandi keliru, atau akun dinonaktifkan. | Periksa huruf besar-kecil. Bila tetap gagal, hubungi admin. |
+| too many login attempts, try again later | Terlalu banyak percobaan masuk dalam satu menit. | Tunggu sekitar satu menit, lalu coba lagi. |
+| Server Jagaind tidak dapat dihubungi. Periksa jaringan lalu coba lagi. | Peramban tidak dapat menjangkau server. | Periksa jaringan dan alamat dashboard. |
+
+Panduan lengkapnya ada di [Cara mengatasi gagal masuk](/bantuan/cara-mengatasi-gagal-masuk).
+
+## Lihat juga
+
+- [Cara mengganti kata sandi](/akun/cara-mengganti-kata-sandi)
+- [Peran dan izin](/akun/peran-dan-izin)

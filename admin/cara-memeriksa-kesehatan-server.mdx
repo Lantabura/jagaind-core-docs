@@ -1,0 +1,83 @@
+---
+title: "Cara memeriksa kesehatan server"
+sidebarTitle: "Memeriksa kesehatan server"
+description: "Pantau status Core, AI Worker, dan koneksi langsung, serta pemakaian CPU, RAM, GPU, dan disk bukti di halaman Sistem."
+keywords: ["kesehatan", "sistem", "healthz", "cpu", "ram", "gpu", "disk", "ai worker"]
+---
+
+JagaInd menampilkan kesehatan server di tiga tempat: lampu status di bilah atas, tab **Kesehatan** di Pengaturan, dan halaman **Sistem**.
+
+## Lampu status di bilah atas
+
+Lampu di kanan atas tampil di semua halaman.
+
+| Lampu | Hijau | Tidak hijau |
+| --- | --- | --- |
+| **Core** | Core berjalan normal. | Core tidak terhubung. |
+| **Worker** | AI Worker tersambung. | AI Worker terputus: tidak ada analitik dan insiden baru. |
+| **Live** | Insiden baru diterima seketika. | Menyambung ulang: insiden baru tertunda. Hanya tampil untuk pengguna dengan izin **Lihat insiden**. |
+
+Arahkan kursor ke lampu untuk membaca keterangannya. Di layar sempit, ketiga lampu digabung menjadi satu.
+
+## Tab Kesehatan
+
+Pilih **Pengaturan** > **Kesehatan**. Semua pengguna dapat membuka tab ini. Status diperiksa otomatis setiap 10 detik.
+
+![Tab Kesehatan dengan status Jagaind Core, AI Worker, dan Siaran langsung](/images/pengaturan/kesehatan.png)
+
+| Baris | Status normal | Status bermasalah |
+| --- | --- | --- |
+| **Jagaind Core** | Normal: Beroperasi normal | Tidak terhubung: periksa proses Core dan koneksi jaringan |
+| **AI Worker** | Tersambung: jumlah modul tersedia | Terputus: tidak ada analitik dan insiden baru |
+| **Siaran langsung** | Terhubung: insiden baru diterima seketika | Menyambung ulang: insiden baru tertunda sampai tersambung |
+
+Lencana di kanan atas merangkum keadaan: **Semua normal**, **Perlu perhatian**, atau **Ada gangguan**.
+
+## Halaman Sistem
+
+Halaman **Sistem** menampilkan pemakaian sumber daya server dan diperbarui setiap 2 detik. Anda butuh izin **Lihat kondisi server**. Peran bawaan yang memilikinya hanya **Admin**.
+
+![Bagian Pemakaian di halaman Sistem dengan kartu CPU, RAM, dan Disk evidence](/images/sistem/pemakaian.png)
+
+Halaman ini berisi:
+
+- **Pemakaian**: kartu **CPU**, **RAM**, dan **Disk evidence**. CPU dan RAM menampilkan grafik 15 menit terakhir beserta nilai maksimumnya.
+- **GPU**: utilisasi, VRAM, suhu, dan daya setiap GPU NVIDIA. Bila tidak ada GPU, tertulis "Tidak ada GPU NVIDIA terdeteksi".
+- **Spesifikasi**: hostname, sistem operasi, CPU, RAM, GPU, dan volume penyimpanan bukti.
+- **Proses**: memori Core dan AI Worker, FPS inferensi, dan status worker.
+
+### Arti warna
+
+| Ukuran | Normal (hijau) | Tinggi (kuning) | Kritis (merah) |
+| --- | --- | --- | --- |
+| CPU, RAM, utilisasi GPU, VRAM | di bawah 80% | 80–94% | 95% ke atas |
+| Disk evidence | di bawah 85% | 85–94% | 95% ke atas |
+| Suhu GPU | di bawah 80 °C | 80–89 °C | 90 °C ke atas |
+
+Nilai yang tidak tersedia tampil abu-abu dengan keterangan **Tidak ada data**.
+
+<Tip>
+  Saat menambah kamera atau memasang modul berat seperti Pengenalan Wajah atau Perundungan Fisik, tambahkan satu per satu sambil memantau halaman Sistem.
+</Tip>
+
+## Pemeriksaan dari luar dashboard
+
+Alamat `http://<alamat-server>:8080/healthz` dapat dibuka tanpa login, sehingga cocok untuk alat pemantauan eksternal. Respons JSON berisi antara lain:
+
+- `status`, `version`, dan `uptime` Core.
+- `ai_worker`: `CONNECTED`, `DISCONNECTED`, atau `STALE`.
+- `cameras`: jumlah frame yang ditulis setiap kamera dan umur frame terakhir.
+- `notification_channels`: jenis dan status setiap kanal notifikasi, tanpa data rahasia.
+
+## Masalah umum
+
+| Gejala | Solusi |
+| --- | --- |
+| Lampu **Worker** tidak hijau | Periksa layanan AI Worker, misalnya dengan `docker logs -f jagaind-ai-worker`. |
+| Spanduk **Server Jagaind tidak terhubung** di layar Pantau | Periksa apakah Core berjalan dan jaringan ke server tersambung. Halaman menyambung ulang sendiri. |
+| Disk evidence **Kritis** | Bukti terlama dihapus otomatis saat disk melewati batas. Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data). |
+
+## Lihat juga
+
+- [Konfigurasi server](/admin/konfigurasi-server)
+- [Cara mengatasi insiden tidak muncul](/bantuan/cara-mengatasi-insiden-tidak-muncul)

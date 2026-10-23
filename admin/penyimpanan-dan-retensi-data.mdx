@@ -1,0 +1,48 @@
+---
+title: "Penyimpanan dan retensi data"
+description: "Pahami kapan JagaInd menghapus foto bukti, insiden lama, statistik, Wajah Tak Dikenal, dan sesi secara otomatis."
+keywords: ["retensi", "penyimpanan", "bukti", "disk penuh", "watermark", "privasi"]
+---
+
+JagaInd menyimpan semua data di server lokal. Agar disk tidak penuh dan data sensitif tidak tersimpan terlalu lama, beberapa data dihapus otomatis.
+
+## Foto bukti insiden
+
+Pembersihan bukti berjalan setiap 5 menit:
+
+1. Berkas bukti yang lebih tua dari `STORAGE_MAX_RETENTION_DAYS` (bawaan 60 hari) dihapus.
+2. Bila pemakaian disk mencapai `STORAGE_HIGH_WATERMARK_PERCENT` (bawaan 85%), bukti terlama dihapus sampai pemakaian turun ke `STORAGE_LOW_WATERMARK_PERCENT` (bawaan 70%).
+
+Insidennya tetap tersimpan. Panel detail insiden menampilkan "Bukti sudah dihapus otomatis".
+
+## Data lain
+
+| Data | Kapan dihapus otomatis |
+| --- | --- |
+| Insiden | Setelah lebih dari 1 tahun, dan hanya bila buktinya sudah terhapus. |
+| Statistik (metrik) | Setelah lebih dari 1 tahun. |
+| Wajah Tak Dikenal | Setelah tidak terlihat selama `UNKNOWN_FACE_RETENTION_DAYS` hari (bawaan 30). Nilai `0` mematikan penghapusan otomatis. |
+| Notifikasi yang sudah terkirim | Dihapus dari antrean secara berkala. |
+| Sesi login kedaluwarsa | Dihapus secara berkala. |
+
+Orang Terdaftar dan Wajah Terdaftar **tidak** dihapus otomatis. Hapus secara manual bila tidak lagi diperlukan. Lihat [Cara mendaftarkan wajah](/modul/cara-mendaftarkan-wajah#mengelola-orang-terdaftar).
+
+Pengaturan nilai-nilai di atas dijelaskan di [Konfigurasi server](/admin/konfigurasi-server#penyimpanan-dan-retensi).
+
+## Cadangan dan keamanan data
+
+<Warning>
+  Cadangan (backup) database berisi data wajah, dan bila WhatsApp aktif, juga berisi material sesi WhatsApp. Siapa pun yang memegang cadangan itu dapat mengambil alih akun WhatsApp organisasi. Perlakukan cadangan database seperti kata sandi: enkripsi, batasi akses, dan catat siapa yang memegangnya.
+</Warning>
+
+- Aktifkan enkripsi disk di server produksi dan batasi akses ke database.
+- Tetapkan masa simpan cadangan sesuai kebijakan organisasi.
+
+## Jejak audit
+
+JagaInd mencatat perubahan penting ke log audit di database, antara lain pembuatan dan perubahan pengguna dan peran, reset kata sandi, reset Occupancy, serta pendaftaran, penghapusan, dan reset data wajah. Log audit belum dapat dilihat dari dashboard.
+
+## Lihat juga
+
+- [Cara memeriksa kesehatan server](/admin/cara-memeriksa-kesehatan-server)
+- [Pengenalan Wajah](/modul/pengenalan-wajah#privasi)

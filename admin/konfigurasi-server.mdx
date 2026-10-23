@@ -1,0 +1,77 @@
+---
+title: "Konfigurasi server"
+description: "Daftar variabel lingkungan JagaInd yang biasa diubah admin: akun admin awal, penyimpanan, video langsung, AI, dan notifikasi."
+keywords: ["konfigurasi", "env", "variabel lingkungan", ".env", "whep_nat_ips", "retensi"]
+---
+
+Konfigurasi server JagaInd diatur lewat variabel lingkungan di berkas `.env` pada repositori aplikasi. Perubahan baru berlaku setelah Core dan AI Worker dimulai ulang.
+
+<Warning>
+  Berkas `.env` berisi kata sandi dan token. Jangan menyalinnya ke tiket, chat, atau repositori.
+</Warning>
+
+Bila ada nilai yang tidak dapat dibaca, Core menolak berjalan dan menyebutkan nama variabelnya di log.
+
+## Akun admin awal
+
+| Variabel | Penjelasan |
+| --- | --- |
+| `JAGAIND_ADMIN_USERNAME` | Username admin pertama. Dibuat saat Core mulai bila username itu belum ada. |
+| `JAGAIND_ADMIN_PASSWORD` | Kata sandi admin pertama. Isi bersama username, atau kosongkan keduanya. |
+
+Variabel ini hanya membuat admin bila belum ada. Mengubahnya tidak mengganti kata sandi admin yang sudah ada.
+
+## Database
+
+| Variabel | Bawaan | Penjelasan |
+| --- | --- | --- |
+| `DATABASE_URL` | Kosong | Alamat PostgreSQL. Bila kosong, data disimpan di memori dan hilang saat Core dimulai ulang. Docker Compose mengisinya otomatis. |
+| `POSTGRES_USER`, `POSTGRES_DB` | `jagaind` | Nama pengguna dan nama database PostgreSQL. |
+| `POSTGRES_PASSWORD` | – | Kata sandi database. Wajib diganti. |
+
+## Video langsung (WebRTC)
+
+| Variabel | Bawaan | Penjelasan |
+| --- | --- | --- |
+| `PORT` | `8080` | Port dashboard dan API. |
+| `WHEP_NAT_IPS` | `127.0.0.1` | Alamat IP server yang diumumkan ke peramban untuk video langsung. Pisahkan dengan koma. Isi dengan IP LAN server bila dashboard dibuka dari perangkat lain. Wajib bila Core berjalan di dalam Docker. |
+| `WHEP_UDP_PORT_MIN`, `WHEP_UDP_PORT_MAX` | `40000`, `40050` | Rentang port UDP untuk video langsung. |
+
+## Analitik
+
+| Variabel | Bawaan | Penjelasan |
+| --- | --- | --- |
+| `INFERENCE_BACKEND` | – | `gpu` (NVIDIA), `cpu`, `coreml` (Apple Silicon), atau `mock` (deteksi sintetis tanpa model). |
+| `JAGAIND_MAX_MODULES_PER_CAMERA` | `0` | Jumlah maksimal modul aktif bersamaan di satu kamera. `0` berarti tanpa batas. Batas hanya memblokir aktivasi baru. Modul yang sudah aktif tetap berjalan. |
+
+## Penyimpanan dan retensi
+
+| Variabel | Bawaan | Penjelasan |
+| --- | --- | --- |
+| `EVIDENCE_STORAGE_PATH` | `./data/evidence` | Folder penyimpanan foto bukti. |
+| `STORAGE_HIGH_WATERMARK_PERCENT` | `85` | Pemakaian disk yang memicu penghapusan bukti terlama. |
+| `STORAGE_LOW_WATERMARK_PERCENT` | `70` | Target pemakaian disk setelah penghapusan. Harus lebih kecil dari batas atas. |
+| `STORAGE_MAX_RETENTION_DAYS` | `60` | Umur maksimum berkas bukti dalam hari. |
+| `UNKNOWN_FACE_RETENTION_DAYS` | `30` | Wajah Tak Dikenal dihapus setelah tidak terlihat selama jumlah hari ini. `0` berarti disimpan sampai dihapus manual. |
+
+Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data).
+
+## Notifikasi
+
+| Variabel | Bawaan | Penjelasan |
+| --- | --- | --- |
+| `TELEGRAM_BOT_TOKEN` | Kosong | Token bot Telegram. Kanal Telegram aktif bila diisi. |
+| `TELEGRAM_CHAT_ID` | Kosong | Opsional. Bila diisi, chat ID ini ditambahkan sekali sebagai target berlabel "Telegram". |
+| `NOTIFICATION_MAX_AGE` | `30m` | Umur maksimum pesan di antrean sebelum ditandai gagal. Format durasi, misalnya `45m` atau `1h`. Berlaku untuk Telegram dan WhatsApp. |
+| `WHATSAPP_ENABLED` | `false` | Aktifkan fitur WhatsApp. Membutuhkan `DATABASE_URL`. |
+| `WHATSAPP_DEVICE_NAME` | `Jagaind Edge` | Nama perangkat di daftar perangkat tertaut HP pengirim. |
+| `WHATSAPP_RATE_LIMIT_PER_MINUTE` | `20` | Batas pesan WhatsApp per menit. Turunkan bila nomor baru atau volume tinggi. |
+
+<Warning>
+  Saat WhatsApp aktif, jalankan tepat satu proses Core untuk setiap database. Dua proses Core yang memakai database yang sama akan saling memutus sesi WhatsApp.
+</Warning>
+
+## Lihat juga
+
+- [Cara memasang JagaInd](/admin/cara-memasang-jagaind)
+- [Cara menghubungkan WhatsApp](/notifikasi/cara-menghubungkan-whatsapp)

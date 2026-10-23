@@ -1,0 +1,53 @@
+---
+title: "Cara mengatasi video tidak tampil"
+description: "Periksa penyebab video hitam, kamera berstatus Gangguan atau Mati, dan pesan video mencoba lagi."
+keywords: ["video hitam", "kamera gangguan", "kamera mati", "rtsp", "webrtc", "whep"]
+---
+
+Gunakan halaman ini bila video kamera tidak tampil di layar Pantau atau halaman kamera.
+
+## Pertama: periksa status kamera
+
+Buka halaman **Kamera** dan lihat status kamera.
+
+<AccordionGroup>
+  <Accordion title="Status Gangguan atau Mati">
+    Server JagaInd tidak menerima video dari kamera.
+
+    1. Pastikan kamera menyala dan tersambung ke jaringan.
+    2. Pastikan server JagaInd dapat menjangkau alamat IP kamera.
+    3. Periksa alamat stream di formulir ubah kamera. Alamat harus diawali `rtsp://` dan memuat nama pengguna, kata sandi, alamat IP, port, dan jalur stream yang benar untuk merek kamera Anda.
+    4. Bila memakai sub-stream, pastikan sub-stream aktif di pengaturan kamera atau NVR.
+    5. Bila JagaInd berjalan di Docker dan kamera atau stream uji berjalan di komputer yang sama, jangan pakai `127.0.0.1` di alamat kamera. Alamat itu menunjuk ke kontainer sendiri. Gunakan IP komputer di jaringan.
+
+    Lihat [Cara mengubah kamera](/kamera/cara-mengubah-dan-menghapus-kamera).
+  </Accordion>
+  <Accordion title="Status Nonaktif">
+    Kamera dimatikan admin dan kotaknya bertuliskan "Kamera dinonaktifkan". Centang **Kamera aktif** di formulir ubah kamera untuk menyalakannya.
+  </Accordion>
+  <Accordion title="Status Aktif, tetapi video hitam">
+    Server menerima video, tetapi peramban tidak dapat memutarnya. Lanjutkan ke bagian berikutnya.
+  </Accordion>
+</AccordionGroup>
+
+## Video hitam padahal kamera Aktif
+
+Video langsung dikirim ke peramban lewat WebRTC dengan port UDP.
+
+1. **Periksa izin.** Akun Anda butuh izin **Lihat siaran langsung**. Peran Viewer tidak memilikinya.
+2. **Periksa `WHEP_NAT_IPS`.** Admin server harus mengisi variabel ini dengan alamat IP server yang dapat dijangkau peramban Anda. Bila dashboard dibuka dari perangkat lain di jaringan, tambahkan IP LAN server. Lihat [Konfigurasi server](/admin/konfigurasi-server#video-langsung-webrtc).
+3. **Periksa port UDP.** Port UDP `40000`–`40050` di server harus terbuka dan tidak diblokir firewall.
+4. **Di Windows**, Hyper-V dapat mencadangkan rentang port tertentu. Gunakan rentang bawaan `40000`–`40050`.
+
+## Arti pesan di video
+
+| Pesan | Langkah |
+| --- | --- |
+| Video belum tersedia, mencoba lagi | Periksa status kamera dan izin **Lihat siaran langsung**. |
+| Video terputus, mencoba lagi | Koneksi putus. Dashboard menyambung ulang sendiri. Bila berulang, periksa jaringan dan `WHEP_NAT_IPS`. |
+| Gagal terhubung ke kamera, mencoba lagi | Peramban tidak dapat membuka koneksi video. Periksa port UDP dan `WHEP_NAT_IPS`. |
+
+## Lihat juga
+
+- [Cara menambah kamera](/kamera/cara-menambah-kamera)
+- [Cara memantau kamera](/pemantauan/cara-memantau-kamera)

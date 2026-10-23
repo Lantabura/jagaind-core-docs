@@ -1,0 +1,94 @@
+---
+title: "Cara mengelola pengguna"
+description: "Tambah pengguna, ubah peran, reset kata sandi, keluarkan sesi, dan nonaktifkan akun di halaman Pengguna & Peran."
+keywords: ["pengguna", "user", "tambah pengguna", "reset kata sandi", "nonaktifkan akun"]
+---
+
+Admin mengelola akun yang dapat masuk ke JagaInd dari halaman **Pengguna & Peran**. Pengguna tidak dapat dihapus. Pengguna yang tidak lagi berhak masuk dinonaktifkan agar jejak tindakannya, misalnya pengakuan insiden, tetap tercatat.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola pengguna dan peran**. Peran bawaan **Admin** sudah memilikinya.
+- Tentukan peran untuk setiap pengguna. Lihat [Peran dan izin](/akun/peran-dan-izin).
+
+## Membuka halaman pengguna
+
+Pilih **Pengguna & Peran** di menu kiri, lalu tab **Pengguna**. Panel **Daftar pengguna** menampilkan setiap akun beserta status **Aktif** atau **Nonaktif**, peran, dan kapan terakhir aktif.
+
+![Halaman Pengguna & Peran dengan Daftar pengguna dan panel Tambah pengguna](/images/pengguna/daftar-pengguna.png)
+
+## Menambah pengguna
+
+<Steps>
+  <Step title="Isi panel Tambah pengguna">
+    Di panel **Tambah pengguna**, isi:
+
+    - **Username**: maksimal 100 karakter. Username tidak dapat diubah setelah dibuat.
+    - **Kata sandi awal**: minimal 8 karakter.
+    - **Peran**: pilih peran. Nilai bawaannya **Operator**.
+  </Step>
+  <Step title="Simpan">
+    Pilih **Tambah pengguna**. Pesan "Pengguna &lt;username&gt; ditambahkan." muncul dan akun baru tampil di daftar.
+  </Step>
+  <Step title="Berikan kata sandi awal kepada pengguna">
+    Sampaikan username dan kata sandi awal lewat jalur yang aman. Minta pengguna menggantinya sendiri setelah masuk. Lihat [Cara mengganti kata sandi](/akun/cara-mengganti-kata-sandi).
+  </Step>
+</Steps>
+
+## Mengubah peran pengguna
+
+1. Di baris pengguna, pilih **Ubah peran**.
+2. Pilih peran baru, lalu pilih **Simpan peran**.
+
+Perubahan berlaku pada permintaan berikutnya. Pengguna tidak perlu keluar dan masuk lagi.
+
+## Reset kata sandi pengguna
+
+Gunakan ini bila pengguna lupa kata sandinya.
+
+1. Di baris pengguna, pilih menu titik tiga, lalu **Reset kata sandi**.
+2. Isi **Kata sandi baru**, minimal 8 karakter.
+3. Pilih **Reset kata sandi**.
+
+Semua sesi pengguna itu langsung dikeluarkan. Berikan kata sandi baru kepadanya.
+
+## Mengeluarkan pengguna dari semua perangkat
+
+Gunakan ini bila perangkat pengguna hilang atau dipakai orang lain.
+
+1. Di baris pengguna, pilih menu titik tiga, lalu **Keluarkan dari semua perangkat**.
+2. Konfirmasi dengan **Keluarkan**.
+
+Semua sesi pengguna dicabut. Pengguna masih bisa masuk lagi dengan kata sandinya.
+
+## Menonaktifkan atau mengaktifkan pengguna
+
+1. Di baris pengguna, pilih menu titik tiga, lalu **Nonaktifkan**.
+2. Konfirmasi dengan **Nonaktifkan**.
+
+Pengguna tidak bisa masuk sampai diaktifkan kembali, dan semua sesinya langsung dikeluarkan. Untuk mengaktifkannya lagi, pilih **Aktifkan** dari menu yang sama.
+
+<Note>
+  Anda tidak dapat menonaktifkan akun Anda sendiri. Pilihan **Nonaktifkan** tidak tampil di baris akun yang bertanda **(Anda)**.
+</Note>
+
+## Batasan
+
+- Pengguna tidak dapat dihapus, hanya dinonaktifkan.
+- Username tidak dapat diubah.
+- Setiap pengguna hanya memegang satu peran.
+- JagaInd selalu menjaga minimal satu pengguna aktif yang dapat mengelola pengguna. Perubahan yang melanggar aturan ini ditolak.
+
+## Masalah umum
+
+| Pesan | Penyebab | Solusi |
+| --- | --- | --- |
+| username sudah dipakai | Username itu sudah ada, termasuk milik pengguna nonaktif. | Pakai username lain, atau aktifkan kembali pengguna lama. |
+| Kata sandi minimal 8 karakter. | Kata sandi terlalu pendek. | Pakai minimal 8 karakter. |
+| tidak dapat menonaktifkan akun sendiri | Anda mencoba menonaktifkan akun yang sedang dipakai. | Minta admin lain melakukannya. |
+| perubahan ini akan menyisakan tidak ada pengguna aktif yang dapat mengelola pengguna | Perubahan peran atau status akan menghilangkan admin terakhir. | Beri pengguna lain izin **Kelola pengguna dan peran** lebih dulu. |
+
+## Lihat juga
+
+- [Peran dan izin](/akun/peran-dan-izin)
+- [Cara membuat peran kustom](/akun/cara-membuat-peran-kustom)

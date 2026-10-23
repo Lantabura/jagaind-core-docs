@@ -1,0 +1,61 @@
+---
+title: "Lintas Garis"
+description: "Catat setiap orang atau kendaraan yang melewati garis Tripwire beserta arahnya, masuk atau keluar."
+keywords: ["lintas garis", "line crossing", "tripwire", "masuk keluar", "gerbang"]
+---
+
+Modul **Lintas Garis** mencatat setiap orang atau kendaraan yang melewati garis yang Anda gambar di video, beserta arahnya: masuk atau keluar.
+
+**Cocok untuk:**
+
+- Gerbang atau pintu masuk gedung
+- Jalur keluar-masuk kendaraan di area parkir
+- Lorong yang hanya boleh dilewati satu arah
+
+## Cara kerja
+
+1. Anda menggambar satu atau beberapa garis (Tripwire) di video, misalnya melintang di depan pintu.
+2. Modul memantau titik kaki setiap objek, yaitu bagian tengah bawah kotak objek.
+3. Saat titik kaki berpindah dari satu sisi garis ke sisi lain, modul mencatat satu kejadian dengan arahnya.
+4. Aturan alarm menentukan perlintasan mana yang dijadikan peringatan untuk petugas.
+
+Objek yang berdiri tepat di atas garis tidak dihitung melintas sampai benar-benar pindah ke sisi seberang.
+
+## Jenis kejadian
+
+| Kejadian | Arti |
+| --- | --- |
+| **Masuk melewati garis** | Objek berpindah ke sisi yang ditunjuk panah **MASUK**. |
+| **Keluar melewati garis** | Objek berpindah dari sisi **MASUK** ke sisi seberang. |
+
+## Yang perlu digambar
+
+Minimal satu **Tripwire**. Tidak ada batas jumlah garis. Panah **MASUK** di tengah garis menunjuk sisi masuk. Pilih **Balik arah** untuk menukarnya.
+
+## Pengaturan
+
+| Pengaturan | Penjelasan |
+| --- | --- |
+| **Jenis objek** | Jenis objek yang dihitung. Pilih dari saran: `person` (orang), `bicycle` (sepeda), `car` (mobil), `motorcycle` (sepeda motor), `bus` (bus), `truck` (truk). |
+
+<Warning>
+  Isi **Jenis objek** saat memasang modul, misalnya `person`. Bila dibiarkan kosong, modul tidak menghitung objek apa pun dan tidak ada kejadian yang tercatat.
+</Warning>
+
+## Langkah singkat
+
+1. Pasang modul **Lintas Garis** di kamera. Lihat [Cara memasang modul](/modul/cara-memasang-modul).
+2. Gambar garis melintang di jalur yang dilewati orang atau kendaraan.
+3. Isi **Jenis objek**.
+4. Biarkan **Kirim peringatan ke petugas** tercentang, atau buat aturan alarm nanti.
+
+## Tips
+
+- Gambar garis di area yang kakinya terlihat jelas, bukan di area yang sering tertutup benda lain.
+- Gunakan aturan alarm dengan jenis kejadian **Masuk melewati garis** saja bila hanya arah masuk yang perlu diwaspadai.
+- Untuk menghitung jumlah pengunjung tanpa alarm, gunakan [Penghitung Pengunjung](/modul/penghitung-pengunjung).
+
+## Lihat juga
+
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)
+- [Cara membuat Ignore Zone](/kamera/cara-membuat-ignore-zone)

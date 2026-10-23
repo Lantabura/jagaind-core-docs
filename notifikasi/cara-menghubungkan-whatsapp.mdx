@@ -1,0 +1,125 @@
+---
+title: "Cara menghubungkan WhatsApp"
+sidebarTitle: "WhatsApp"
+description: "Tautkan satu nomor WhatsApp organisasi lewat QR atau kode pairing, tambahkan grup atau nomor tujuan, dan pulihkan sesi yang terputus."
+keywords: ["whatsapp", "pairing", "qr", "notifikasi whatsapp", "tautkan ulang"]
+---
+
+Kanal WhatsApp mengirim pesan insiden dari satu nomor WhatsApp milik organisasi ke grup atau nomor perorangan. Satu nomor pengirim dipakai untuk seluruh instalasi.
+
+<Warning>
+  Kanal ini memakai protokol WhatsApp Web tidak resmi, bukan API resmi WhatsApp.
+
+  - Nomor berisiko diblokir WhatsApp bila mengirim banyak pesan. Gunakan nomor khusus, bukan nomor pribadi.
+  - Pesan dan foto insiden dikirim ke server WhatsApp.
+  - HP pengirim sebaiknya tetap aktif agar perangkat tertaut tidak dilepas.
+</Warning>
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola kanal dan target notifikasi**.
+- Admin server sudah mengaktifkan fitur WhatsApp dengan `WHATSAPP_ENABLED=true` dan database PostgreSQL. Bila belum, kartu WhatsApp menampilkan "Kanal WhatsApp dinonaktifkan di server". Lihat [Konfigurasi server](/admin/konfigurasi-server).
+- Server JagaInd terhubung ke internet.
+- Anda memegang HP dengan nomor WhatsApp organisasi.
+
+Urutan penyiapannya: aktifkan fitur di server, tautkan nomor, aktifkan kanal, lalu tambahkan target.
+
+## Menautkan nomor organisasi
+
+<Steps>
+  <Step title="Buka kartu WhatsApp">
+    Pilih **Pengaturan** > **Notifikasi**. Di kartu **WhatsApp**, pilih **Hubungkan**.
+  </Step>
+  <Step title="Baca peringatan risiko">
+    Dialog **Hubungkan WhatsApp** menampilkan **Peringatan risiko**. Baca sebelum melanjutkan.
+  </Step>
+  <Step title="Pilih metode penautan">
+    <Tabs>
+      <Tab title="Pindai QR">
+        1. Pilih **Pindai QR**, lalu **Mulai pairing**.
+        2. Tunggu QR muncul.
+        3. Di HP pengirim, buka WhatsApp > **Perangkat tertaut** > **Tautkan perangkat**, lalu pindai QR. QR diperbarui otomatis.
+      </Tab>
+      <Tab title="Kode pairing lewat nomor">
+        1. Pilih **Kode pairing lewat nomor**.
+        2. Isi **Nomor WhatsApp pengirim** lengkap dengan kode negara, misalnya `6281234567890`.
+        3. Pilih **Mulai pairing**. Kode 8 karakter muncul di dialog.
+        4. Di HP pengirim, buka WhatsApp > **Perangkat tertaut** > **Tautkan perangkat** > **Tautkan dengan nomor telepon**, lalu masukkan kode itu.
+      </Tab>
+    </Tabs>
+  </Step>
+  <Step title="Tunggu konfirmasi">
+    Setelah berhasil, pesan "WhatsApp berhasil ditautkan." muncul dan dialog tertutup sendiri. Status kartu menjadi **Terhubung**.
+  </Step>
+  <Step title="Aktifkan kanal">
+    Kanal WhatsApp nonaktif secara bawaan. Pilih **Aktifkan kanal**. Selama kanal nonaktif, tidak ada notifikasi yang dikirim walaupun nomor sudah tersambung.
+  </Step>
+</Steps>
+
+<Note>
+  Pairing berhenti otomatis setelah sekitar dua menit. Menutup dialog selama pairing juga membatalkannya.
+</Note>
+
+## Menambahkan target
+
+Target baru hanya dapat ditambahkan saat nomor organisasi **Terhubung**, karena grup dan nomor dicek ke WhatsApp.
+
+1. Di bagian bawah kartu, pilih **Jenis target**:
+   - **Grup**: pilih grup dari daftar **Grup WhatsApp**. Daftar hanya berisi grup yang diikuti nomor pengirim.
+   - **Nomor perorangan**: isi **Nomor WhatsApp tujuan** dengan kode negara. Nomor dicek terdaftar di WhatsApp sebelum disimpan.
+2. Isi **Label target WhatsApp**, misalnya "Tim jaga malam".
+3. Pilih **Tambah target**.
+4. Pilih **Kirim tes** di baris target untuk memastikan pesan sampai.
+
+<Tip>
+  Grup lebih disarankan daripada nomor perorangan. Anda cukup mengatur anggota grup di WhatsApp tanpa mengubah target di JagaInd.
+</Tip>
+
+## Mengelola target
+
+- **Ubah**: ganti label target. Untuk mengganti tujuan, hapus target lalu tambahkan yang baru.
+- **Nonaktifkan** atau **Aktifkan**: hentikan atau lanjutkan pengiriman ke target.
+- **Hapus**: target berhenti menerima notifikasi. Pesan yang sudah antre tetap dikirim.
+
+## Status sesi dan pemulihannya
+
+| Status | Arti | Tindakan |
+| --- | --- | --- |
+| **Terhubung** | Nomor tersambung dan siap mengirim. | – |
+| **Pairing** | Penautan sedang berjalan. | Pindai QR atau masukkan kode. |
+| **Terputus** | Sesi terputus. Bila tautan masih tersimpan, tidak perlu pairing ulang. | Pilih **Sambungkan ulang**. Bila tidak ada tautan, pilih **Hubungkan**. |
+| **Galat** | Gangguan sementara. Server terus mencoba menyambung ulang. | Tunggu, atau pilih **Sambungkan ulang**. |
+| **Keluar** | Perangkat tertaut dilepas dari HP. | Pilih **Tautkan ulang** dan lakukan pairing lagi. |
+| **Nonaktif** | Fitur dimatikan di server atau kanal dinonaktifkan. | Aktifkan fitur atau kanal. |
+
+Saat sesi bermasalah, kartu menampilkan spanduk berisi galat terakhir dan jumlah kegagalan 24 jam. Kanal tidak pernah dinonaktifkan otomatis.
+
+Pesan insiden yang tertahan selama sesi terputus tetap dikirim setelah sesi pulih, selama belum melewati batas umur antrean (bawaan 30 menit).
+
+## Memutus tautan
+
+Pilih **Putuskan**, lalu konfirmasi dengan **Putuskan**. Nomor organisasi harus ditautkan ulang lewat QR atau kode pairing, dan notifikasi berhenti sampai tautan dipulihkan.
+
+## Bila nomor diblokir WhatsApp
+
+1. Pilih **Nonaktifkan kanal** untuk menghentikan pengiriman.
+2. Jangan mengulang pairing berkali-kali dengan nomor yang sama.
+3. Siapkan nomor organisasi baru, tautkan, lalu aktifkan kanal kembali.
+
+## Masalah umum
+
+| Pesan | Solusi |
+| --- | --- |
+| Nomor WhatsApp wajib diisi untuk pairing lewat kode. | Isi nomor pengirim, atau pilih **Pindai QR**. |
+| nomor WhatsApp harus 7-15 digit termasuk kode negara | Tulis nomor dengan kode negara, misalnya awalan `62`. |
+| nomor tidak terdaftar di WhatsApp; periksa kode negara atau pakai grup | Periksa nomor tujuan, atau gunakan grup. |
+| grup tidak diikuti nomor pengirim; pilih dari daftar grup | Tambahkan nomor pengirim ke grup, lalu pilih ulang. |
+| sesi WhatsApp belum tersambung; sambungkan nomor lalu coba lagi | Sambungkan ulang atau tautkan nomor lebih dulu. |
+| nomor masih tertaut (sambungkan ulang atau putuskan dulu) atau pairing lain masih berjalan | Sambungkan ulang, atau putuskan tautan lama sebelum pairing baru. |
+
+Panduan lengkapnya ada di [Cara mengatasi notifikasi tidak terkirim](/bantuan/cara-mengatasi-notifikasi-tidak-terkirim).
+
+## Lihat juga
+
+- [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi)
+- [Konfigurasi server](/admin/konfigurasi-server)

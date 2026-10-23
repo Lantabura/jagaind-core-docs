@@ -1,0 +1,79 @@
+---
+title: "Cara mengubah dan menghapus kamera"
+description: "Ubah nama, alamat stream, kecepatan, dan resolusi analisis kamera, nonaktifkan sementara, atau hapus kamera secara permanen."
+keywords: ["ubah kamera", "hapus kamera", "nonaktifkan kamera", "resolusi analisis"]
+---
+
+Setiap kamera punya halaman pengaturan dengan tiga tab: **Modul**, **Zona**, dan **Info**. Pengaturan kamera itu sendiri ada di tab **Info**.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola kamera**.
+
+## Membuka pengaturan kamera
+
+Pilih **Kamera** di menu kiri, lalu pilih kartu kamera. Halaman pengaturan menampilkan video langsung di kiri dan panel tab di kanan.
+
+![Tab Info di halaman kamera dengan ringkasan kamera dan bagian Hapus kamera](/images/kamera/tab-info.png)
+
+Tab **Info** menampilkan **Sumber**, **Stream utama**, **Sub-stream**, **Analisis** (kecepatan dan resolusi), dan tanggal **Terdaftar**. Alamat stream ditampilkan dengan kata sandi disamarkan.
+
+## Mengubah kamera
+
+<Steps>
+  <Step title="Buka formulir">
+    Pilih **Ubah** di kanan atas halaman kamera, atau **Ubah** di tab **Info**.
+  </Step>
+  <Step title="Ubah isian">
+    Ubah isian yang perlu. Untuk alamat stream, kosongkan kolom bila ingin tetap memakai alamat tersimpan. Kata sandi kamera tidak pernah ditampilkan.
+  </Step>
+  <Step title="Simpan">
+    Pilih **Simpan kamera**.
+  </Step>
+</Steps>
+
+### Menonaktifkan kamera sementara
+
+Di formulir ubah, hilangkan centang **Kamera aktif**, lalu pilih **Simpan kamera**. Kamera berstatus **Nonaktif** dan kotaknya di layar Pantau bertuliskan "Kamera dinonaktifkan". Modul, garis, dan aturan kamera tetap tersimpan.
+
+Centang lagi **Kamera aktif** untuk menyalakannya.
+
+### Mengganti resolusi analisis untuk Pengenalan Wajah
+
+Modul Pengenalan Wajah butuh **Resolusi analisis** **Tinggi** agar wajah cukup besar untuk dikenali. Di formulir ubah, pilih **Tinggi**, lalu simpan.
+
+## Menghapus kamera
+
+<Danger>
+  Menghapus kamera juga menghapus semua modul terpasang, Tripwire dan zona, aturan alarm, serta riwayat insiden kamera itu. Tindakan ini tidak dapat dibatalkan. Bila hanya ingin menghentikan kamera sementara, nonaktifkan saja.
+</Danger>
+
+<Steps>
+  <Step title="Buka tab Info">
+    Di halaman kamera, buka tab **Info**.
+  </Step>
+  <Step title="Pilih Hapus kamera…">
+    Di bagian **Hapus kamera**, pilih **Hapus kamera…**.
+  </Step>
+  <Step title="Konfirmasi">
+    Ketik nama kamera persis seperti yang tertulis, lalu pilih **Hapus kamera**.
+
+    ![Dialog konfirmasi hapus kamera yang meminta pengguna mengetik nama kamera](/images/kamera/hapus-kamera.png)
+  </Step>
+</Steps>
+
+Setelah dihapus, Anda kembali ke halaman **Kamera**.
+
+## Masalah umum
+
+| Gejala | Solusi |
+| --- | --- |
+| Tombol **Hapus kamera** tidak aktif | Ketik nama kamera persis sama, termasuk huruf besar-kecil. |
+| Pesan "Akun Anda tidak punya izin untuk tindakan ini." | Minta admin memberi izin **Kelola kamera**. |
+| Kamera tidak ditemukan | Kamera sudah dihapus pengguna lain. Kembali ke daftar kamera. |
+
+## Lihat juga
+
+- [Cara menambah kamera](/kamera/cara-menambah-kamera)
+- [Cara membuat Ignore Zone](/kamera/cara-membuat-ignore-zone)
+- [Pengenalan Wajah](/modul/pengenalan-wajah)

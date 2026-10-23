@@ -1,0 +1,97 @@
+---
+title: "Cara mengubah, menjeda, dan melepas modul"
+sidebarTitle: "Mengubah modul"
+description: "Ubah pengaturan dan geometri modul yang sudah terpasang, jeda modul sementara, lepas modul dari kamera, dan pahami status modul."
+keywords: ["ubah modul", "jeda modul", "lepas modul", "status modul", "perlu dikonfigurasi ulang"]
+---
+
+Setelah modul terpasang, Anda dapat mengubah pengaturannya, menggambar ulang garis atau area, menjedanya, atau melepasnya dari kamera.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola modul kamera**. Tanpa izin ini, Anda hanya dapat melihat konfigurasi modul.
+- AI Worker tersambung. Konfigurasi modul tidak dapat diubah saat AI Worker terputus.
+
+## Membaca daftar modul kamera
+
+Buka halaman kamera, tab **Modul**. Bagian **Modul analitik** menampilkan berapa modul yang terpasang, serta jumlah modul **aktif**, **dijeda**, dan **tersedia**.
+
+![Daftar modul di halaman kamera dengan Lintas Garis aktif](/images/modul/daftar-modul-kamera.png)
+
+Setiap modul menampilkan status, ringkasan geometri (misalnya **1 tripwire**), jumlah aturan, dan sakelar aktif. Tanda **Perlu dicek** muncul bila modul bermasalah.
+
+## Mengubah pengaturan modul
+
+<Steps>
+  <Step title="Buka modul">
+    Pilih nama modul di daftar. Panel detail modul terbuka dengan tab **Pengaturan**, **Geometri**, dan **Aturan**. Tab **Geometri** hanya ada untuk modul yang memakai garis atau area. Tab **Aturan** hanya ada untuk modul peringatan.
+  </Step>
+  <Step title="Ubah pengaturan">
+    Di tab **Pengaturan**, ubah nilai yang perlu. Penjelasan dan rentang nilai tampil di bawah setiap isian.
+
+    ![Tab Pengaturan modul Lintas Garis dengan Jenis objek orang](/images/modul/pengaturan-jenis-objek.png)
+  </Step>
+  <Step title="Simpan">
+    Pilih **Simpan perubahan**. Pilih **Batalkan perubahan** untuk kembali ke nilai tersimpan. Tulisan **Ada perubahan belum disimpan** muncul selama ada perubahan yang belum disimpan.
+  </Step>
+</Steps>
+
+<Note>
+  Setiap kali pengaturan modul disimpan, modul di kamera itu dimulai ulang. Hitungan waktu yang sedang berjalan, misalnya lama orang berdiam di zona, ikut dimulai dari awal.
+</Note>
+
+## Menggambar ulang garis atau area
+
+1. Buka modul, lalu tab **Geometri**.
+2. Pilih **Gambar di video** atau **Ubah di video**. Video hanya menampilkan geometri modul ini.
+3. Ubah garis atau zona di video. Untuk beberapa modul, setiap zona punya isian angka sendiri di samping namanya. Kosongkan isian itu untuk memakai nilai modul.
+4. Pilih **Selesai menggambar** di bawah video.
+5. Pilih **Simpan perubahan** di panel modul.
+
+Pilih **Tampilkan semua** di bawah video untuk menampilkan kembali geometri semua modul.
+
+## Menjeda modul
+
+Matikan sakelar di samping modul pada daftar, atau sakelar di panel detail modul. Modul berstatus **Dijeda** dan berhenti mengamati kamera. Pengaturan, geometri, dan aturan tetap tersimpan. Nyalakan lagi sakelarnya untuk melanjutkan.
+
+## Melepas modul
+
+1. Buka modul, lalu pilih **Lepas**.
+2. Konfirmasi dengan **Lepas modul**.
+
+<Warning>
+  Melepas modul menghapus Tripwire, zona, dan pengaturannya di kamera ini. Aturan alarm untuk modul ini tidak lagi menerima kejadian.
+</Warning>
+
+## Konfigurasi lanjutan (JSON)
+
+Bagian **Lanjutan (JSON)** di tab **Pengaturan** ditujukan untuk teknisi. Bagian ini menampilkan konfigurasi mentah modul. Perubahan di sini menggantikan isian di atasnya. Pilih **Terapkan JSON**, lalu **Simpan perubahan**.
+
+## Status modul
+
+| Status | Arti | Tindakan |
+| --- | --- | --- |
+| **Menunggu konfirmasi** | Konfigurasi sudah dikirim, AI Worker belum menjawab. | Tunggu sebentar. |
+| **Aktif** | Modul berjalan dengan konfigurasi terbaru. | – |
+| **Dijeda** | Modul dimatikan lewat sakelar. | Nyalakan sakelar bila perlu. |
+| **Gagal diaktifkan** | AI Worker menolak konfigurasi dan modul tidak berjalan. | Baca pesan galat di bawah status, perbaiki pengaturan, lalu simpan ulang. |
+| **Gagal diperbarui, masih memakai konfigurasi lama** | Perubahan terakhir ditolak, modul tetap berjalan dengan konfigurasi sebelumnya. | Baca pesan galat, perbaiki, lalu simpan ulang. |
+| **Perlu dikonfigurasi ulang** | Konfigurasi tidak lagi sesuai versi modul terbaru, modul tidak lagi diumumkan AI Worker, atau ditolak karena batas modul per kamera. | Periksa konfigurasi, sesuaikan, lalu simpan ulang. |
+
+Halaman modul di **Katalog Modul** juga menandai kamera bermasalah dengan pesan **N kamera bermasalah pada modul ini**.
+
+## Masalah umum
+
+| Pesan | Solusi |
+| --- | --- |
+| AI Worker sedang tidak terhubung, konfigurasi modul tidak dapat diubah | Tunggu sampai AI Worker tersambung. |
+| kamera sudah mencapai batas N modul aktif | Jeda atau lepas modul lain sebelum mengaktifkan modul ini. |
+| Belum bisa disimpan: ... | Perbaiki isian yang disebutkan, misalnya nilai di luar rentang. |
+| Teks bukan JSON objek yang valid. Periksa tanda kutip dan koma. | Perbaiki teks di **Lanjutan (JSON)**. |
+| Anda hanya dapat melihat konfigurasi modul ini. | Akun Anda tidak punya izin **Kelola modul kamera**. |
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)
+- [Katalog modul](/modul/katalog-modul)

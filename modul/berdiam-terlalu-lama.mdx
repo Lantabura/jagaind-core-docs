@@ -1,0 +1,51 @@
+---
+title: "Berdiam Terlalu Lama"
+description: "Beri tanda saat seseorang berada di area yang diawasi lebih lama dari batas waktu."
+keywords: ["berdiam terlalu lama", "loitering", "berkeliaran", "zona"]
+---
+
+Modul **Berdiam Terlalu Lama** memberi tanda saat seseorang berada di area yang diawasi lebih lama dari batas waktu.
+
+**Cocok untuk:**
+
+- Area depan ATM atau brankas
+- Pintu samping atau gang sepi
+- Area parkir pada malam hari
+
+## Cara kerja
+
+1. Anda menandai satu atau beberapa zona di video.
+2. Modul menghitung berapa lama setiap orang berada di dalam zona. Hitungan tetap berjalan walaupun orang itu bergerak di dalam zona.
+3. Bila seseorang bertahan lebih lama dari **Durasi minimum**, modul mencatat satu kejadian.
+
+Setiap kunjungan seseorang ke sebuah zona hanya dilaporkan sekali. Orang yang keluar dari zona atau tidak terlihat sebentar, hingga sekitar 30 detik, tetap dianggap kunjungan yang sama.
+
+## Jenis kejadian
+
+| Kejadian | Arti |
+| --- | --- |
+| **Berdiam lama di area** | Seseorang berada di zona melewati durasi minimum. |
+
+Detail insiden menampilkan **Hadir minimal**, yaitu durasi saat batas terlewati, bukan total lama orang itu berada di zona.
+
+## Yang perlu digambar
+
+Minimal satu **zona** berupa poligon dengan minimal 3 titik.
+
+## Pengaturan
+
+| Pengaturan | Bawaan | Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Durasi minimum (detik)** | 120 | 15–1800 | Lama orang harus berada di zona sebelum dilaporkan. |
+| **Durasi minimum (detik)** per zona | Kosong | 15–1800 | Isian di samping nama zona. Kosongkan untuk memakai nilai modul. |
+
+Modul ini hanya mengamati orang.
+
+## Batasan
+
+- Hitungan waktu dimulai ulang setiap kali pengaturan modul di kamera diubah.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)

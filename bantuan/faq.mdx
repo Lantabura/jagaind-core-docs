@@ -1,0 +1,50 @@
+---
+title: "Pertanyaan umum"
+description: "Jawaban singkat untuk pertanyaan yang sering muncul tentang JagaInd: internet, kamera, modul, insiden, notifikasi, dan data."
+keywords: ["faq", "pertanyaan umum", "tanya jawab"]
+---
+
+<AccordionGroup>
+  <Accordion title="Apakah JagaInd butuh internet?">
+    Tidak untuk fungsi utama. Video, analitik AI, aturan alarm, insiden, dan dashboard berjalan di server lokal. Internet hanya dibutuhkan untuk mengirim notifikasi ke Telegram atau WhatsApp.
+  </Accordion>
+  <Accordion title="Kamera apa yang bisa dipakai?">
+    Kamera atau NVR yang menyediakan stream RTSP. Formulir tambah kamera menyediakan sumber **Kamera RTSP** dan **Kamera uji**. Lihat [Cara menambah kamera](/kamera/cara-menambah-kamera).
+  </Accordion>
+  <Accordion title="Apa bedanya kejadian dan insiden?">
+    Kejadian (observasi) adalah fakta yang dicatat modul, misalnya orang melewati garis. Insiden adalah kejadian yang lolos aturan alarm dan perlu ditanggapi petugas. Tanpa aturan alarm, kejadian tidak menjadi insiden. Lihat [Konsep dasar](/mulai/konsep-dasar).
+  </Accordion>
+  <Accordion title="Mengapa modul sudah terpasang tetapi tidak ada insiden?">
+    Kemungkinan besar belum ada aturan alarm, aturannya nonaktif, di luar jam aktif, atau **Jenis objek** modul masih kosong. Ikuti [Cara mengatasi insiden tidak muncul](/bantuan/cara-mengatasi-insiden-tidak-muncul).
+  </Accordion>
+  <Accordion title="Bisakah satu modul dipasang dua kali di kamera yang sama?">
+    Tidak. Satu modul dipasang sekali per kamera, tetapi satu pemasangan dapat berisi beberapa garis atau zona.
+  </Accordion>
+  <Accordion title="Apakah JagaInd merekam klip video?">
+    Belum. Bukti insiden saat ini berupa foto (snapshot) saat kejadian.
+  </Accordion>
+  <Accordion title="Berapa lama foto bukti disimpan?">
+    Bawaannya hingga 60 hari, atau lebih singkat bila disk hampir penuh. Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data).
+  </Accordion>
+  <Accordion title="Bisakah notifikasi hanya dikirim untuk insiden Kritis?">
+    Belum. Semua insiden dikirim ke kanal aktif, apa pun tingkatnya. Kurangi jumlah pesan dengan mengatur aturan alarm, misalnya memperpanjang jeda antar alarm atau membatasi jam aktif. Lihat [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi).
+  </Accordion>
+  <Accordion title="Bisakah pengguna dihapus?">
+    Tidak. Pengguna dinonaktifkan agar jejak tindakannya tetap tercatat. Lihat [Cara mengelola pengguna](/akun/cara-mengelola-pengguna).
+  </Accordion>
+  <Accordion title="Saya lupa kata sandi. Apa yang harus dilakukan?">
+    Minta admin mereset kata sandi Anda. JagaInd tidak menyediakan fitur lupa kata sandi mandiri.
+  </Accordion>
+  <Accordion title="Mengapa bunyi alarm tidak terdengar?">
+    Klik sekali di halaman setelah masuk, pastikan tombol **Senyapkan** tidak aktif, dan pastikan insidennya bertingkat **Kritis**. Hanya insiden Kritis yang berbunyi. Lihat [Cara mengatur bunyi alarm](/pemantauan/cara-mengatur-bunyi-alarm).
+  </Accordion>
+  <Accordion title="Apakah foto wajah asli disimpan?">
+    Tidak. JagaInd menyimpan potongan wajah berukuran 112×112 piksel dan representasi wajahnya. Keduanya tetap data biometrik dan harus diperlakukan sebagai data sensitif. Lihat [Pengenalan Wajah](/modul/pengenalan-wajah#privasi).
+  </Accordion>
+  <Accordion title="Seberapa akurat Pengenalan Wajah?">
+    Belum ada angka akurasi resmi. Ambang bawaan belum dikalibrasi, jadi uji modul dengan kondisi kamera Anda sebelum mengandalkan hasilnya.
+  </Accordion>
+  <Accordion title="Bisakah dashboard dibuka dari HP?">
+    Bisa, selama HP berada di jaringan yang dapat menjangkau server. Di layar sempit, kamera tampil satu kolom dan antrean insiden tampil sebagai bilah di bagian bawah.
+  </Accordion>
+</AccordionGroup>

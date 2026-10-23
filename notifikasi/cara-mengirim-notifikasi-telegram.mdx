@@ -1,0 +1,78 @@
+---
+title: "Cara mengirim notifikasi ke Telegram"
+sidebarTitle: "Telegram"
+description: "Siapkan bot Telegram, tambahkan chat ID tujuan sebagai target, lalu kirim pesan tes dari Pengaturan."
+keywords: ["telegram", "bot telegram", "chat id", "notifikasi"]
+---
+
+Kanal Telegram mengirim pesan insiden lewat bot Telegram ke satu atau beberapa chat atau grup.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola kanal dan target notifikasi**.
+- Server JagaInd terhubung ke internet.
+- Token bot Telegram sudah diisi admin server di variabel `TELEGRAM_BOT_TOKEN`. Token hanya disimpan di konfigurasi server dan tidak pernah ditampilkan di dashboard. Lihat [Konfigurasi server](/admin/konfigurasi-server).
+- Anda tahu **chat ID** tujuan, yaitu ID chat pribadi atau grup Telegram yang akan menerima pesan, dan bot sudah dapat mengirim pesan ke chat itu.
+
+<Note>
+  Pembuatan bot dan cara mendapatkan chat ID dilakukan di aplikasi Telegram dan tidak dibahas di sini. Lihat dokumentasi resmi Telegram tentang bot.
+</Note>
+
+## Langkah-langkah
+
+<Steps>
+  <Step title="Buka kartu Telegram">
+    Pilih **Pengaturan** di menu kiri, lalu tab **Notifikasi**. Kartu **Telegram** menampilkan status kanal.
+
+    Bila kartu bertuliskan **Belum dikonfigurasi** dan "Token bot belum diisi di konfigurasi server", minta admin server mengisi `TELEGRAM_BOT_TOKEN` dan memulai ulang Core.
+  </Step>
+  <Step title="Tambahkan target">
+    Di bagian bawah kartu, isi:
+
+    - **Chat ID Telegram**: misalnya `-1001234567890` untuk grup.
+    - **Label**: nama yang mudah dikenali, misalnya "Tim jaga malam".
+
+    Pilih **Tambah target**.
+  </Step>
+  <Step title="Kirim pesan tes">
+    Di baris target, pilih **Kirim tes**. Pesan tes berisi kanal, label target, dan waktu, diakhiri "Konfigurasi notifikasi berfungsi."
+  </Step>
+  <Step title="Pastikan kanal aktif">
+    Bila kanal nonaktif, pilih **Aktifkan kanal**. Kartu bertuliskan "Notifikasi Insiden dikirim ke semua target aktif di bawah ini."
+  </Step>
+</Steps>
+
+## Hasil
+
+Pesan "Pesan tes terkirim." muncul di dashboard dan pesan tes masuk ke chat Telegram. Insiden berikutnya dikirim ke semua target aktif.
+
+## Mengelola target
+
+- **Nonaktifkan** atau **Aktifkan**: hentikan atau lanjutkan pengiriman ke target tanpa menghapusnya.
+- **Hapus**: target berhenti menerima notifikasi. Pesan yang sudah antre tetap dikirim ke chat ID yang tersimpan.
+
+Label target Telegram tidak dapat diubah. Untuk mengganti chat ID atau label, hapus target lalu tambahkan target baru.
+
+## Status kanal
+
+| Status | Arti |
+| --- | --- |
+| **Terhubung** | Pengiriman terakhir berhasil, atau belum ada kegagalan. |
+| **Galat** | Pengiriman terakhir gagal, misalnya token bot dicabut atau chat ID salah. Kartu menampilkan **Pengiriman Telegram gagal**, galat terakhir, dan jumlah kegagalan 24 jam. Status kembali normal setelah ada pengiriman yang berhasil. |
+| **Nonaktif** | Kanal dinonaktifkan, atau token bot belum diisi. |
+
+## Masalah umum
+
+| Pesan | Solusi |
+| --- | --- |
+| Chat ID dan label target wajib diisi. | Isi kedua kolom. |
+| target dengan external id tersebut sudah terdaftar di kanal ini | Chat ID itu sudah menjadi target. |
+| kanal menolak pesan tes: ... | Periksa chat ID dan pastikan bot sudah ditambahkan ke grup. |
+| kanal sedang tidak dapat dijangkau: ... | Periksa koneksi internet server. |
+
+Lihat juga [Cara mengatasi notifikasi tidak terkirim](/bantuan/cara-mengatasi-notifikasi-tidak-terkirim).
+
+## Lihat juga
+
+- [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi)
+- [Cara menghubungkan WhatsApp](/notifikasi/cara-menghubungkan-whatsapp)

@@ -1,55 +1,52 @@
-# Mintlify Starter Kit
+# Dokumentasi JagaInd
 
-Use the starter kit to get your docs deployed and ready to customize.
+Repositori ini berisi dokumentasi pengguna dan admin JagaInd, dibangun dengan [Mintlify](https://mintlify.com). Kode aplikasi ada di repositori terpisah (`jagaind/core`).
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Struktur
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+| Folder | Isi |
+| --- | --- |
+| `index.mdx` | Beranda dokumentasi |
+| `mulai/` | Konsep dasar dan panduan cepat admin dan operator |
+| `akun/` | Masuk, kata sandi, pengguna, peran dan izin |
+| `pemantauan/` | Layar Pantau, menanggapi insiden, riwayat, bunyi alarm |
+| `kamera/` | Menambah, mengubah, Ignore Zone, mode debug |
+| `modul/` | Katalog modul, pemasangan, dan panduan per modul |
+| `aturan/` | Aturan alarm |
+| `notifikasi/` | Telegram dan WhatsApp |
+| `admin/` | Instalasi, konfigurasi, kesehatan server, retensi data |
+| `bantuan/` | Pemecahan masalah dan FAQ |
+| `images/` | Screenshot dari data demo yang sudah disanitasi |
+| `docs.json` | Konfigurasi situs dan navigasi |
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+Panduan gaya dan istilah ada di `AGENTS.md`. Ringkasan produk untuk penulis ada di `.mintlify/product-brief.md`.
 
-## AI-assisted writing
+## Menjalankan secara lokal
 
-Set up your AI coding tool to work with Mintlify:
+Butuh Node.js 20.17 atau lebih baru.
 
 ```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
 npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+Buka `http://localhost:3000`.
 
-## Publishing changes
+## Memeriksa sebelum push
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+```bash
+mint validate
+mint broken-links
+```
 
-## Need help?
+## Menerbitkan
 
-### Troubleshooting
+Situs diterbitkan otomatis oleh Mintlify setelah perubahan di-push ke branch utama, selama aplikasi GitHub Mintlify sudah terpasang untuk repositori ini di [dashboard Mintlify](https://dashboard.mintlify.com).
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+## Menambah halaman
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+1. Buat berkas `.mdx` di folder yang sesuai dengan `title` dan `description` di frontmatter.
+2. Tambahkan path halaman ke `navigation` di `docs.json`.
+3. Jalankan `mint validate` dan `mint broken-links`.
+
+Tulis hanya perilaku yang sudah diverifikasi di aplikasi. Jangan memakai data asli di screenshot.

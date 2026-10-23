@@ -1,0 +1,81 @@
+---
+title: "Cara memantau kamera di layar Pantau"
+sidebarTitle: "Memantau kamera"
+description: "Baca layar Pantau: video langsung, garis dan area yang diawasi, status kamera, dan ringkasan kejadian per kamera."
+keywords: ["pantau", "live view", "video langsung", "grid kamera", "dashboard"]
+---
+
+Layar **Pantau** adalah halaman utama untuk petugas jaga. Setiap kamera tampil sebagai satu kotak berisi video langsung, garis dan area yang diawasi AI, serta ringkasan kejadian hari ini.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Lihat kamera**. Untuk menonton video langsung, Anda juga butuh izin **Lihat siaran langsung**.
+- Admin sudah menambahkan kamera. Bila belum, layar Pantau menampilkan **Belum ada kamera yang dipantau**.
+
+## Membuka layar Pantau
+
+Pilih **Pantau** di menu kiri. Angka di samping menu **Pantau** menunjukkan jumlah insiden Kritis dan Peringatan yang belum diakui.
+
+![Layar Pantau dengan satu kotak kamera dan panel Perlu ditanggapi di kanan](/images/pantau/pantau.png)
+
+## Membaca kotak kamera
+
+Setiap kotak kamera berisi:
+
+- **Video langsung** dengan garis Tripwire dan zona yang diawasi modul. Yang tampil di video adalah yang dianalisis AI.
+- **Nama dan lokasi kamera** di bawah video, dengan lampu status.
+- **Status kamera** bila kamera tidak normal, misalnya "Kamera gangguan" atau "Kamera mati".
+- **Ringkasan modul**: nama setiap modul aktif dan jumlah insiden hari ini per jenis kejadian, misalnya "Lintas Garis · 3 masuk · 1 keluar hari ini". Bila belum ada, tertulis "belum ada kejadian hari ini".
+- **Terakhir**: waktu insiden terakhir di kamera ini.
+
+Bila kamera punya insiden yang belum diakui, strip di bawah video berubah warna:
+
+| Warna | Arti |
+| --- | --- |
+| Merah | Ada insiden **Kritis** yang belum diakui. |
+| Kuning | Ada insiden **Peringatan** yang belum diakui. |
+
+Strip juga menampilkan tingkat terburuk dan jumlah insiden yang belum diakui, misalnya "Kritis · 2 belum diakui". Saat insiden baru tiba, strip kamera itu berkilat sekali.
+
+### Status kamera
+
+| Status | Arti |
+| --- | --- |
+| **Aktif** | Kamera tersambung dan mengirim video. |
+| **Gangguan** | Kamera gagal tersambung atau stream bermasalah. |
+| **Mati** | Kamera diaktifkan tetapi belum atau tidak lagi mengirim video. |
+| **Nonaktif** | Kamera dimatikan admin. Kotaknya bertuliskan "Kamera dinonaktifkan". |
+
+## Mengatur jumlah kolom
+
+Di layar lebar, pilih jumlah kolom di kanan atas: **Otomatis**, **1**, **2**, **3**, atau **4**. Pilihan ini tersimpan di peramban Anda. Di layar sempit, kamera selalu tampil satu kolom.
+
+## Menyorot kamera dari insiden
+
+Saat Anda memilih insiden di panel **Perlu ditanggapi**, layar Pantau menggulir ke kamera itu dan menyorotnya selama beberapa detik. Bila insiden berasal dari Tripwire, garisnya ikut berkedip. Tekan `Esc` untuk menghapus sorotan.
+
+## Pesan di video
+
+| Pesan | Arti |
+| --- | --- |
+| Video belum tersedia, mencoba lagi | Server belum menyajikan video kamera ini, atau akun Anda tidak punya izin **Lihat siaran langsung**. |
+| Video terputus, mencoba lagi | Koneksi video terputus. Dashboard menyambung ulang sendiri. |
+| Gagal terhubung ke kamera, mencoba lagi | Peramban tidak dapat membuka koneksi video. |
+
+## Peringatan sistem
+
+Bagian atas layar Pantau menampilkan peringatan bila server bermasalah:
+
+- **Server Jagaind tidak terhubung**: video, insiden, dan status kamera tidak diperbarui. Halaman menyambung ulang sendiri.
+- **AI Worker terputus**: video tetap tampil, tetapi tidak ada analitik dan insiden baru sampai AI Worker tersambung kembali.
+
+## Batasan
+
+- Viewer tidak punya izin **Lihat siaran langsung**, jadi video tidak tampil untuk peran ini.
+- Nama orang yang dikenali modul Pengenalan Wajah hanya tampil untuk pengguna dengan izin **Lihat Orang Terdaftar** dan **Lihat siaran langsung**.
+
+## Lihat juga
+
+- [Cara menanggapi insiden](/pemantauan/cara-menanggapi-insiden)
+- [Cara mengatasi video tidak tampil](/bantuan/cara-mengatasi-video-tidak-tampil)
+- [Cara memakai mode debug](/kamera/cara-memakai-mode-debug)

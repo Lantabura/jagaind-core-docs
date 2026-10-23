@@ -1,0 +1,71 @@
+---
+title: "Cara membuat peran kustom"
+description: "Buat peran dengan kombinasi izin sendiri, misalnya operator yang boleh mengatur aturan alarm, lalu ubah atau hapus peran itu."
+keywords: ["peran kustom", "custom role", "izin", "duplikasi peran"]
+---
+
+Bila peran bawaan Admin, Operator, dan Viewer tidak sesuai, admin dapat membuat peran kustom dari daftar izin yang tersedia. Admin tidak dapat membuat izin baru.
+
+## Sebelum mulai
+
+- Akun Anda punya izin **Kelola pengguna dan peran**.
+- Pahami arti setiap izin. Lihat [Peran dan izin](/akun/peran-dan-izin).
+
+## Membuat peran baru
+
+<Steps>
+  <Step title="Buka tab Peran">
+    Pilih **Pengguna & Peran** di menu kiri, lalu tab **Peran**. Panel kanan berjudul **Tambah peran**.
+  </Step>
+  <Step title="Isi nama peran">
+    Isi **Nama peran**, maksimal 50 karakter. Nama tidak boleh mengandung `/` dan tidak boleh sama dengan peran bawaan (admin, operator, viewer).
+  </Step>
+  <Step title="Centang izin">
+    Centang izin yang boleh dimiliki peran ini. Izin tulis otomatis mencentang izin baca yang dibutuhkannya.
+  </Step>
+  <Step title="Simpan">
+    Pilih **Simpan peran**. Peran baru tampil di **Daftar peran** dan dapat dipilih saat menambah atau mengubah pengguna.
+  </Step>
+</Steps>
+
+## Memulai dari peran bawaan
+
+Cara tercepat membuat peran yang mirip peran bawaan adalah menduplikasinya.
+
+1. Di baris peran, pilih menu titik tiga, lalu **Duplikasi**.
+2. Panel kanan berjudul **Duplikasi peran ...** dengan nama awal, misalnya "Operator (salinan)". Ubah nama bila perlu.
+3. Tambah atau kurangi izin, lalu pilih **Simpan peran**.
+
+![Tab Peran dengan daftar peran bawaan dan izin peran Operator](/images/pengguna/peran-izin.png)
+
+Peran bawaan hanya dapat dilihat lewat **Lihat izin**. Izinnya tidak dapat diubah.
+
+## Mengubah peran kustom
+
+1. Di baris peran kustom, pilih **Ubah**.
+2. Ubah centang izin, lalu pilih **Simpan peran**.
+
+Nama peran kustom tidak dapat diubah setelah dibuat. Perubahan izin berlaku untuk semua pengguna yang memegang peran itu pada permintaan berikutnya.
+
+## Menghapus peran kustom
+
+1. Di baris peran kustom, pilih menu titik tiga, lalu **Hapus**.
+2. Konfirmasi dengan **Hapus**.
+
+Peran yang masih dipegang pengguna tidak dapat dihapus. Menunya tampil sebagai **Hapus (masih dipakai N pengguna)** dan tidak dapat dipilih. Pindahkan pengguna tersebut ke peran lain lebih dulu.
+
+## Masalah umum
+
+| Pesan | Solusi |
+| --- | --- |
+| Isi nama peran. | Isi kolom **Nama peran**. |
+| Nama peran maksimal 50 karakter. | Persingkat nama. |
+| Nama peran tidak boleh mengandung '/'. | Hapus tanda `/` dari nama. |
+| Nama itu dipakai peran bawaan. | Pilih nama selain admin, operator, atau viewer. |
+| nama peran sudah dipakai | Pilih nama lain. |
+| perubahan ini akan menyisakan tidak ada pengguna aktif yang dapat mengelola pengguna | Jangan melepas izin **Kelola pengguna dan peran** dari peran yang dipegang admin terakhir. |
+
+## Lihat juga
+
+- [Peran dan izin](/akun/peran-dan-izin)
+- [Cara mengelola pengguna](/akun/cara-mengelola-pengguna)

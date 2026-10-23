@@ -1,0 +1,57 @@
+---
+title: "Perundungan Fisik"
+description: "Deteksi pukulan, tendangan, dorongan hingga terjatuh, dan pergulatan antara dua orang berdasarkan pose tubuh."
+keywords: ["perundungan", "bullying", "perkelahian", "kekerasan", "pose"]
+---
+
+Modul **Perundungan Fisik** mendeteksi pukulan, tendangan, dorongan hingga terjatuh, dan pergulatan antara dua orang. Modul membaca pose tubuh setiap orang, lalu menilai interaksi antarorang yang berdekatan.
+
+**Cocok untuk:**
+
+- Koridor sekolah dan area bermain
+- Lobi atau ruang tunggu yang ramai
+- Lorong parkir dan tangga darurat
+
+## Cara kerja
+
+1. Modul mencari pasangan orang yang cukup dekat untuk berinteraksi.
+2. Modul menilai gerakan tangan dan kaki yang mendekati orang lain, serta tanda lain seperti orang terjatuh.
+3. Bila bukti agresi bertahan dalam jendela waktu tertentu, modul mencatat kejadian beserta peran pelaku dan korban.
+
+Modul butuh minimal dua orang di gambar. Tidak ada garis atau area yang perlu digambar.
+
+## Jenis kejadian
+
+| Kejadian |
+| --- |
+| **Memukul orang lain** |
+| **Menendang orang lain** |
+| **Mendorong hingga terjatuh** |
+| **Bergulat atau membanting** |
+
+Detail insiden menampilkan **Pelaku**, **Korban**, **Orang di sekitar**, dan **Skor agresi**.
+
+## Pengaturan
+
+| Pengaturan | Bawaan | Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Ambang jarak interaksi** | 1,35 | 0,5–3,0 | Jarak antartubuh, dalam kelipatan tinggi badan, agar dua orang dianggap berinteraksi. |
+| **Kecepatan pukulan minimum** | 2,0 | 0,5–10,0 | Kecepatan tangan atau kaki yang mendekati korban, dalam tinggi badan per detik. |
+| **Ambang skor agresi** | 0,5 | 0,1–1,0 | Skor interaksi yang harus tercapai agar dihitung sebagai bukti agresi. |
+| **Durasi tahan alarm (detik)** | 0,85 | 0,1–10,0 | Lama status agresi bertahan setelah bukti terakhir hilang. |
+
+## Tips
+
+- Arahkan kamera ke area interaksi dari samping dan tidak terhalang.
+- Bila alarm terlalu sering, naikkan **Ambang skor agresi** atau **Kecepatan pukulan minimum** sedikit demi sedikit. Bila kejadian terlewat, turunkan.
+- Buat aturan alarm hanya untuk jenis kejadian yang ingin dilaporkan.
+
+## Batasan
+
+- Modul ini memakai model pose dan berjalan pada kecepatan analisis yang tinggi, sehingga lebih berat untuk server dibanding modul lain.
+- Hasil deteksi dipengaruhi sudut kamera, jarak, dan benda yang menghalangi. Uji di lokasi sebelum mengandalkannya.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)

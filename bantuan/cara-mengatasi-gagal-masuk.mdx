@@ -1,0 +1,58 @@
+---
+title: "Cara mengatasi gagal masuk"
+description: "Langkah pemeriksaan bila Anda tidak bisa masuk ke dashboard JagaInd atau tiba-tiba keluar sendiri."
+keywords: ["gagal login", "tidak bisa masuk", "lupa kata sandi", "sesi berakhir"]
+---
+
+Gunakan halaman ini bila Anda tidak bisa masuk ke dashboard, atau dashboard tiba-tiba kembali ke halaman Masuk.
+
+## Pesan "Nama pengguna atau kata sandi salah."
+
+<Steps>
+  <Step title="Periksa isian">
+    Periksa ejaan nama pengguna dan huruf besar-kecil kata sandi. Pilih ikon mata untuk melihat kata sandi yang Anda ketik.
+  </Step>
+  <Step title="Pastikan akun aktif">
+    Pesan yang sama muncul bila akun Anda dinonaktifkan. Tanyakan status akun Anda kepada admin.
+  </Step>
+  <Step title="Minta reset kata sandi">
+    Bila Anda lupa kata sandi, minta admin meresetnya. JagaInd tidak menyediakan fitur lupa kata sandi mandiri. Lihat [Cara mengelola pengguna](/akun/cara-mengelola-pengguna#reset-kata-sandi-pengguna).
+  </Step>
+</Steps>
+
+## Pesan "too many login attempts, try again later"
+
+Server membatasi percobaan masuk untuk mencegah tebakan kata sandi: maksimal 10 percobaan per nama pengguna dan 20 percobaan per alamat IP dalam satu menit. Tunggu sekitar satu menit, lalu coba lagi dengan kata sandi yang benar.
+
+## Pesan "Server Jagaind tidak dapat dihubungi. Periksa jaringan lalu coba lagi."
+
+- Pastikan perangkat Anda tersambung ke jaringan yang sama dengan server.
+- Periksa alamat dashboard, termasuk nomor port, misalnya `:8080`.
+- Bila tetap gagal, minta admin memeriksa apakah server JagaInd berjalan. Lihat [Cara memeriksa kesehatan server](/admin/cara-memeriksa-kesehatan-server).
+
+## Admin terkunci di luar
+
+Bila tidak ada lagi admin yang dapat masuk:
+
+- Bila ada pengguna lain dengan izin **Kelola pengguna dan peran**, minta ia mereset kata sandi admin.
+- `JAGAIND_ADMIN_USERNAME` dan `JAGAIND_ADMIN_PASSWORD` hanya membuat admin baru bila username itu belum ada. Variabel ini tidak mengganti kata sandi akun yang sudah ada.
+
+## Tiba-tiba kembali ke halaman Masuk
+
+Sesi Anda berakhir bila:
+
+- Sudah 7 hari sejak Anda masuk.
+- Dashboard tidak dipakai selama 12 jam.
+- Admin menonaktifkan akun, mereset kata sandi, atau mengeluarkan Anda dari semua perangkat.
+- Anda mengganti kata sandi dari perangkat lain.
+
+Masuk lagi dengan kata sandi yang berlaku.
+
+## Halaman tidak tersedia setelah masuk
+
+Pesan **Halaman tidak tersedia** berarti peran Anda tidak punya izin untuk halaman itu. Minta admin memeriksa peran Anda. Lihat [Peran dan izin](/akun/peran-dan-izin).
+
+## Lihat juga
+
+- [Cara masuk dan keluar](/akun/cara-masuk)
+- [Cara mengganti kata sandi](/akun/cara-mengganti-kata-sandi)
