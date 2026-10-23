@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "JagaInd",
   "description": "Panduan pengguna dan admin JagaInd, platform analitik video CCTV berbasis AI yang berjalan di server lokal.",
   "colors": {
