@@ -9,3 +9,6 @@ drafts/
 # Catatan internal penulis dokumentasi
 AGENTS.md
 .mintlify/
+
+# Skrip pemeriksaan repo
+scripts/

@@ -35,9 +35,16 @@ Buka `http://localhost:3000`.
 ## Memeriksa sebelum push
 
 ```bash
+node scripts/check-navigation.mjs
 mint validate
 mint broken-links
 ```
+
+`scripts/check-navigation.mjs` memeriksa hal yang tidak diperiksa `mint validate`: halaman `.mdx` yang tidak masuk navigasi, entri navigasi ganda, `title` dan `description` di frontmatter, serta gambar `/images/...` yang tidak ada. Workflow `.github/workflows/validate.yml` menjalankan ketiga perintah di atas pada setiap pull request dan push ke `main`.
+
+## Sinkronisasi dengan aplikasi
+
+Setiap tugas di repositori aplikasi menilai dampaknya ke dokumentasi ini. Perubahan dokumentasi dikerjakan di branch bernama sama dengan branch aplikasi, lalu digabung setelah PR aplikasinya digabung. Prosedurnya ada di `docs/agents/documentation-sync.md` pada repositori aplikasi.
 
 ## Menerbitkan
 
