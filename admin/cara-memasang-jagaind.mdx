@@ -5,7 +5,7 @@ description: "Jalankan JagaInd di server edge dengan Docker Compose, siapkan mod
 keywords: ["instalasi", "docker compose", "server edge", "gpu", "cpu", "deployment"]
 ---
 
-Halaman ini untuk admin atau teknisi yang memasang JagaInd di server lokal. Cara yang didukung adalah **Docker Compose** dari repositori aplikasi JagaInd.
+Halaman ini untuk admin atau teknisi yang memasang JagaInd di server lokal. Cara yang didukung adalah **Docker Compose** dari repositori aplikasi JagaInd. Semua perintah di halaman ini dijalankan dari akar folder repositori aplikasi.
 
 ## Sebelum mulai
 
@@ -59,16 +59,18 @@ Halaman ini untuk admin atau teknisi yang memasang JagaInd di server lokal. Cara
     - **Perundungan Fisik** butuh model pose di `models/yolo_pose/`. Lihat `docs/development/adding-models.md` di repositori aplikasi.
   </Step>
   <Step title="Jalankan layanan">
+    Berkas Compose berada di `deploy/`, jadi sertakan `-f deploy/docker-compose.yml` dan `--project-directory .`. Tanpa `--project-directory .`, Compose memakai folder `deploy/` sebagai dasar path relatif sehingga data, model, dan `.env` salah alamat.
+
     Pilih profil sesuai perangkat keras:
 
     <CodeGroup>
 
     ```bash GPU NVIDIA
-    docker compose --profile gpu up -d --build
+    docker compose -f deploy/docker-compose.yml --project-directory . --profile gpu up -d --build
     ```
 
     ```bash Hanya CPU
-    docker compose --profile cpu up -d --build
+    docker compose -f deploy/docker-compose.yml --project-directory . --profile cpu up -d --build
     ```
 
     </CodeGroup>
@@ -77,7 +79,7 @@ Halaman ini untuk admin atau teknisi yang memasang JagaInd di server lokal. Cara
   </Step>
   <Step title="Periksa status">
     ```bash
-    docker compose ps
+    docker compose -f deploy/docker-compose.yml --project-directory . ps
     ```
 
     Buka `http://<alamat-server>:8080/healthz`. Respons berisi `"status":"HEALTHY"` dan `"ai_worker":"CONNECTED"` bila semua berjalan.
@@ -97,12 +99,14 @@ Dashboard JagaInd dapat dibuka dari peramban di jaringan lokal, dan lampu **Core
 
 ## Perintah operasional
 
+Semua perintah dijalankan dari akar folder repositori aplikasi.
+
 | Tujuan | Perintah |
 | --- | --- |
-| Melihat status layanan | `docker compose ps` |
+| Melihat status layanan | `docker compose -f deploy/docker-compose.yml --project-directory . ps` |
 | Melihat log Core | `docker logs -f jagaind-core` |
 | Melihat log AI Worker | `docker logs -f jagaind-ai-worker` |
-| Menghentikan semua layanan | `docker compose down` |
+| Menghentikan semua layanan | `docker compose -f deploy/docker-compose.yml --project-directory . down` |
 
 Perubahan pada `.env` baru berlaku setelah layanan dimulai ulang.
 
@@ -110,6 +114,7 @@ Perubahan pada `.env` baru berlaku setelah layanan dimulai ulang.
 
 | Gejala | Penyebab | Solusi |
 | --- | --- | --- |
+| `no configuration file provided: not found` | `docker compose` dijalankan tanpa `-f deploy/docker-compose.yml --project-directory .` dari akar repositori. | Gunakan perintah lengkap seperti di halaman ini. |
 | `could not select device driver "" with capabilities: [[gpu]]` | Profil GPU dipakai di server tanpa driver NVIDIA atau NVIDIA Container Toolkit. | Pasang toolkit, atau gunakan `--profile cpu`. |
 | AI Worker gagal memuat `model.onnx` | Model belum diekspor. | Jalankan `make export-model`, atau setel `INFERENCE_BACKEND=mock` untuk percobaan. |
 | Video di dashboard hitam | `WHEP_NAT_IPS` tidak berisi IP yang dapat dijangkau peramban, atau port UDP tertutup. | Lihat [Cara mengatasi video tidak tampil](/bantuan/cara-mengatasi-video-tidak-tampil). |
