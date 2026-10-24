@@ -20,7 +20,7 @@ Modul **Penyusupan Zona** menandai objek yang masuk ke area yang dilarang.
 3. Saat objek target pertama kali terlihat di dalam area, modul mencatat satu kejadian **Masuk ke zona terlarang**.
 4. Selama objek itu masih berada di area, modul tidak mencatat kejadian lagi. Keluar dari area juga tidak dicatat.
 
-Objek yang keluar dari area selama lebih dari 2 detik lalu masuk lagi dihitung sebagai penyusupan baru. Keluar sesaat karena getaran deteksi di tepi area tidak dihitung keluar, sehingga tidak memicu alarm berulang.
+Objek yang keluar dari area selama lebih dari 2 detik lalu masuk lagi dihitung sebagai penyusupan baru. Keluar sesaat karena getaran deteksi di tepi area tidak dihitung keluar, sehingga tidak memicu alarm berulang. Bila objek sempat tidak terlihat karena terhalang kurang dari sekitar 10 detik, modul menganggapnya masih objek yang sama di area itu.
 
 <Note>
   Bila modul baru dipasang atau pengaturannya baru disimpan, objek yang **sudah berada di dalam area** tidak langsung dilaporkan. Modul mulai melaporkan setelah objek itu keluar dan masuk lagi. Ini mencegah alarm palsu setiap kali Anda menyimpan pengaturan.
@@ -48,7 +48,7 @@ Ketik nama kelas atau pilih dari saran yang muncul, lalu pilih **Tambah**. Nilai
 
 - Gunakan [Ignore Zone](/kamera/cara-membuat-ignore-zone) untuk jalan atau layar yang tidak perlu diawasi.
 - Atur **Cooldown** pada [aturan alarm](/aturan/cara-membuat-aturan-alarm) sesuai tingkat risiko area. Cooldown berlaku per zona: beberapa orang yang masuk ke zona yang sama dalam satu periode cooldown menjadi satu insiden.
-- Cocokkan **Jenis objek** dengan aturan alarm. Aturan yang hanya memilih sebagian jenis kejadian tidak akan terpicu oleh kejadian lain.
+- Cocokkan **Jenis objek** dengan aturan alarm. Modul ini hanya mengirim kejadian **Masuk ke zona terlarang**, jadi pastikan aturan alarm memilih jenis kejadian itu.
 
 ## Batasan
 
