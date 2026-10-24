@@ -1,7 +1,7 @@
 ---
 title: "Cara mengirim notifikasi ke Telegram"
 sidebarTitle: "Telegram"
-description: "Siapkan bot Telegram, tambahkan chat ID tujuan sebagai target, lalu kirim pesan tes dari Pengaturan."
+description: "Isi token bot Telegram di Pengaturan, tambahkan chat ID tujuan sebagai target, lalu kirim pesan tes."
 keywords: ["telegram", "bot telegram", "chat id", "notifikasi"]
 ---
 
@@ -11,8 +11,8 @@ Kanal Telegram mengirim pesan insiden lewat bot Telegram ke satu atau beberapa c
 
 - Akun Anda punya izin **Kelola kanal dan target notifikasi**.
 - Server JagaInd terhubung ke internet.
-- Token bot Telegram sudah diisi admin server di variabel `TELEGRAM_BOT_TOKEN`. Token hanya disimpan di konfigurasi server dan tidak pernah ditampilkan di dashboard. Lihat [Konfigurasi server](/admin/konfigurasi-server).
-- Anda tahu **chat ID** tujuan, yaitu ID chat pribadi atau grup Telegram yang akan menerima pesan, dan bot sudah dapat mengirim pesan ke chat itu.
+- Anda punya token bot dari [@BotFather](https://t.me/BotFather). Token diisi di **Pengaturan** > **Notifikasi**, disimpan di database server, dan tidak pernah ditampilkan lagi setelah tersimpan.
+- Anda punya tujuan pengiriman: **chat ID** pribadi atau grup Telegram, atau Anda dapat memakai tombol **Deteksi chat ID** setelah token tersimpan. Bot harus sudah dapat mengirim pesan ke chat itu.
 
 <Note>
   Pembuatan bot dan cara mendapatkan chat ID dilakukan di aplikasi Telegram dan tidak dibahas di sini. Lihat dokumentasi resmi Telegram tentang bot.
@@ -23,11 +23,22 @@ Kanal Telegram mengirim pesan insiden lewat bot Telegram ke satu atau beberapa c
 <Steps>
   <Step title="Buka kartu Telegram">
     Pilih **Pengaturan** di menu kiri, lalu tab **Notifikasi**. Kartu **Telegram** menampilkan status kanal.
+  </Step>
+  <Step title="Isi token bot">
+    Bila kartu bertuliskan **Belum dikonfigurasi**, tempel token dari @BotFather di kolom **Token bot**, lalu pilih **Simpan & uji**.
 
-    Bila kartu bertuliskan **Belum dikonfigurasi** dan "Token bot belum diisi di konfigurasi server", minta admin server mengisi `TELEGRAM_BOT_TOKEN` dan memulai ulang Core.
+    JagaInd memeriksa token ke Telegram sebelum menyimpannya. Token yang ditolak tampil sebagai pesan di bawah kolom dan tidak disimpan; token yang benar langsung tersimpan dan kartu menampilkan **Bot @nama_bot**. Pengiriman berikutnya memakai token itu tanpa memulai ulang Core.
+
+    Untuk memastikan token diterima tanpa menyimpannya, pilih **Uji koneksi**. Hasilnya tampil di bawah kolom: nama bot saat berhasil, atau alasan yang dapat ditindaklanjuti saat token ditolak, jaringan bermasalah, atau kuota habis. Form tetap terbuka.
+
+    <Warning>
+      Pada mode in-memory (tanpa `DATABASE_URL`), token hilang saat Core dimulai ulang dan harus diisi lagi. Kartu menampilkan peringatan ini.
+    </Warning>
   </Step>
   <Step title="Tambahkan target">
-    Di bagian bawah kartu, isi:
+    Bila Anda tidak tahu chat ID, pilih **Deteksi chat ID**. JagaInd menampilkan chat yang pernah berinteraksi dengan bot beserta tombol **Tambah** per baris; label terisi dari nama chat.
+
+    Anda juga dapat mengisi target secara manual:
 
     - **Chat ID Telegram**: misalnya `-1001234567890` untuk grup.
     - **Label**: nama yang mudah dikenali, misalnya "Tim jaga malam".
@@ -46,12 +57,46 @@ Kanal Telegram mengirim pesan insiden lewat bot Telegram ke satu atau beberapa c
 
 Pesan "Pesan tes terkirim." muncul di dashboard dan pesan tes masuk ke chat Telegram. Insiden berikutnya dikirim ke semua target aktif.
 
+Token hanya perlu diisi sekali. Setelah tersimpan, kartu menampilkan username bot, dan token tidak dapat dilihat lagi dari dashboard.
+
+## Deteksi chat ID
+
+Tombol **Deteksi chat ID** membantu bila Anda tidak tahu ID grup atau percakapan. JagaInd membaca maksimal 50 update terakhir bot dan menampilkan chat unik dari pesan, pesan suntingan, kiriman channel, dan perubahan keanggotaan bot. Karena itu, ID grup tetap muncul walaupun bot memakai privacy mode.
+
+- Kirim `/start` ke bot, atau tambahkan bot ke grup lalu kirim satu pesan, sebelum mendeteksi.
+- Setiap baris menampilkan nama, jenis chat, dan ID, dengan tombol **Tambah**. Label target terisi dari nama chat dan dapat diubah lewat tombol **Ubah** di daftar target.
+- Baris yang sudah menjadi target ditandai **Sudah ditambahkan** dan tombolnya nonaktif.
+- Bila daftar kosong, kirim pesan ke bot terlebih dahulu lalu deteksi lagi.
+
+<Note>
+  Deteksi memakai `getUpdates` dan membaca 50 update terakhir, lalu melupakan update yang lebih lama. Bila token bot juga dipakai proses lain atau webhook aktif, Telegram menolak permintaan dan JagaInd menampilkan pesan `409`. Hentikan konsumen lain atau hapus webhook terlebih dahulu; JagaInd tidak menghapus webhook otomatis. Kuota Telegram yang habis ditampilkan sebagai `429` beserta waktu tunggu.
+</Note>
+
+## Mengganti token
+
+1. Di kartu Telegram, pilih **Ganti token**.
+2. Tempel token baru dari @BotFather. Pilih **Uji koneksi** bila ingin memastikan token diterima tanpa menyimpannya, lalu pilih **Simpan & uji**.
+
+Token baru divalidasi ke Telegram sebelum menggantikan token lama. Bila token baru ditolak atau Telegram tidak dapat dijangkau, token lama **tetap dipakai** dan notifikasi yang sedang berjalan tidak terputus. Setelah tersimpan, pengiriman berikutnya memakai token baru tanpa memulai ulang Core, termasuk pesan yang masih antre.
+
+## Menghapus token
+
+1. Di kartu Telegram, pilih **Hapus token**, lalu konfirmasi.
+
+Notifikasi Telegram berhenti sampai token diisi lagi. Kanal **tidak** dinonaktifkan otomatis: target dan riwayat Insiden tetap ada. Pesan yang sudah antre tetap dicoba sampai batas umur antrean (`NOTIFICATION_MAX_AGE`, bawaan 30 menit), lalu ditandai gagal. Setelah token diisi lagi, notifikasi berjalan kembali.
+
+## Setelah upgrade
+
+"TELEGRAM_BOT_TOKEN" tidak lagi dibaca. Bila variabel itu masih terpasang di server, Core menulis peringatan di log saat mulai dan kartu Telegram menampilkan banner **Token lama masih terpasang di environment**. Isi token sekali dari Dashboard; setelah itu variabel lama boleh dihapus dari deployment.
+
+Selama token belum diisi, kanal tampil **Belum dikonfigurasi**, tidak ada notifikasi Telegram baru, dan `/healthz` melaporkan kanal Telegram `DISABLED`.
+
 ## Mengelola target
 
 - **Nonaktifkan** atau **Aktifkan**: hentikan atau lanjutkan pengiriman ke target tanpa menghapusnya.
 - **Hapus**: target berhenti menerima notifikasi. Pesan yang sudah antre tetap dikirim ke chat ID yang tersimpan.
 
-Label target Telegram tidak dapat diubah. Untuk mengganti chat ID atau label, hapus target lalu tambahkan target baru.
+Label target dapat diubah lewat tombol **Ubah**. Untuk mengganti chat ID, hapus target lalu tambahkan target baru.
 
 ## Status kanal
 
@@ -65,6 +110,10 @@ Label target Telegram tidak dapat diubah. Untuk mengganti chat ID atau label, ha
 
 | Pesan | Solusi |
 | --- | --- |
+| Token bot wajib diisi. | Tempel token dari @BotFather di kolom **Token bot**. |
+| token ditolak Telegram; periksa token dari @BotFather | Salin ulang token dari @BotFather. Token yang sudah dicabut atau salah ketik tidak dapat disimpan. |
+| Telegram tidak dapat dijangkau; periksa koneksi lalu coba lagi | Periksa koneksi internet server, lalu simpan lagi. Konfigurasi lama tidak berubah. |
+| kuota Telegram habis; coba lagi dalam N detik | Tunggu sesuai waktu yang disebutkan, lalu coba lagi. |
 | Chat ID dan label target wajib diisi. | Isi kedua kolom. |
 | target dengan external id tersebut sudah terdaftar di kanal ini | Chat ID itu sudah menjadi target. |
 | kanal menolak pesan tes: ... | Periksa chat ID dan pastikan bot sudah ditambahkan ke grup. |

@@ -29,6 +29,12 @@ keywords: ["faq", "pertanyaan umum", "tanya jawab"]
   <Accordion title="Bisakah notifikasi hanya dikirim untuk insiden Kritis?">
     Belum. Semua insiden dikirim ke kanal aktif, apa pun tingkatnya. Kurangi jumlah pesan dengan mengatur aturan alarm, misalnya memperpanjang jeda antar alarm atau membatasi jam aktif. Lihat [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi).
   </Accordion>
+  <Accordion title="Di mana token bot Telegram disimpan?">
+    Di database server, diisi admin dari **Pengaturan** > **Notifikasi**. Token tidak pernah ditampilkan kembali di dashboard; kartu hanya menampilkan nama bot. Token tidak lagi dibaca dari variabel lingkungan. Karena itu, backup database harus diperlakukan sebagai kredensial. Bila token bocor, pilih **Ganti token** di kartu Telegram. Lihat [Cara mengirim notifikasi ke Telegram](/notifikasi/cara-mengirim-notifikasi-telegram).
+  </Accordion>
+  <Accordion title="Apakah token Telegram saya hilang setelah Core dimulai ulang?">
+    Tidak, bila server memakai PostgreSQL. Pada mode in-memory (tanpa `DATABASE_URL`), token hanya bertahan selama Core berjalan dan harus diisi ulang setelah restart; kartu Telegram menampilkan peringatan tentang ini.
+  </Accordion>
   <Accordion title="Bisakah pengguna dihapus?">
     Tidak. Pengguna dinonaktifkan agar jejak tindakannya tetap tercatat. Lihat [Cara mengelola pengguna](/akun/cara-mengelola-pengguna).
   </Accordion>

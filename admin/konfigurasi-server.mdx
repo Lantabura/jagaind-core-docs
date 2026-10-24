@@ -60,12 +60,21 @@ Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data).
 
 | Variabel | Bawaan | Penjelasan |
 | --- | --- | --- |
-| `TELEGRAM_BOT_TOKEN` | Kosong | Token bot Telegram. Kanal Telegram aktif bila diisi. |
 | `TELEGRAM_CHAT_ID` | Kosong | Opsional. Bila diisi, chat ID ini ditambahkan sekali sebagai target berlabel "Telegram". |
 | `NOTIFICATION_MAX_AGE` | `30m` | Umur maksimum pesan di antrean sebelum ditandai gagal. Format durasi, misalnya `45m` atau `1h`. Berlaku untuk Telegram dan WhatsApp. |
 | `WHATSAPP_ENABLED` | `false` | Aktifkan fitur WhatsApp. Membutuhkan `DATABASE_URL`. |
 | `WHATSAPP_DEVICE_NAME` | `Jagaind Edge` | Nama perangkat di daftar perangkat tertaut HP pengirim. |
 | `WHATSAPP_RATE_LIMIT_PER_MINUTE` | `20` | Batas pesan WhatsApp per menit. Turunkan bila nomor baru atau volume tinggi. |
+
+<Info>
+  Token bot Telegram tidak lagi dibaca dari environment. Isi token sekali di **Pengaturan** > **Notifikasi**; Core menyimpannya di database dan memakainya tanpa restart. Lihat [Cara mengirim notifikasi ke Telegram](/notifikasi/cara-mengirim-notifikasi-telegram).
+
+  Bila "TELEGRAM_BOT_TOKEN" masih terpasang, Core menulis peringatan di log saat mulai, tetapi nilainya tidak dipakai. Setelah upgrade, notifikasi Telegram berhenti sampai token diisi dari Dashboard.
+</Info>
+
+<Warning>
+  Token bot tersimpan di database. Backup atau dump database harus diperlakukan sebagai kredensial: siapa pun yang membacanya dapat mengirim pesan sebagai bot. Bila token bocor, ganti dari Dashboard.
+</Warning>
 
 <Warning>
   Saat WhatsApp aktif, jalankan tepat satu proses Core untuk setiap database. Dua proses Core yang memakai database yang sama akan saling memutus sesi WhatsApp.

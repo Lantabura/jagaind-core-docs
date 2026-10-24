@@ -26,7 +26,7 @@ Indonesian, addressing the reader as "Anda". UI language is Indonesian.
 - Modules: Lintas Garis, Berdiam Terlalu Lama, Larangan Parkir, Kepadatan Berlebih, Penghitung Pengunjung (statistics), Perundungan Fisik, Pengenalan Wajah
 - Ignore Zones, debug mode
 - Alarm rules: observation types, severity, cooldown per area, min confidence, active days and hours
-- Notifications: Telegram (bot token from env) and WhatsApp (unofficial WhatsApp Web protocol, QR or pairing code)
+- Notifications: Telegram (bot token set from Settings, stored in the database) and WhatsApp (unofficial WhatsApp Web protocol, QR or pairing code)
 - Settings: health, notifications, sound, account; System page with CPU/RAM/GPU/disk
 - Install via Docker Compose (cpu or gpu profile)
 
