@@ -31,9 +31,42 @@ Gunakan halaman ini bila insiden muncul di dashboard tetapi pesan tidak sampai k
 
 | Gejala | Penyebab | Solusi |
 | --- | --- | --- |
-| Kartu bertuliskan **Belum dikonfigurasi** | `TELEGRAM_BOT_TOKEN` belum diisi. | Minta admin server mengisinya dan memulai ulang Core. |
-| Status **Galat** dengan **Pengiriman Telegram gagal** | Token bot dicabut atau chat ID salah. | Periksa galat terakhir di kartu. Perbaiki token atau ganti target. Status kembali normal setelah ada pengiriman berhasil. |
+| Kartu bertuliskan **Belum dikonfigurasi** | Token bot belum diisi di **Pengaturan** > **Notifikasi**. | Tempel token dari @BotFather di kolom **Token bot**, lalu pilih **Simpan & uji**. Tidak perlu memulai ulang Core. |
+| token ditolak Telegram; periksa token dari @BotFather | Token salah ketik, sudah dicabut, atau bot sudah dihapus. | Salin ulang token dari @BotFather. Token yang ditolak tidak menggantikan token lama. |
+| token bot belum tersimpan; isi token lalu coba lagi | **Uji koneksi** ditekan dengan form kosong, padahal belum ada token tersimpan. | Isi token di form, atau simpan token lebih dulu. |
+| Telegram tidak dapat dijangkau; periksa koneksi lalu coba lagi | Server tidak dapat menghubungi Telegram. | Periksa koneksi internet server, lalu simpan lagi. |
+| kuota Telegram habis; coba lagi dalam N detik | Terlalu banyak permintaan ke Telegram. | Tunggu sesuai waktu yang disebutkan, lalu coba lagi. |
+| Status **Galat** dengan **Pengiriman Telegram gagal** | Token bot dicabut atau chat ID salah. | Periksa galat terakhir di kartu. Isi ulang token di Dashboard atau ganti target. Status kembali normal setelah ada pengiriman berhasil. |
 | kanal menolak pesan tes: ... | Telegram menolak pesan, misalnya bot belum ada di grup. | Tambahkan bot ke grup tujuan, lalu kirim tes lagi. |
+
+### Chat tidak terdeteksi
+
+| Gejala | Penyebab | Solusi |
+| --- | --- | --- |
+| **Belum ada chat terdeteksi** | Bot belum pernah menerima pesan, atau bot baru ditambahkan ke grup tanpa ada pesan. | Kirim `/start` ke bot, atau tambahkan bot ke grup lalu kirim satu pesan. Deteksi lagi. |
+| Grup tidak muncul walau bot sudah ditambahkan | Bot memakai privacy mode dan belum menerima update keanggotaan. | Kirim satu pesan di grup, lalu deteksi lagi. ID grup tetap dapat diisi manual bila diketahui. |
+| Chat lama tidak muncul | Deteksi hanya membaca 50 update terakhir dan melupakan yang lebih lama. | Tambahkan chat ID secara manual, atau kirim pesan baru lalu deteksi lagi. |
+| 409: Telegram menolak getUpdates karena webhook aktif atau ada konsumen lain | Token bot juga dipakai webhook atau proses lain. | Hentikan konsumen lain atau hapus webhook lewat @BotFather, lalu deteksi lagi. JagaInd tidak menghapus webhook otomatis. |
+| 429: kuota Telegram habis | Terlalu banyak permintaan getUpdates. | Tunggu sesuai waktu yang disebutkan, lalu coba lagi. |
+
+Deteksi tidak menambah target sendiri. Pilih **Tambah** pada baris yang diinginkan, atau isi chat ID secara manual.
+
+## Notifikasi berhenti setelah token dihapus
+
+Menghapus token dari kartu Telegram membuat kanal tampil **Belum dikonfigurasi** dan menghentikan notifikasi baru. Kanal tidak dinonaktifkan otomatis, jadi target dan riwayat tetap ada.
+
+- Pesan yang sudah antre dicoba sampai `NOTIFICATION_MAX_AGE` (bawaan 30 menit), lalu ditandai gagal.
+- Isi lagi token dari **Pengaturan** > **Notifikasi** untuk melanjutkan. Tidak perlu memulai ulang Core.
+
+## Setelah upgrade: token Telegram di environment tidak lagi dibaca
+
+Versi ini memindahkan token bot Telegram ke database. Bila "TELEGRAM_BOT_TOKEN" masih terpasang di `.env`:
+
+- Core menulis peringatan `[Telegram] TELEGRAM_BOT_TOKEN tidak lagi dibaca` saat mulai, lalu mengabaikan nilainya.
+- Kartu Telegram menampilkan **Belum dikonfigurasi** beserta banner **Token lama masih terpasang di environment**.
+- `/healthz` melaporkan kanal Telegram `DISABLED`.
+
+Isi token sekali di **Pengaturan** > **Notifikasi**. Setelah tersimpan, notifikasi berjalan kembali tanpa memulai ulang Core, dan variabel lama boleh dihapus dari deployment.
 
 ## WhatsApp
 
