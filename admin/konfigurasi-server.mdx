@@ -12,6 +12,17 @@ Konfigurasi server JagaInd diatur lewat variabel lingkungan di berkas `.env` pad
 
 Bila ada nilai yang tidak dapat dibaca, Core menolak berjalan dan menyebutkan nama variabelnya di log.
 
+## Kebijakan operasional dari Dashboard
+
+Sebagian kebijakan tidak lagi dibaca dari `.env`: ambang dan retensi penyimpanan, retensi Wajah Tak
+Dikenal, batas modul per kamera, umur antrean notifikasi, serta batas laju dan nama perangkat WhatsApp.
+Nilai itu diatur di **Pengaturan** > **Operasional** (dan kartu **Kebijakan pengiriman** serta **WhatsApp**
+di tab **Notifikasi**) dan berlaku tanpa restart Core. Lihat
+[Mengubah pengaturan operasional](/admin/pengaturan-operasional).
+
+Variabel `.env` yang bersangkutan masih ada tetapi hanya di-seed **sekali** saat tabel `system_settings`
+masih kosong; setelah itu nilainya diabaikan. Tabel di bawah menandainya.
+
 ## Akun admin awal
 
 | Variabel | Penjelasan |
@@ -41,30 +52,33 @@ Variabel ini hanya membuat admin bila belum ada. Mengubahnya tidak mengganti kat
 
 | Variabel | Bawaan | Penjelasan |
 | --- | --- | --- |
-| `INFERENCE_BACKEND` | – | `gpu` (NVIDIA), `cpu`, `coreml` (Apple Silicon), atau `mock` (deteksi sintetis tanpa model). |
-| `JAGAIND_MAX_MODULES_PER_CAMERA` | `0` | Jumlah maksimal modul aktif bersamaan di satu kamera. `0` berarti tanpa batas. Batas hanya memblokir aktivasi baru. Modul yang sudah aktif tetap berjalan. |
+| `INFERENCE_BACKEND` | – | `gpu` (NVIDIA), `cpu`, `coreml` (Apple Silicon), atau `mock` (deteksi sintetis tanpa model). Hanya tampil baca-saja di **Pengaturan** > **Operasional**; ubah di `.env` lalu restart Core dan AI Worker. |
+| `JAGAIND_MAX_MODULES_PER_CAMERA` | `0` | Di-seed sekali. Jumlah maksimal modul aktif bersamaan di satu kamera. `0` berarti tanpa batas. Batas hanya memblokir aktivasi baru; modul yang sudah aktif tetap berjalan. Setelah seed, ubah dari **Pengaturan** > **Operasional**. |
 
 ## Penyimpanan dan retensi
 
+Semua variabel di tabel ini di-seed sekali; setelah itu ubah dari **Pengaturan** > **Operasional**.
+Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data).
+
 | Variabel | Bawaan | Penjelasan |
 | --- | --- | --- |
-| `EVIDENCE_STORAGE_PATH` | `./data/evidence` | Folder penyimpanan bukti insiden (foto dan klip). |
 | `STORAGE_HIGH_WATERMARK_PERCENT` | `85` | Pemakaian disk yang memicu penghapusan bukti terlama. |
 | `STORAGE_LOW_WATERMARK_PERCENT` | `70` | Target pemakaian disk setelah penghapusan. Harus lebih kecil dari batas atas. |
 | `STORAGE_MAX_RETENTION_DAYS` | `60` | Umur maksimum berkas bukti dalam hari. |
 | `UNKNOWN_FACE_RETENTION_DAYS` | `30` | Wajah Tak Dikenal dihapus setelah tidak terlihat selama jumlah hari ini. `0` berarti disimpan sampai dihapus manual. |
 
-Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data).
+`EVIDENCE_STORAGE_PATH` (`./data/evidence`) tetap dibaca dari `.env` karena mengikat path volume; nilainya
+hanya tampil di daftar **Terikat deployment**.
 
 ## Notifikasi
 
 | Variabel | Bawaan | Penjelasan |
 | --- | --- | --- |
 | `TELEGRAM_CHAT_ID` | Kosong | Opsional. Bila diisi, chat ID ini ditambahkan sekali sebagai target berlabel "Telegram". |
-| `NOTIFICATION_MAX_AGE` | `30m` | Umur maksimum pesan di antrean sebelum ditandai gagal. Format durasi, misalnya `45m` atau `1h`. Berlaku untuk Telegram dan WhatsApp. |
+| `NOTIFICATION_MAX_AGE` | `30m` | Di-seed sekali. Umur maksimum pesan di antrean sebelum ditandai gagal. Setelah seed, ubah dari **Pengaturan** > **Notifikasi** (kartu **Kebijakan pengiriman**). Berlaku untuk Telegram dan WhatsApp. |
 | `WHATSAPP_ENABLED` | `false` | Aktifkan fitur WhatsApp. Membutuhkan `DATABASE_URL`. |
-| `WHATSAPP_DEVICE_NAME` | `Jagaind Edge` | Nama perangkat di daftar perangkat tertaut HP pengirim. |
-| `WHATSAPP_RATE_LIMIT_PER_MINUTE` | `20` | Batas pesan WhatsApp per menit. Turunkan bila nomor baru atau volume tinggi. |
+| `WHATSAPP_DEVICE_NAME` | `Jagaind Edge` | Di-seed sekali. Nama perangkat di daftar perangkat tertaut HP pengirim; berlaku setelah menautkan ulang. Ubah dari kartu **WhatsApp**. |
+| `WHATSAPP_RATE_LIMIT_PER_MINUTE` | `20` | Di-seed sekali. Batas pesan WhatsApp per menit. Turunkan bila nomor baru atau volume tinggi. Ubah dari kartu **WhatsApp**. |
 
 <Info>
   Token bot Telegram tidak lagi dibaca dari environment. Isi token sekali di **Pengaturan** > **Notifikasi**; Core menyimpannya di database dan memakainya tanpa restart. Lihat [Cara mengirim notifikasi ke Telegram](/notifikasi/cara-mengirim-notifikasi-telegram).

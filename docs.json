@@ -104,6 +104,7 @@
         "pages": [
           "admin/cara-memasang-jagaind",
           "admin/konfigurasi-server",
+          "admin/pengaturan-operasional",
           "admin/cara-memeriksa-kesehatan-server",
           "admin/penyimpanan-dan-retensi-data"
         ]

@@ -10,8 +10,8 @@ JagaInd menyimpan semua data di server lokal. Agar disk tidak penuh dan data sen
 
 Pembersihan bukti berjalan setiap 5 menit:
 
-1. Berkas bukti yang lebih tua dari `STORAGE_MAX_RETENTION_DAYS` (bawaan 60 hari) dihapus.
-2. Bila pemakaian disk mencapai `STORAGE_HIGH_WATERMARK_PERCENT` (bawaan 85%), bukti terlama dihapus sampai pemakaian turun ke `STORAGE_LOW_WATERMARK_PERCENT` (bawaan 70%).
+1. Berkas bukti yang lebih tua dari **Retensi maksimum** (bawaan 60 hari) dihapus.
+2. Bila pemakaian disk mencapai **Ambang atas** (bawaan 85%), bukti terlama dihapus sampai pemakaian turun ke **Ambang bawah** (bawaan 70%).
 
 Insidennya tetap tersimpan. Panel detail insiden menampilkan "Bukti sudah dihapus otomatis".
 
@@ -21,13 +21,13 @@ Insidennya tetap tersimpan. Panel detail insiden menampilkan "Bukti sudah dihapu
 | --- | --- |
 | Insiden | Setelah lebih dari 1 tahun, dan hanya bila buktinya sudah terhapus. |
 | Statistik (metrik) | Setelah lebih dari 1 tahun. |
-| Wajah Tak Dikenal | Setelah tidak terlihat selama `UNKNOWN_FACE_RETENTION_DAYS` hari (bawaan 30). Nilai `0` mematikan penghapusan otomatis. |
+| Wajah Tak Dikenal | Setelah tidak terlihat selama **Retensi data biometrik** hari (bawaan 30). Nilai `0` mematikan penghapusan otomatis. |
 | Notifikasi yang sudah terkirim | Dihapus dari antrean secara berkala. |
 | Sesi login kedaluwarsa | Dihapus secara berkala. |
 
 Orang Terdaftar dan Wajah Terdaftar **tidak** dihapus otomatis. Hapus secara manual bila tidak lagi diperlukan. Lihat [Cara mendaftarkan wajah](/modul/cara-mendaftarkan-wajah#mengelola-orang-terdaftar).
 
-Pengaturan nilai-nilai di atas dijelaskan di [Konfigurasi server](/admin/konfigurasi-server#penyimpanan-dan-retensi).
+Nilai ambang dan retensi di atas diatur dari **Pengaturan** > **Operasional** tanpa restart Core. Lihat [Mengubah pengaturan operasional](/admin/pengaturan-operasional).
 
 ## Cadangan dan keamanan data
 

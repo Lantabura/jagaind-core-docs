@@ -18,6 +18,7 @@ Kanal WhatsApp mengirim pesan insiden dari satu nomor WhatsApp milik organisasi 
 ## Sebelum mulai
 
 - Akun Anda punya izin **Kelola kanal dan target notifikasi**.
+- Untuk mengubah **Batas laju** dan **Nama perangkat**, akun Anda juga butuh izin **Kelola pengaturan operasional**.
 - Admin server sudah mengaktifkan fitur WhatsApp dengan `WHATSAPP_ENABLED=true` dan database PostgreSQL. Bila belum, kartu WhatsApp menampilkan "Kanal WhatsApp dinonaktifkan di server". Lihat [Konfigurasi server](/admin/konfigurasi-server).
 - Server JagaInd terhubung ke internet.
 - Anda memegang HP dengan nomor WhatsApp organisasi.
@@ -80,6 +81,15 @@ Target baru hanya dapat ditambahkan saat nomor organisasi **Terhubung**, karena 
 - **Ubah**: ganti label target. Untuk mengganti tujuan, hapus target lalu tambahkan yang baru.
 - **Nonaktifkan** atau **Aktifkan**: hentikan atau lanjutkan pengiriman ke target.
 - **Hapus**: target berhenti menerima notifikasi. Pesan yang sudah antre tetap dikirim.
+
+## Mengatur batas laju dan nama perangkat
+
+Di kartu **WhatsApp**, bagian **Pengiriman**:
+
+- **Batas laju** (bawaan 20 per menit): batas pesan WhatsApp. Saat kuota habis, entri dijadwalkan ulang tanpa menambah percobaan. Turunkan bila nomor baru atau volume tinggi berisiko diblokir; perubahan berlaku pada pengiriman berikutnya.
+- **Nama perangkat** (bawaan "Jagaind Edge"): nama yang tampil di daftar perangkat tertaut HP pengirim. Perubahan baru berlaku setelah Anda menautkan ulang nomor.
+
+Umur maksimum antrean pesan diatur di kartu **Kebijakan pengiriman** pada tab yang sama. Lihat [Mengubah pengaturan operasional](/admin/pengaturan-operasional).
 
 ## Status sesi dan pemulihannya
 
