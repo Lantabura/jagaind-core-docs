@@ -25,7 +25,9 @@ Tab **Info** menampilkan **Sumber**, **Stream utama**, **Sub-stream**, **Analisi
     Pilih **Ubah** di kanan atas halaman kamera, atau **Ubah** di tab **Info**.
   </Step>
   <Step title="Ubah isian">
-    Ubah isian yang perlu. Untuk alamat stream, kosongkan kolom bila ingin tetap memakai alamat tersimpan. Kata sandi kamera tidak pernah ditampilkan.
+    Ubah isian yang perlu. Untuk alamat stream, kosongkan kolom bila ingin tetap memakai alamat tersimpan; alamat baru harus diawali `rtsp://` atau `rtsps://`. Kata sandi kamera tidak pernah ditampilkan.
+
+    Bila Anda mengganti skema, host, port, atau nama pengguna, ketik ulang kata sandi kamera pada alamat baru. JagaInd hanya memakai ulang kata sandi tersimpan bila endpoint-nya sama. Mengubah path atau query pada host yang sama boleh tetap memakai kata sandi tersimpan.
   </Step>
   <Step title="Simpan">
     Pilih **Simpan kamera**.
@@ -71,6 +73,8 @@ Setelah dihapus, Anda kembali ke halaman **Kamera**.
 | Tombol **Hapus kamera** tidak aktif | Ketik nama kamera persis sama, termasuk huruf besar-kecil. |
 | Pesan "Akun Anda tidak punya izin untuk tindakan ini." | Minta admin memberi izin **Kelola kamera**. |
 | Kamera tidak ditemukan | Kamera sudah dihapus pengguna lain. Kembali ke daftar kamera. |
+| Ketik ulang kata sandi kamera saat skema, host, port, atau nama pengguna berubah. | Alamat memakai kata sandi tersamarkan, tetapi skema, host, port, atau nama pengguna berubah. Ketik kata sandi kamera yang sebenarnya pada alamat baru, lalu simpan. |
+| Alamat stream harus diawali rtsp:// atau rtsps:// | Alamat yang dikirim memakai skema selain RTSP. Mulai alamat dengan `rtsp://` atau `rtsps://`. |
 
 ## Lihat juga
 
