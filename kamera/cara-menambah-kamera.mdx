@@ -34,8 +34,8 @@ Kamera adalah sumber video untuk semua analitik JagaInd. Admin menambahkan kamer
       <Tab title="Kamera RTSP">
         Isi:
 
-        - **Alamat stream utama**: stream resolusi penuh untuk tampilan langsung. Wajib diisi dan harus diawali `rtsp://` atau `rtsps://`.
-        - **Alamat sub-stream (disarankan)**: stream resolusi rendah untuk analitik. Kosongkan bila kamera tidak punya sub-stream.
+        - **Alamat stream utama**: stream resolusi penuh untuk tampilan langsung. Wajib diisi dan harus diawali `rtsp://` atau `rtsps://`. JagaInd menolak skema lain seperti `http://`, `file://`, atau `concat:`.
+        - **Alamat sub-stream (disarankan)**: stream resolusi rendah untuk analitik. Kosongkan bila kamera tidak punya sub-stream. Bila diisi, alamatnya juga harus diawali `rtsp://` atau `rtsps://`.
       </Tab>
       <Tab title="Kamera uji">
         Kamera uji membangkitkan gambar sintetis untuk mencoba modul tanpa kamera sungguhan. Tidak perlu alamat stream.
@@ -77,6 +77,7 @@ Gunakan kolom **Cari nama atau lokasi…** dan filter status atau sumber untuk m
 ## Batasan
 
 - Formulir hanya menyediakan sumber **Kamera RTSP** dan **Kamera uji**.
+- Alamat stream hanya boleh memakai skema `rtsp://` atau `rtsps://`. Alamat dengan skema lain ditolak.
 - Alamat stream tersimpan tidak pernah ditampilkan ulang lengkap dengan kata sandinya.
 - Bila AI Worker belum terhubung, kamera tetap bisa ditambahkan, tetapi modul baru bisa dipasang setelah AI Worker tersambung.
 
@@ -86,7 +87,8 @@ Gunakan kolom **Cari nama atau lokasi…** dan filter status atau sumber untuk m
 | --- | --- | --- |
 | Isi nama kamera. | Nama kosong. | Isi **Nama kamera**. |
 | Isi alamat stream utama kamera. | Sumber RTSP tanpa alamat utama. | Isi **Alamat stream utama**. |
-| Alamat stream harus diawali rtsp:// | Format alamat salah. | Mulai alamat dengan `rtsp://`. |
+| Alamat stream harus diawali rtsp:// atau rtsps:// | Format alamat utama salah. | Mulai alamat dengan `rtsp://` atau `rtsps://`. |
+| Alamat sub-stream harus diawali rtsp:// atau rtsps:// | Format alamat sub-stream salah. | Mulai alamat sub-stream dengan `rtsp://` atau `rtsps://`, atau kosongkan kolomnya. |
 | Kecepatan analisis harus 1–30 gambar per detik. | Nilai di luar rentang. | Isi angka antara 1 dan 30. |
 | Kamera berstatus **Gangguan** | Alamat, nama pengguna, atau kata sandi kamera salah, atau kamera tidak terjangkau. | Lihat [Cara mengatasi video tidak tampil](/bantuan/cara-mengatasi-video-tidak-tampil). |
 
