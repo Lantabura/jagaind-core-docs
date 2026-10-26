@@ -1,0 +1,74 @@
+---
+title: "Mengubah pengaturan operasional"
+description: "Atur ambang penyimpanan, retensi Wajah Tak Dikenal, batas modul per kamera, dan kebijakan pengiriman notifikasi dari Dashboard tanpa restart Core."
+keywords: ["pengaturan", "operasional", "retensi", "ambang disk", "batas modul", "whatsapp", "batas laju"]
+---
+
+Tab **Operasional** di **Pengaturan** mengumpulkan kebijakan yang berlaku tanpa restart Core. Perubahan disimpan di database dan tercatat di jejak audit. Nilai yang mengikat deployment (database, port, path bukti, video) tetap diatur dari `.env` dan hanya tampil baca-saja di tab ini.
+
+## Sebelum mulai
+
+- Untuk melihat: izin **Lihat kondisi server**.
+- Untuk mengubah: izin **Kelola pengaturan operasional** (hanya peran **Admin**).
+- Tab **Operasional** hanya tampil bila Anda punya izin tersebut.
+
+## Penyimpanan evidence
+
+Kartu **Penyimpanan evidence** mengatur pembersihan bukti insiden. Pembersihan berjalan setiap 5 menit.
+
+| Field | Arti |
+| --- | --- |
+| **Ambang atas** | Pemakaian disk yang memicu penghapusan bukti terlama. |
+| **Ambang bawah** | Pembersihan berhenti saat pemakaian turun ke nilai ini. Harus lebih kecil dari ambang atas. |
+| **Retensi maksimum** | Umur maksimum berkas bukti dalam hari, termasuk saat disk masih lega. |
+
+Gauge di atas field menampilkan pemakaian volume bukti saat ini beserta posisi kedua ambang. Bila **Ambang bawah** menyamai atau melewati **Ambang atas**, pesan "Harus lebih kecil dari ambang atas" muncul dan **Simpan perubahan** dinonaktifkan.
+
+## Retensi data biometrik
+
+Kartu **Retensi data biometrik** mengatur umur **Wajah Tak Dikenal**, dihitung sejak terakhir terlihat. Pemeriksaan berjalan setiap jam.
+
+- Nilai `0` berarti tanpa batas: penghapusan hanya manual. Sebelum menyimpan nilai ini, kartu menampilkan peringatan bahwa data biometrik orang asing akan tersimpan tanpa batas.
+
+## Batas modul per kamera
+
+Kartu **Batas modul per kamera** membatasi jumlah modul analitik yang aktif bersamaan di satu kamera. Nilai `0` berarti tanpa batas. Batas hanya memblokir aktivasi baru; modul yang sudah aktif tidak diputus.
+
+## Kebijakan pengiriman
+
+Kartu **Kebijakan pengiriman** di tab **Notifikasi** mengatur **Umur maksimum antrean** (menit). Pesan yang lebih tua dari nilai ini ditandai gagal dan tidak dikirim, agar alarm basi tidak muncul. Berlaku untuk semua kanal, termasuk Telegram dan WhatsApp.
+
+## Batas laju dan nama perangkat WhatsApp
+
+Di kartu **WhatsApp** pada tab **Notifikasi**:
+
+| Field | Arti |
+| --- | --- |
+| **Batas laju** | Batas pesan WhatsApp per menit. Saat kuota habis, entri dijadwalkan ulang tanpa menambah percobaan. Berlaku pada pengiriman berikutnya. |
+| **Nama perangkat** | Nama yang tampil di daftar perangkat tertaut HP pengirim. Berlaku setelah menautkan ulang. |
+
+## Terikat deployment
+
+Kartu **Terikat deployment** tertutup secara bawaan. Pilih **Tampilkan nilai** untuk melihat nilai `.env` yang dibaca sebelum dashboard tersedia atau dipakai proses lain, misalnya `PORT`, `EVIDENCE_STORAGE_PATH`, `WHEP_NAT_IPS`, dan `INFERENCE_BACKEND`. Nilai ini **tidak dapat diubah** dari dashboard; ubah di `.env` atau `docker-compose.yml` lalu mulai ulang Core (dan AI Worker untuk nilai inferensi).
+
+## Kapan berlaku
+
+| Kebijakan | Kapan berlaku |
+| --- | --- |
+| Ambang disk | Saat pembersihan berikutnya (setiap 5 menit). |
+| Retensi evidence | Saat pembersihan berikutnya (setiap 5 menit). |
+| Retensi Wajah Tak Dikenal | Saat pemeriksaan berikutnya (setiap jam). `0` mematikan retensi otomatis. |
+| Batas modul | Saat aktivasi modul berikutnya. |
+| Umur antrean notifikasi | Saat pengiriman/penilaian entri berikutnya. |
+| Batas laju WhatsApp | Saat pengiriman berikutnya. |
+| Nama perangkat WhatsApp | Setelah menautkan ulang. |
+
+## Bila variabel `.env` lama diubah
+
+Variabel `.env` berikut hanya di-seed **sekali** saat tabel `system_settings` masih kosong, lalu diabaikan: `STORAGE_HIGH_WATERMARK_PERCENT`, `STORAGE_LOW_WATERMARK_PERCENT`, `STORAGE_MAX_RETENTION_DAYS`, `UNKNOWN_FACE_RETENTION_DAYS`, `JAGAIND_MAX_MODULES_PER_CAMERA`, `NOTIFICATION_MAX_AGE`, `WHATSAPP_RATE_LIMIT_PER_MINUTE`, `WHATSAPP_DEVICE_NAME`. Bila mengubahnya setelah seed, nilainya tidak berpengaruh; ubah dari tab ini.
+
+## Lihat juga
+
+- [Konfigurasi server](/admin/konfigurasi-server)
+- [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data)
+- [Cara menghubungkan WhatsApp](/notifikasi/cara-menghubungkan-whatsapp)

@@ -19,7 +19,7 @@ Indonesian, addressing the reader as "Anda". UI language is Indonesian.
 ## Verified feature set (application version 1.0.0 at time of writing)
 
 - Login with username/password, sessions (7 days max, 12 hours idle), change own password
-- Users and roles: built-in Admin/Operator/Viewer, custom roles from 16 permissions
+- Users and roles: built-in Admin/Operator/Viewer, custom roles from 17 permissions
 - Cameras: RTSP (main + sub-stream) and test camera, analysis FPS 1–30, analysis resolution Standar/Tinggi
 - Pantau screen with live WebRTC video, geometry overlay, incident queue, acknowledge, acknowledge all, critical alarm sound
 - Incident history with filters and detail panel; evidence is a JPEG snapshot plus a short MP4 clip when the camera stream supports it
@@ -28,6 +28,7 @@ Indonesian, addressing the reader as "Anda". UI language is Indonesian.
 - Alarm rules: observation types, severity, cooldown per area, min confidence, active days and hours
 - Notifications: Telegram (bot token set from Settings, stored in the database) and WhatsApp (unofficial WhatsApp Web protocol, QR or pairing code)
 - Settings: health, notifications, sound, account; System page with CPU/RAM/GPU/disk
+- Operational settings from the dashboard without a Core restart: evidence storage thresholds and retention, unknown-face retention, module limit per camera, notification queue max age, and WhatsApp rate limit/device name; deployment-bound values are shown read-only
 - Install via Docker Compose (cpu or gpu profile)
 
 ## Known gaps (do not document as working)
