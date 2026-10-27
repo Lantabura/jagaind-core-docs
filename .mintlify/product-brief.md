@@ -19,6 +19,7 @@ Indonesian, addressing the reader as "Anda". UI language is Indonesian.
 ## Verified feature set (application version 1.0.0 at time of writing)
 
 - Login with username/password, sessions (7 days max, 12 hours idle), change own password
+- Live video, debug, and identity-label streams close when the session is revoked (logout, disabled account, password reset); debug and identity-label streams also close when the permission required by the stream is removed
 - Users and roles: built-in Admin/Operator/Viewer, custom roles from 17 permissions
 - Cameras: RTSP (main + sub-stream) and test camera, analysis FPS 1–30, analysis resolution Standar/Tinggi
 - Pantau screen with live WebRTC video, geometry overlay, incident queue, acknowledge, acknowledge all, critical alarm sound
