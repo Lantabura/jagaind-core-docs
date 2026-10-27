@@ -1,0 +1,64 @@
+---
+title: "Deteksi Jatuh"
+description: "Beri tanda saat orang jatuh lalu tertahan di lantai, dan sekali lagi bila tergeletak lama."
+keywords: ["deteksi jatuh", "jatuh", "fall", "tergeletak", "lansia", "pose"]
+---
+
+Modul **Deteksi Jatuh** memberi tanda saat satu orang jatuh lalu tertahan di lantai, dan sekali lagi bila orang itu tergeletak lama. Modul membaca pose tubuh setiap orang dan menilai apakah tubuhnya sudah tidak tegak lagi.
+
+**Cocok untuk:**
+
+- Kamar lansia atau ruang perawatan
+- Koridor dan ruang tunggu
+- Area kerja dengan lantai licin
+
+## Cara kerja
+
+1. Modul menghitung skor postur setiap orang dari posisi bahu, pinggul, dan kakinya di gambar.
+2. Saat postur rebah bertahan selama **Durasi konfirmasi jatuh (detik)**, modul mencatat kejadian **Orang jatuh dan tertahan di lantai**.
+3. Bila orang yang sama masih tergeletak ketika **Durasi tergeletak lama (detik)** tercapai, modul mencatat kejadian **Tergeletak lama di lantai**. Durasi ini dihitung sejak postur rebah mulai bertahan, jadi sudah termasuk durasi konfirmasi.
+4. Setiap kejadian terpancar satu kali. Kejadian baru untuk orang yang sama baru mungkin setelah ia kembali tegak.
+
+Modul hanya menilai orang yang kedua bahu dan kedua pinggulnya terlihat jelas. Bila bagian tubuh itu tertutup meja, selimut, atau benda lain, gambar tersebut tidak dinilai, dan kejadian yang sudah tercatat tidak dibatalkan.
+
+## Jenis kejadian
+
+| Kejadian | Arti |
+| --- | --- |
+| **Orang jatuh dan tertahan di lantai** | Postur rebah bertahan selama durasi konfirmasi. |
+| **Tergeletak lama di lantai** | Orang yang sama masih tergeletak saat durasi tergeletak lama tercapai. |
+
+## Pengaturan
+
+| Pengaturan | Bawaan | Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Durasi konfirmasi jatuh (detik)** | 4 | 2–10 | Lama postur rebah harus bertahan sebelum kejadian pertama dicatat. |
+| **Durasi tergeletak lama (detik)** | 15 | 10–600 | Lama sejak postur rebah mulai bertahan sebelum kejadian kedua dicatat, termasuk durasi konfirmasi. |
+
+Kedua isian itu punya rentang yang tidak beririsan, jadi durasi tergeletak lama tidak pernah lebih pendek dari durasi konfirmasi. Tidak ada garis atau area yang perlu digambar untuk modul ini.
+
+## Membuat dua aturan alarm
+
+Buat dua [aturan alarm](/aturan/cara-membuat-aturan-alarm) terpisah, satu untuk **Orang jatuh dan tertahan di lantai** dan satu untuk **Tergeletak lama di lantai**.
+
+Modul ini tidak menandai area, sehingga **Jeda antar alarm** berlaku untuk semua kejadian dari aturan itu, bukan per orang atau per area. Bila kedua jenis kejadian dimasukkan ke satu aturan, jeda aturan dapat menelan kejadian **Tergeletak lama di lantai** yang muncul saat jeda dari kejadian pertama belum lewat. Dengan dua aturan, jeda masing-masing diatur sendiri, misalnya jeda pendek pada aturan jatuh dan jeda lebih panjang pada aturan tergeletak lama.
+
+## Mengecualikan kasur, sofa, dan matras
+
+Orang yang berbaring di kasur, sofa, atau matras bisa terbaca jatuh. Gambar [Ignore Zone](/kamera/cara-membuat-ignore-zone) di atas perabot itu, lalu centang hanya modul Deteksi Jatuh di **Berlaku untuk modul**. Modul lain di kamera yang sama tetap melihat area tersebut.
+
+## Batasan
+
+- Duduk lalu diam bisa terbaca jatuh. Postur duduk yang terlalu rebah mirip dengan orang yang tergeletak.
+- Kamera plafon yang menghadap lurus ke bawah tidak didukung, karena kemiringan tubuh tidak terbaca dari sudut itu. Pasang kamera dari samping atau serong.
+- Orang yang sebagian besar tubuhnya tertutup tidak dinilai saat itu.
+- Modul ini memakai model pose dan menganalisis 12 gambar per detik selama ada orang di kamera. Bila kamera yang sama juga memakai Perundungan Fisik, model pose itu dipakai bersama, tidak dijalankan dua kali.
+- Hasil deteksi dipengaruhi sudut kamera, jarak, dan pencahayaan. Uji di lokasi dan pantau beberapa hari pertama sebelum mengandalkannya.
+- Ambang skor bawaan belum dikalibrasi untuk setiap jenis kamera dan lokasi. Bila alarm palsu sering muncul, periksa Ignore Zone lebih dulu, lalu sesuaikan durasi konfirmasi.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)
+- [Cara membuat Ignore Zone](/kamera/cara-membuat-ignore-zone)
+- [Cara mengatasi insiden tidak muncul](/bantuan/cara-mengatasi-insiden-tidak-muncul)

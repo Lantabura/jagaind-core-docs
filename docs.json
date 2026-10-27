@@ -71,7 +71,8 @@
               "modul/penyusupan-zona",
               "modul/kepadatan-berlebih",
               "modul/penghitung-pengunjung",
-              "modul/perundungan-fisik"
+              "modul/perundungan-fisik",
+              "modul/deteksi-jatuh"
             ]
           },
           {
