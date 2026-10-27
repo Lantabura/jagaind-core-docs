@@ -15,6 +15,16 @@ Pembersihan bukti berjalan setiap 5 menit:
 
 Insidennya tetap tersimpan. Panel detail insiden menampilkan "Bukti sudah dihapus otomatis".
 
+### Nilai ambang dan retensi yang sah
+
+- **Ambang atas** antara `1` dan `100` persen.
+- **Ambang bawah** minimal `1` persen dan selalu lebih kecil dari **Ambang atas**.
+- **Retensi maksimum** antara `1` dan `3650` hari.
+
+Core menolak start bila variabel `.env` di luar rentang itu. Ambang bawah `0` atau negatif tidak diterima karena membuat pruner menghapus **seluruh** bukti saat disk mencapai ambang atas, bukan hanya bukti terlama.
+
+Bila tabel pengaturan sudah berisi nilai tidak sah, misalnya karena diubah manual di database, Core tidak memakainya. Saat start, nilai itu diganti dengan nilai bawaan yang aman, penggantian dicatat di log server, dan nilai terkoreksi disimpan kembali ke tabel. Pruner juga berhenti tanpa menghapus berkas apa pun selama kebijakan yang dibacanya tidak sah, lalu mencoba lagi pada siklus berikutnya.
+
 ## Data lain
 
 | Data | Kapan dihapus otomatis |
