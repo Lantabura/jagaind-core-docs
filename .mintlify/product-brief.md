@@ -24,7 +24,7 @@ Indonesian, addressing the reader as "Anda". UI language is Indonesian.
 - Cameras: RTSP (main + sub-stream) and test camera, analysis FPS 1–30, analysis resolution Standar/Tinggi
 - Pantau screen with live WebRTC video, geometry overlay, incident queue, acknowledge, acknowledge all, critical alarm sound
 - Incident history with filters and detail panel; evidence is a JPEG snapshot plus a short MP4 clip when the camera stream supports it
-- Modules: Lintas Garis, Berdiam Terlalu Lama, Larangan Parkir, Penyusupan Zona, Kepadatan Berlebih, Penghitung Pengunjung (statistics), Perundungan Fisik, Pengenalan Wajah
+- Modules: Lintas Garis, Berdiam Terlalu Lama, Larangan Parkir, Penyusupan Zona, Kepadatan Berlebih, Penghitung Pengunjung (statistics), Perundungan Fisik, Deteksi Jatuh, Pengenalan Wajah
 - Ignore Zones, debug mode
 - Alarm rules: observation types, severity, cooldown per area, min confidence, active days and hours
 - Notifications: Telegram (bot token set from Settings, stored in the database) and WhatsApp (unofficial WhatsApp Web protocol, QR or pairing code)
@@ -38,3 +38,4 @@ Indonesian, addressing the reader as "Anda". UI language is Indonesian.
 - No audit log viewer in the dashboard
 - No self-service password reset
 - No release notes or changelog published yet
+- Fall detection thresholds are not calibrated for every camera type and location yet; prolonged sitting can be read as a fall, and ceiling-mounted (top-down) cameras are not supported
