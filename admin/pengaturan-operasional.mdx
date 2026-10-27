@@ -18,11 +18,11 @@ Kartu **Penyimpanan evidence** mengatur pembersihan bukti insiden. Pembersihan b
 
 | Field | Arti |
 | --- | --- |
-| **Ambang atas** | Pemakaian disk yang memicu penghapusan bukti terlama. |
-| **Ambang bawah** | Pembersihan berhenti saat pemakaian turun ke nilai ini. Harus lebih kecil dari ambang atas. |
-| **Retensi maksimum** | Umur maksimum berkas bukti dalam hari, termasuk saat disk masih lega. |
+| **Ambang atas** | Pemakaian disk yang memicu penghapusan bukti terlama, antara `1` dan `100` persen. |
+| **Ambang bawah** | Target pemakaian disk setelah penghapusan. Minimal `1` dan harus lebih kecil dari ambang atas. |
+| **Retensi maksimum** | Umur maksimum berkas bukti dalam hari, antara `1` dan `3650`. |
 
-Gauge di atas field menampilkan pemakaian volume bukti saat ini beserta posisi kedua ambang. Bila **Ambang bawah** menyamai atau melewati **Ambang atas**, pesan "Harus lebih kecil dari ambang atas" muncul dan **Simpan perubahan** dinonaktifkan.
+Gauge di atas field menampilkan pemakaian volume bukti saat ini beserta posisi kedua ambang. Bila **Ambang bawah** kurang dari `1`, pesan "Harus minimal 1%" muncul dan **Simpan perubahan** dinonaktifkan. Bila **Ambang bawah** menyamai atau melewati **Ambang atas**, pesan "Harus lebih kecil dari ambang atas" muncul dan tombol simpan juga dinonaktifkan. Server tetap memeriksa nilai yang sama, sehingga permintaan API di luar rentang ditolak.
 
 ## Retensi data biometrik
 
@@ -66,6 +66,8 @@ Kartu **Terikat deployment** tertutup secara bawaan. Pilih **Tampilkan nilai** u
 ## Bila variabel `.env` lama diubah
 
 Variabel `.env` berikut hanya di-seed **sekali** saat tabel `system_settings` masih kosong, lalu diabaikan: `STORAGE_HIGH_WATERMARK_PERCENT`, `STORAGE_LOW_WATERMARK_PERCENT`, `STORAGE_MAX_RETENTION_DAYS`, `UNKNOWN_FACE_RETENTION_DAYS`, `JAGAIND_MAX_MODULES_PER_CAMERA`, `NOTIFICATION_MAX_AGE`, `WHATSAPP_RATE_LIMIT_PER_MINUTE`, `WHATSAPP_DEVICE_NAME`. Bila mengubahnya setelah seed, nilainya tidak berpengaruh; ubah dari tab ini.
+
+Nilai `.env` untuk ambang penyimpanan dan retensi evidence di luar rentang yang sah membuat Core menolak start. Nilai tidak sah yang sudah terlanjur tersimpan di tabel, termasuk pasangan **Ambang bawah** yang tidak lebih kecil dari **Ambang atas**, diganti dengan nilai bawaan yang aman saat start berikutnya. Penggantian itu tercatat di log server dan nilai terkoreksi disimpan kembali, sehingga tab ini menampilkan nilai yang benar-benar berlaku.
 
 ## Lihat juga
 

@@ -62,10 +62,12 @@ Lihat [Penyimpanan dan retensi data](/admin/penyimpanan-dan-retensi-data).
 
 | Variabel | Bawaan | Penjelasan |
 | --- | --- | --- |
-| `STORAGE_HIGH_WATERMARK_PERCENT` | `85` | Pemakaian disk yang memicu penghapusan bukti terlama. |
-| `STORAGE_LOW_WATERMARK_PERCENT` | `70` | Target pemakaian disk setelah penghapusan. Harus lebih kecil dari batas atas. |
-| `STORAGE_MAX_RETENTION_DAYS` | `60` | Umur maksimum berkas bukti dalam hari. |
+| `STORAGE_HIGH_WATERMARK_PERCENT` | `85` | Pemakaian disk yang memicu penghapusan bukti terlama. Nilai sah `1`–`100`. |
+| `STORAGE_LOW_WATERMARK_PERCENT` | `70` | Target pemakaian disk setelah penghapusan. Nilai sah `1` sampai satu angka di bawah ambang atas. |
+| `STORAGE_MAX_RETENTION_DAYS` | `60` | Umur maksimum berkas bukti dalam hari. Nilai sah `1`–`3650`. |
 | `UNKNOWN_FACE_RETENTION_DAYS` | `30` | Wajah Tak Dikenal dihapus setelah tidak terlihat selama jumlah hari ini. `0` berarti disimpan sampai dihapus manual. |
+
+Nilai ambang atau retensi di luar rentang itu menggagalkan start Core dengan pesan yang menyebut variabel dan nilai aktual. Ambang bawah `0` atau negatif tidak diterima karena akan menghapus seluruh bukti saat disk penuh.
 
 `EVIDENCE_STORAGE_PATH` (`./data/evidence`) tetap dibaca dari `.env` karena mengikat path volume; nilainya
 hanya tampil di daftar **Terikat deployment**.
