@@ -22,9 +22,9 @@ Indonesian, addressing the reader as "Anda". UI language is Indonesian.
 - Live video, debug, and identity-label streams close when the session is revoked (logout, disabled account, password reset); debug and identity-label streams also close when the permission required by the stream is removed
 - Users and roles: built-in Admin/Operator/Viewer, custom roles from 17 permissions
 - Cameras: RTSP (main + sub-stream) and test camera, analysis FPS 1–30, analysis resolution Standar/Tinggi
-- Pantau screen with live WebRTC video, geometry overlay, incident queue, acknowledge, acknowledge all, critical alarm sound
-- Incident history with filters and detail panel; evidence is a JPEG snapshot plus a short MP4 clip when the camera stream supports it
-- Modules: Lintas Garis, Berdiam Terlalu Lama, Larangan Parkir, Penyusupan Zona, Kepadatan Berlebih, Penghitung Pengunjung (statistics), Perundungan Fisik, Deteksi Jatuh, Pengenalan Wajah
+- Pantau screen with live WebRTC video, geometry overlay, live zone duration timer badge, incident queue, acknowledge, acknowledge all, critical alarm sound and Indonesian browser speech alert for `required_presence`
+- Incident history with filters (including module/type) and detail panel; evidence is a JPEG snapshot with geometry highlight plus a short MP4 clip when the camera stream supports it
+- Modules: Lintas Garis, Berdiam Terlalu Lama, Larangan Parkir, Area kehadiran wajib, Area drop off, Penyusupan Zona, Kepadatan Berlebih, Penghitung Pengunjung (statistics), Perundungan Fisik, Deteksi Jatuh, Pengenalan Wajah
 - Ignore Zones, debug mode
 - Alarm rules: observation types, severity, cooldown per area, min confidence, active days and hours
 - Notifications: Telegram (bot token set from Settings, stored in the database) and WhatsApp (unofficial WhatsApp Web protocol, QR or pairing code)
