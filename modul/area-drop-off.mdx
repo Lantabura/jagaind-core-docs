@@ -1,0 +1,75 @@
+---
+title: "Area drop off"
+description: "Pantau area berhenti sementara kendaraan dan kirim peringatan bila kendaraan bertahan melampaui batas waktu yang diizinkan."
+keywords: ["area drop off", "drop off", "bongkar muat", "kendaraan", "zona", "timer"]
+---
+
+Modul **Area drop off** memantau zona yang memperbolehkan kendaraan berhenti sementara—misalnya area turun-naik penumpang atau dermaga bongkar muat—dan memberi peringatan bila ada kendaraan yang bertahan melampaui batas waktu.
+
+Berbeda dari [Larangan Parkir](/modul/larangan-parkir) yang melarang berhenti sejak awal di luar toleransi singkat, **Area drop off** memang mengizinkan kendaraan masuk dan berhenti hingga batas waktu yang Anda tetapkan per zona.
+
+**Cocok untuk:**
+
+- Area turun-naik penumpang di lobi atau gerbang
+- Dermaga bongkar muat gudang
+- Zona antre pengantaran singkat
+
+## Cara kerja
+
+1. Anda menggambar satu atau beberapa zona poligon pada area drop off di video.
+2. Saat kendaraan target masuk dan berhenti di dalam zona, hitungan waktu untuk kendaraan itu dimulai dan badge timer langsung tampil di tengah area poligon pada video kamera.
+3. Bila kendaraan meninggalkan zona sebelum batas waktu habis, timer hilang dalam beberapa detik tanpa peringatan.
+4. Bila kendaraan bertahan melampaui **Batas waktu drop off**, modul mencatat kejadian **Kendaraan melebihi batas waktu di area drop off** secara berkala sampai kendaraan pergi.
+
+Perilaku pelacakan di dalam area drop off:
+
+- **Tahan halangan sesaat**: kendaraan yang sempat tertutup kendaraan atau orang lain tetap mempertahankan hitungan waktunya hingga 60 detik sebelum dianggap pergi.
+- **Tahan pergantian ID pelacakan**: asosiasi memakai posisi kendaraan di dalam zona, sehingga durasi tidak ter-reset hanya karena ID pelacakan kamera berubah.
+- **Timer menampilkan durasi terlama**: bila ada lebih dari satu kendaraan di zona yang sama, timer langsung di tengah area menampilkan durasi kendaraan yang paling lama berada di zona.
+- **Pengingat berkala**: setelah batas waktu terlewati, peringatan dikirim ulang secara berkala (antara 1 hingga 15 menit mengikuti batas waktu zona) selama kendaraan masih bertahan.
+
+## Jenis kejadian
+
+| Kejadian | Arti |
+| --- | --- |
+| **Kendaraan melebihi batas waktu di area drop off** | Satu kendaraan bertahan di dalam zona melebihi batas waktu drop off. |
+
+Detail insiden menampilkan **Objek** (jenis kendaraan), **Zona**, **Durasi berhenti**, dan **Batas drop off**.
+
+## Yang perlu digambar
+
+Minimal satu **zona** berupa poligon dengan minimal 3 titik. Satu kamera dapat memiliki lebih dari satu zona dengan batas waktu dan jadwal aktif masing-masing.
+
+## Pengaturan
+
+### Pengaturan per zona
+
+| Pengaturan | Bawaan | Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Batas waktu drop off** | `15 mnt` (900 detik) | 1 menit – 8 jam | Lama kendaraan diperbolehkan berhenti di zona sebelum memicu peringatan. Tersedia pilihan cepat `5 mnt`, `15 mnt`, `30 mnt`, `1 jam`, `2 jam`, serta tombol `-` dan `+`. |
+| **Jadwal aktif zona** | **Setiap hari** · sepanjang hari | Hari (`Min`–`Sab`), jam `00.00`–`23.00` | Jadwal berlakunya zona. Pilih **Setiap hari** atau centang hari tertentu; jam **Mulai** dan **Selesai** yang sama berarti 24 jam. Di luar jadwal aktif, kendaraan tidak dihitung dan timer tidak tampil. |
+
+### Pengaturan modul
+
+| Pengaturan | Bawaan | Pilihan | Penjelasan |
+| --- | --- | --- | --- |
+| **Jenis kendaraan** | `car`, `motorcycle`, `bus`, `truck` | `car`, `motorcycle`, `bus`, `truck` | Jenis kendaraan yang diawasi di area drop off (`mobil`, `sepeda motor`, `bus`, `truk`). |
+
+## Tips
+
+- Saat memasang modul lewat panduan pemasangan, JagaInd menyarankan **Jeda antar peringatan** `0 detik` pada aturan alarm agar pengingat berkala tiap zona langsung diteruskan.
+- Gambar zona poligon pada lantai area berhenti, bukan pada jalur lalu lintas utama di sampingnya, agar kendaraan yang sekadar lewat tidak memulai timer.
+- Gunakan [Ignore Zone](/kamera/cara-membuat-ignore-zone) bila ada area parkir tetap di sebelah area drop off yang ingin dikecualikan.
+
+## Batasan
+
+- Modul dievaluasi berkala setiap sekitar 2 detik; kendaraan yang hanya melintas sangat cepat mungkin tidak terekam, yang memang diharapkan untuk area drop off.
+- Jika kendaraan tertutup penuh halangan lebih dari 60 detik, slot waktunya dianggap selesai dan dimulai ulang saat muncul kembali.
+- Hitungan waktu dimulai ulang setiap kali pengaturan modul di kamera disimpan ulang.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)
+- [Larangan Parkir](/modul/larangan-parkir)
+- [Cara memantau kamera](/pemantauan/cara-memantau-kamera)

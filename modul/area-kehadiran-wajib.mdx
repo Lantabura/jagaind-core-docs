@@ -1,0 +1,68 @@
+---
+title: "Area kehadiran wajib"
+description: "Pantau ruangan atau pos yang wajib selalu ada petugas dan kirim peringatan berkala bila kosong melampaui batas waktu."
+keywords: ["area kehadiran wajib", "required presence", "pos jaga", "petugas", "zona", "timer"]
+---
+
+Modul **Area kehadiran wajib** memantau titik atau ruangan yang harus selalu dijaga petugas. Bila jumlah orang di dalam area kurang dari batas minimum selama melampaui batas waktu yang ditentukan, modul mengirim peringatan secara berkala sampai petugas kembali.
+
+**Cocok untuk:**
+
+- Pos jaga atau gerbang keamanan
+- Meja layanan dan resepsionis
+- Ruang kontrol atau ruang operator
+
+## Cara kerja
+
+1. Anda menggambar satu atau beberapa zona poligon pada area yang wajib selalu terisi petugas.
+2. Modul memeriksa jumlah orang di dalam setiap zona secara berkala, termasuk ketika ruangan sepi tanpa gerakan apa pun.
+3. Begitu jumlah orang kurang dari **Jumlah minimum orang hadir**, hitungan waktu kosong dimulai dan badge timer langsung tampil di tengah area poligon pada video kamera.
+4. Bila hitungan melewati **Batas waktu kosong**, modul mencatat kejadian **Area kehadiran wajib kosong** secara berkala sampai petugas kembali.
+
+Untuk mencegah peringatan palsu di ruang kerja atau pos jaga:
+
+- **Orang duduk diam tetap terhitung hadir**: pemeriksaan tidak bergantung pada gerakan di gambar.
+- **Tahan terhadap potongan meja atau kursi**: keberadaan orang diperiksa melalui titik tengah dan bagian tubuh, bukan hanya titik kaki yang sering tertutup meja.
+- **Anti-kedip kehadiran**: saat area sedang dihitung kosong, dibutuhkan **2 pembacaan beruntun** yang memenuhi minimum orang untuk menghentikan dan mereset timer.
+- **Jeda stream aman**: bila kamera sempat terputus lebih dari 12 detik, hitungan waktu direset agar tidak memicu alarm palsu saat kamera tersambung kembali.
+- **Pengingat berkala**: setelah batas waktu terlewati, peringatan dikirim ulang secara berkala (mengikuti batas waktu zona, minimal setiap 30 detik) selama area masih kosong. Di peramban operator, peringatan juga dapat diucapkan secara lokal selama bunyi alarm tidak disenyapkan.
+
+## Jenis kejadian
+
+| Kejadian | Arti |
+| --- | --- |
+| **Area kehadiran wajib kosong** | Jumlah orang di dalam zona kurang dari minimum yang ditetapkan melampaui batas waktu kosong. |
+
+Detail insiden menampilkan **Zona**, **Kehadiran** (`<hadir> / <minimum> orang`), **Durasi kosong**, **Batas kosong**, dan **Pesan suara**.
+
+## Yang perlu digambar
+
+Minimal satu **zona** berupa poligon dengan minimal 3 titik. Satu kamera dapat memiliki beberapa zona, dan setiap zona mempunyai batas waktu, jumlah minimum orang, jadwal aktif, dan pesan peringatannya sendiri.
+
+## Pengaturan per zona
+
+| Pengaturan | Bawaan | Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Batas waktu kosong** | `5 mnt` (300 detik) | 15 detik – 60 menit | Lama area boleh kosong sebelum memicu peringatan. Tersedia pilihan cepat `15 dtk`, `1 mnt`, `5 mnt`, `15 mnt`, `30 mnt`, `60 mnt`, serta tombol `-` dan `+`. |
+| **Jumlah minimum orang hadir** | `1 orang` | 1–10 orang | Jumlah minimum orang di dalam poligon agar area dianggap terisi. |
+| **Jadwal aktif zona** | **Setiap hari** · sepanjang hari | Hari (`Min`–`Sab`), jam `00.00`–`23.00` | Jadwal berlakunya zona. Pilih **Setiap hari** atau centang hari tertentu; jam **Mulai** dan **Selesai** yang sama berarti 24 jam. Di luar jadwal aktif, zona tidak dihitung kosong dan timer tidak tampil. |
+| **Pesan peringatan / ucapan suara (opsional)** | Kosong | Maksimal 300 karakter | Ucapan suara dan teks pesan saat area kosong. Bila dikosongkan, JagaInd memakai kalimat bawaan: *"Perhatian, &lt;nama zona&gt; belum terisi petugas. Petugas dimohon segera kembali."* |
+
+## Tips
+
+- Saat memasang modul lewat panduan pemasangan, JagaInd menyarankan **Jeda antar peringatan** `0 detik` pada aturan alarm agar pengingat berkala dari setiap zona langsung diteruskan sesuai jadwal masing-masing zona.
+- Pastikan poligon mencakup area duduk atau berdiri petugas, termasuk bagian torso, tidak hanya lantai di depan kursi.
+- Bila kamera mengarah ke jalur lalu-lalang umum di latar belakang, gunakan poligon yang pas dengan pos petugas atau tambahkan [Ignore Zone](/kamera/cara-membuat-ignore-zone).
+
+## Batasan
+
+- Penilaian bergantung pada visibilitas petugas di kamera. Jika petugas berada sepenuhnya di luar area poligon atau terhalang penuh oleh benda lain, ia tidak terhitung hadir.
+- Ucapan peringatan suara di layar bergantung pada dukungan fitur ucapan peramban operator (`id-ID`) dan tidak berbunyi saat tombol **Senyapkan** aktif.
+- Hitungan timer yang sedang berjalan dimulai ulang bila pengaturan modul disimpan ulang atau kamera terputus.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)
+- [Cara mengatur bunyi alarm](/pemantauan/cara-mengatur-bunyi-alarm)
+- [Cara memantau kamera](/pemantauan/cara-memantau-kamera)
