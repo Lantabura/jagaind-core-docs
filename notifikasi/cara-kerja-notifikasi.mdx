@@ -36,7 +36,7 @@ Pesan insiden berisi foto bukti beserta teks berikut:
 
 - Tingkat ditulis dalam bahasa Inggris: `INFO`, `WARNING`, atau `CRITICAL`.
 - Bila foto bukti tidak tersedia, pesan dikirim sebagai teks saja.
-- Untuk modul **Area kehadiran wajib**, **Area drop off**, dan **Nyaris Tabrakan**, ringkasan kejadian langsung menyebut lokasi zona (atau nama zona dan durasi pada **Area kehadiran wajib** dan **Area drop off**: `Area kehadiran wajib "<zona>" kosong selama <durasi>` beserta baris `💬 Pesan: ...`, `<Kendaraan> melampaui batas waktu di area drop off "<zona>" (<durasi>)`, atau `<Kendaraan> nyaris menabrak <target> di "<zona>"`) tanpa baris objek terpisah.
+- Untuk modul **Area kehadiran wajib**, **Area drop off**, dan **Keselamatan Jalur Bahaya**, ringkasan kejadian langsung menyebut lokasi zona (misalnya `Area kehadiran wajib "<zona>" kosong selama <durasi>` beserta baris `💬 Pesan: ...`, `<Kendaraan> melampaui batas waktu di area drop off "<zona>" (<durasi>)`, `<Target> memasuki jalur bahaya "<zona>"`, atau `<Kendaraan> mendekati <target> di jalur bahaya "<zona>" (~<estimasi> detik)`) tanpa baris objek terpisah.
 
 <Warning>
   Pesan dan foto insiden dikirim ke server Telegram atau WhatsApp di internet. Pertimbangkan kebijakan privasi organisasi Anda sebelum mengaktifkan notifikasi, terutama untuk kamera yang merekam wajah.
