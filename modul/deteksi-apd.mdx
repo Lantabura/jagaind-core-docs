@@ -1,0 +1,74 @@
+---
+title: "Deteksi APD (K3)"
+description: "Awasi kepatuhan Alat Pelindung Diri per zona keselamatan kerja, catat bukti pelanggaran dan tindak lanjut K3, serta unduh rekapitulasi mingguan dan bulanan."
+keywords: ["apd", "ppe", "k3", "keselamatan kerja", "helm", "rompi", "welder", "rekap", "pdf"]
+---
+
+Modul **Deteksi APD (K3)** memantau penggunaan Alat Pelindung Diri (APD) pekerja di satu atau beberapa zona keselamatan kerja pada kamera yang sama. Setiap zona memiliki aturan APD wajib, jadwal aktif, dan mode deteksi tersendiri.
+
+**Cocok untuk:**
+
+- **Zona Welder** yang mewajibkan helm las, sarung tangan safety, dan sepatu safety selama proses pengelasan
+- **Zona Produksi** yang mewajibkan helm safety, rompi safety, dan sepatu safety untuk operator lini
+- **Zona Gudang / Bongkar Muat** yang mewajibkan helm safety dan rompi visibilitas tinggi di area lalu lintas forklift
+
+## Cara kerja
+
+1. Anda menggambar satu atau beberapa poligon zona K3 di kamera dan memberi nama tiap zona (misalnya **Zona Welder**, **Zona Produksi**, atau **Zona Gudang**).
+2. Untuk tiap zona, Anda memilih **Template zona K3** atau mencentang daftar **APD wajib dipakai**, menentukan **Mode deteksi APD**, serta mengatur **Jadwal aktif zona** dan sakelar aktif/nonaktif zona.
+3. Saat orang berada di dalam poligon zona aktif selama minimal **Durasi konfirmasi pelanggaran** (`min_duration_seconds`, bawaan `2,5` detik) dengan APD wajib yang tidak lengkap, modul mencatat kejadian **Pelanggaran APD**.
+4. Sistem menyimpan foto bukti pelanggaran lengkap dengan kotak objek, waktu kejadian, lokasi kamera dan zona, serta daftar APD yang belum dipakai.
+5. Dari halaman modul **Deteksi APD (K3)**, Anda dapat mengelola aturan zona di tab **Zona K3** dan meninjau statistik periode **Mingguan**, **Bulanan**, atau **Rentang kustom** di tab **Rekapitulasi K3** beserta unduhan **CSV** dan **PDF (.pdf)**.
+
+## Jenis kejadian dan APD yang didukung
+
+Modul menghasilkan kejadian **Pelanggaran APD** dengan tingkat keparahan bawaan sesuai aturan alarm yang Anda pasang.
+
+APD yang dapat diwajibkan per zona:
+
+- **Helm safety** (`helmet`)
+- **Helm las** (`welding_helmet`)
+- **Kacamata safety** (`goggles`)
+- **Rompi safety** (`vest`)
+- **Wearpack** (`wearpack`)
+- **Sarung tangan** (`gloves`)
+- **Sepatu safety** (`boots`)
+
+<Note>
+  Sebagian kamera bersudut rendah memotong area kaki di tepi paling bawah gambar. Sistem mengabaikan pemeriksaan **Sepatu safety** ketika batas bawah tubuh pekerja menyentuh tepi bawah frame agar tidak memicu pelanggaran palsu.
+</Note>
+
+## Pengaturan per zona K3
+
+Anda dapat mengatur tiap zona saat memasang modul di halaman kamera maupun lewat tab **Zona K3** di halaman modul.
+
+| Pengaturan | Penjelasan |
+| --- | --- |
+| **Status deteksi zona** | Mengaktifkan atau menonaktifkan pengawasan di zona tertentu tanpa menghapus poligon. |
+| **Template zona K3** | Pilihan cepat untuk **Zona Welder** (helm las, sarung tangan, sepatu safety), **Zona Produksi** (helm safety, rompi safety, sepatu safety), dan **Zona Gudang** (helm safety, rompi safety). |
+| **APD wajib dipakai** | Checklist 7 jenis APD yang wajib terpenuhi di dalam zona tersebut (minimal 1 APD dipilih). |
+| **Mode deteksi APD** | **Ketat (wajib terdeteksi)** mengharuskan APD terlihat jelas di tubuh pekerja; **Deteksi tidak memakai (anti positif palsu)** hanya melapor bila deteksi negatif terkonfirmasi (helm las dan wearpack tetap dipantau dengan kehadiran positif karena tidak memiliki kelas negatif). |
+| **Jadwal aktif zona** | Hari dalam seminggu serta jam mulai dan selesai pengawasan di zona tersebut. |
+
+## Dokumentasi pelanggaran & tindak lanjut
+
+Setiap pelanggaran yang menjadi insiden memiliki panel **Status penanganan & tindak lanjut** di halaman **Insiden** maupun dari tab **Rekapitulasi K3**:
+
+- **Status penanganan**: **Belum ditangani**, **Dalam penanganan**, **Selesai ditangani**, atau **Positif palsu**.
+- **Catatan tindak lanjut**: hingga `2000` karakter untuk mencatat teguran, penggantian APD, atau hasil verifikasi di lapangan.
+- Riwayat perubahan mencatat nama petugas dan waktu pembaruan terakhir (memerlukan izin **Akui insiden** untuk mengubah; pengguna dengan izin **Lihat insiden** dapat membacanya).
+
+## Rekapitulasi mingguan, bulanan, dan ekspor laporan
+
+Buka **Modul Analitik** > **Deteksi APD (K3)** > tab **Rekapitulasi K3** untuk evaluasi keselamatan kerja:
+
+- Pilih periode **Mingguan** (Senin–Minggu dengan navigasi antar minggu), **Bulanan** (navigasi antar bulan), atau **Rentang kustom**.
+- Saring data menurut **Kamera**, **Zona K3**, **Status penanganan**, dan **APD dilanggar**.
+- Pantau ringkasan statistik: total pelanggaran beserta perbandingan terhadap periode sebelumnya, jumlah menunggu/ditangani, tingkat penyelesaian, kelengkapan catatan tindak lanjut, grafik tren harian, grafik jenis APD yang paling sering dilanggar, dan ringkasan per zona.
+- Pilih **Unduh CSV** untuk membuka data di spreadsheet, atau **Unduh PDF (.pdf)** untuk menyimpan laporan evaluasi lengkap dengan ringkasan statistik, rincian pelanggaran, foto bukti (bagi akun berizin **Lihat bukti (foto dan klip)**), dan catatan tindak lanjut.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara melihat riwayat insiden](/pemantauan/cara-melihat-riwayat-insiden)
+- [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi)

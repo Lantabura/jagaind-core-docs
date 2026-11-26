@@ -71,6 +71,7 @@
               "modul/area-kehadiran-wajib",
               "modul/area-drop-off",
               "modul/keselamatan-jalur-bahaya",
+              "modul/deteksi-apd",
               "modul/penyusupan-zona",
               "modul/kepadatan-berlebih",
               "modul/penghitung-pengunjung",
