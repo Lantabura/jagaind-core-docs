@@ -23,8 +23,8 @@ Indonesian, addressing the reader as "Anda". UI language is Indonesian.
 - Users and roles: built-in Admin/Operator/Viewer, custom roles from 17 permissions
 - Cameras: RTSP (main + sub-stream) and test camera, analysis FPS 1–30, analysis resolution Standar/Tinggi
 - Pantau screen with live WebRTC video, geometry overlay, live zone duration timer badge, incident queue, acknowledge, acknowledge all, critical alarm sound and Indonesian browser speech alert for `required_presence`
-- Incident history with filters (including module/type) and detail panel; evidence is a JPEG snapshot with geometry highlight plus a short MP4 clip when the camera stream supports it
-- Modules: Lintas Garis, Berdiam Terlalu Lama, Larangan Parkir, Area kehadiran wajib, Area drop off, Keselamatan Jalur Bahaya, Penyusupan Zona, Kepadatan Berlebih, Penghitung Pengunjung (statistics), Perundungan Fisik, Deteksi Jatuh, Pengenalan Wajah
+- Incident history with filters (including module/type and handling status), follow-up handling status/notes (`OPEN`, `IN_PROGRESS`, `RESOLVED`, `FALSE_POSITIVE`), weekly/monthly/custom recap statistics (`GET /api/v1/incidents/recap`) with CSV and PDF report export, and detail panel; evidence is a JPEG snapshot with geometry highlight plus a short MP4 clip when the camera stream supports it
+- Modules: Lintas Garis, Berdiam Terlalu Lama, Larangan Parkir, Area kehadiran wajib, Area drop off, Keselamatan Jalur Bahaya, Deteksi APD (K3), Penyusupan Zona, Kepadatan Berlebih, Penghitung Pengunjung (statistics), Perundungan Fisik, Deteksi Jatuh, Pengenalan Wajah
 - Ignore Zones, debug mode
 - Alarm rules: observation types, severity, cooldown per area, min confidence, active days and hours
 - Notifications: Telegram (bot token set from Settings, stored in the database) and WhatsApp (unofficial WhatsApp Web protocol, QR or pairing code)
