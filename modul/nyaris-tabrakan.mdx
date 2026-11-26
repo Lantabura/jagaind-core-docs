@@ -1,0 +1,76 @@
+---
+title: "Nyaris Tabrakan"
+description: "Deteksi interaksi berbahaya saat kendaraan yang sedang bergerak melintas terlalu dekat dengan pejalan kaki atau kendaraan lain di zona pemantauan."
+keywords: ["nyaris tabrakan", "near miss", "forklift", "truk", "keselamatan kerja", "k3", "gudang", "zona"]
+---
+
+Modul **Nyaris Tabrakan** membantu Anda menangkap kejadian nyaris celaka (*near-miss*) antara kendaraan yang sedang bergerak (bawaannya `forklift`, dapat diganti ke truk, mobil, motor, atau kendaraan lainnya) dan objek target (bawaannya `person`/pejalan kaki, dapat diganti ke truk, forklift, atau kendaraan lain) di dalam zona pemantauan, sebelum kecelakaan serius terjadi.
+
+Berbeda dari [Penyusupan Zona](/modul/penyusupan-zona) yang langsung memberi tanda setiap kali objek masuk ke area terlarang, modul ini hanya memicu peringatan bila **kendaraan benar-benar sedang bergerak** dan berada dalam jarak dekat dengan objek target di dalam **Zona pemantauan**.
+
+**Cocok untuk:**
+
+- Lorong gudang tempat forklift dan pekerja berbagi jalur yang sama
+- Area bongkar muat tempat truk, van, atau mobil melintas di dekat pekerja
+- Persimpangan dermaga atau jalur keluar-masuk kendaraan untuk mencegah tabrakan forklift dengan truk atau sesama kendaraan
+
+## Cara kerja
+
+1. Anda menggambar satu atau beberapa poligon **Zona pemantauan** di video kamera.
+2. Anda memilih **Jenis kendaraan bergerak** (bawaannya `forklift`) dan **Objek target** (bawaannya `person`).
+3. Modul memantau kendaraan dan objek target di dalam setiap zona.
+4. Kendaraan yang sedang parkir atau diam tidak memicu peringatan; hanya kendaraan yang bergerak melampaui kecepatan minimum (termasuk jeda singkat saat baru mengerem) yang dinilai.
+5. Bila target berupa orang (`person`), pengemudi yang duduk di dalam kabin kendaraan secara bawaan diabaikan agar tidak menimbulkan peringatan palsu.
+6. Bila kendaraan bergerak berada dalam **Batas jarak dekat** dari objek target selama **Durasi konfirmasi**, modul mencatat kejadian **Interaksi nyaris tabrakan**.
+
+Selama interaksi yang sama berlanjut, modul tidak mengirim kejadian berulang. Pasangan kendaraan dan target yang sama baru dapat memicu peringatan lagi setelah terpisah cukup lama lalu kembali berdekatan. Bila dua kendaraan sama-sama bergerak dan keduanya termasuk dalam daftar kendaraan bergerak serta target, hanya satu kejadian yang dicatat dengan kendaraan tercepat sebagai pemicu.
+
+## Jenis kejadian
+
+| Kejadian | Arti |
+| --- | --- |
+| **Interaksi nyaris tabrakan** | Kendaraan yang sedang bergerak berada terlalu dekat dengan objek target di dalam zona pemantauan. |
+
+Detail insiden menampilkan **Zona**, **Kendaraan** (jenis dan nomor track), **Target** (jenis dan nomor track), dan **Jarak relatif** (dalam kelipatan skala objek).
+
+## Yang perlu digambar
+
+Minimal satu **Zona pemantauan** berupa poligon dengan minimal 3 titik sudut. Satu kamera dapat memiliki beberapa zona dengan batas jarak dekat masing-masing bila diperlukan.
+
+## Pengaturan
+
+### Pengaturan per zona
+
+| Pengaturan | Bawaan | Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Batas jarak dekat (skala objek)** | Kosong (pakai nilai modul) | 0,2–5,0 | Batas jarak dekat khusus zona ini; biarkan kosong untuk mengikuti nilai tingkat modul. |
+
+### Pengaturan modul
+
+| Pengaturan | Bawaan | Pilihan / Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Jenis kendaraan bergerak** | `forklift` | `bicycle`, `motorbike`, `threewheel`, `car`, `van`, `bus`, `truck`, `forklift` | Jenis kendaraan yang dipantau pergerakannya. |
+| **Objek target** | `person` | `person`, `bicycle`, `motorbike`, `threewheel`, `car`, `van`, `bus`, `truck`, `forklift` | Objek yang berisiko tertabrak saat berdekatan dengan kendaraan bergerak. |
+| **Batas jarak dekat (skala objek)** | `1,2` | 0,2–5,0 | Jarak maksimum antara tepi kendaraan bergerak dan objek target (~`1,2` ≈ 2 meter untuk pejalan kaki). |
+| **Kecepatan minimum kendaraan** | `0,15` | 0,02–3,0 | Kecepatan gerak minimum kendaraan (kelipatan ukuran kendaraan per detik) agar dianggap bergerak dan menyaring kendaraan parkir. |
+| **Durasi konfirmasi (detik)** | `0,4` | 0–5,0 | Lama kendaraan bergerak dan objek target harus bertahan dalam jarak dekat sebelum peringatan tercatat. |
+| **Abaikan pengemudi kendaraan** | Aktif (`true`) | Aktif / Nonaktif | Mengabaikan deteksi `person` yang duduk di dalam kabin kendaraan agar pengemudi tidak memicu peringatan palsu. |
+
+## Tips
+
+- Gambar zona mencakup seluruh lebar lorong atau persimpangan tempat kendaraan melintas dan objek target berada.
+- Naikkan **Batas jarak dekat (skala objek)** sedikit (misalnya `1,5`) di persimpangan sempit atau tikungan buta, atau turunkan (misalnya `0,8`) di area yang ramai agar hanya jarak yang benar-benar berisiko yang tercatat.
+- Anda bisa memantau skenario kendaraan vs kendaraan (misalnya **Jenis kendaraan bergerak** diisi `forklift` dan `truck`, lalu **Objek target** diisi `truck`) untuk mendeteksi risiko tabrakan di area bongkar muat.
+- Bila kamera dipasang dari sudut sangat tinggi atau tegak lurus dari atas dengan target `person`, periksa hasil deteksi di mode debug untuk memastikan pengemudi kabin tetap terabaikan dengan baik.
+
+## Batasan
+
+- Penilaian jarak dihitung di bidang gambar kamera dengan kompensasi skala objek; kamera yang sangat miring atau sudut ekstrem mungkin membutuhkan penyesuaian **Batas jarak dekat (skala objek)** per zona.
+- Kendaraan dan objek target harus terdeteksi dan terpisah dengan jelas di dalam area gambar; objek yang tertutup penuh oleh rak atau muatan tinggi tidak dapat dinilai sampai kembali terlihat.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)
+- [Penyusupan Zona](/modul/penyusupan-zona)
+- [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi)
