@@ -1,0 +1,77 @@
+---
+title: "Keselamatan Jalur Bahaya"
+description: "Pencegahan kecelakaan di jalur kendaraan dengan pemberitahuan saat target memasuki zona bahaya dan peringatan dini saat kendaraan bergerak mendekat."
+keywords: ["jalur bahaya", "keselamatan kerja", "forklift", "truk", "preventif", "k3", "gudang", "zona"]
+---
+
+Modul **Keselamatan Jalur Bahaya** membantu mencegah kecelakaan di lorong atau area kerja bersama secara **preventif** dalam dua tingkat:
+
+1. **Info saat target masuk jalur bahaya** (**Masuk ke jalur bahaya**) — langsung memberi tahu petugas begitu pejalan kaki (`person`) atau objek target lain memasuki **Zona jalur bahaya**, bahkan sebelum ada kendaraan.
+2. **Peringatan saat kendaraan mendekat** (**Kendaraan mendekati jalur bahaya**) — memberi peringatan dini saat kendaraan bergerak (bawaannya `forklift`, dapat diganti ke truk, mobil, motor, atau kendaraan lain) melaju ke arah zona bahaya atau target di dalamnya, baik dari luar zona, dari jauh di dalam zona, maupun saat jaraknya sudah dekat.
+
+**Cocok untuk:**
+
+- Lorong gudang tempat pekerja perlu langsung diketahui bila masuk ke jalur lintas forklift
+- Area bongkar muat agar petugas mendapat peringatan dini saat truk, van, atau forklift mulai mendekati pekerja atau kendaraan lain di zona kerja
+- Persimpangan logistik atau pintu gudang untuk mencegah benturan sebelum jarak terlalu mepet
+
+## Cara kerja
+
+1. Anda menggambar satu atau beberapa poligon **Zona jalur bahaya** di video kamera.
+2. Anda memilih **Jenis kendaraan bergerak** (bawaannya `forklift`) dan **Objek target** (bawaannya `person`).
+3. Saat objek target memasuki zona selama **Durasi konfirmasi**, modul mencatat kejadian **Masuk ke jalur bahaya**. Target yang tetap berada di dalam zona tidak memicu ulang sebelum keluar cukup lama.
+4. Pengemudi (`person`) yang duduk di dalam kabin kendaraan secara bawaan diabaikan oleh **Abaikan pengemudi kendaraan** agar tidak memicu info masuk jalur ataupun peringatan.
+5. Modul melacak vektor arah gerak kendaraan maupun target. Saat kendaraan bergerak mendekati jalur bahaya (proyeksi dalam **Horison peringatan kendaraan mendekat**) atau memasuki **Batas jarak dekat** dari target, modul mencatat **Kendaraan mendekati jalur bahaya**.
+6. Kendaraan yang sedang parkir, melaju menjauh, atau melintas paralel di jalur aman tidak memicu peringatan **Kendaraan mendekati jalur bahaya**.
+7. Saat pemasangan lewat wizard dashboard, sistem otomatis membuat **dua aturan terpisah** (`Info` untuk masuk ke jalur bahaya dan tingkat pilihan untuk kendaraan mendekat) agar cooldown info tidak menghalangi peringatan kendaraan mendekat.
+
+## Jenis kejadian
+
+| Kejadian | Tingkat bawaan | Arti |
+| --- | --- | --- |
+| **Masuk ke jalur bahaya** | Info | Objek target berada di dalam zona jalur bahaya. |
+| **Kendaraan mendekati jalur bahaya** | Peringatan | Kendaraan bergerak terdeteksi mendekati zona jalur bahaya atau objek target di dalamnya. |
+
+Detail insiden menampilkan **Zona**, **Target** (jenis, nomor track, dan arah gerak atau `diam`), dan khusus **Kendaraan mendekati jalur bahaya** juga menampilkan **Kendaraan** (jenis, nomor track, dan arah gerak), **Estimasi tiba** (bila terdeteksi dari luar atau dari jauh), serta **Jarak relatif** (dalam kelipatan skala objek).
+
+## Yang perlu digambar
+
+Minimal satu **Zona jalur bahaya** berupa poligon dengan minimal 3 titik sudut. Satu kamera dapat memiliki beberapa zona dengan batas jarak dekat masing-masing bila diperlukan.
+
+## Pengaturan
+
+### Pengaturan per zona
+
+| Pengaturan | Bawaan | Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Batas jarak dekat (skala objek)** | Kosong (pakai nilai modul) | 0,2–5,0 | Batas jarak dekat khusus zona ini; biarkan kosong untuk mengikuti nilai tingkat modul. |
+
+### Pengaturan modul
+
+| Pengaturan | Bawaan | Pilihan / Rentang | Penjelasan |
+| --- | --- | --- | --- |
+| **Jenis kendaraan bergerak** | `forklift` | `bicycle`, `motorbike`, `threewheel`, `car`, `van`, `bus`, `truck`, `forklift` | Jenis kendaraan yang dipantau saat mendekati jalur bahaya atau objek target. |
+| **Objek target** | `person` | `person`, `bicycle`, `motorbike`, `threewheel`, `car`, `van`, `bus`, `truck`, `forklift` | Objek yang diberi info saat masuk ke jalur bahaya dan dipantau risikonya. |
+| **Horison peringatan kendaraan mendekat (detik)** | `3,5` | 0–10,0 | Jangka waktu proyeksi lintasan untuk memberi peringatan dini saat kendaraan mendekat (`0` = hanya pantau jarak dekat). |
+| **Batas jarak dekat (skala objek)** | `1,2` | 0,2–5,0 | Jarak langsung maksimum antara tepi kendaraan dan objek target (~`1,2` ≈ 2 meter untuk pejalan kaki). |
+| **Kecepatan minimum kendaraan** | `0,15` | 0,02–3,0 | Kecepatan gerak minimum kendaraan (kelipatan ukuran kendaraan per detik) agar dianggap bergerak dan menyaring kendaraan parkir. |
+| **Durasi konfirmasi (detik)** | `0,4` | 0–5,0 | Lama kondisi masuk jalur atau kendaraan mendekat harus bertahan sebelum kejadian dikirim. |
+| **Abaikan pengemudi kendaraan** | Aktif (`true`) | Aktif / Nonaktif | Mengabaikan deteksi `person` yang duduk di dalam kabin kendaraan agar pengemudi tidak memicu informasi atau peringatan palsu. |
+
+## Tips
+
+- Gambar **Zona jalur bahaya** pas di jalur lintasan kendaraan agar kendaraan yang baru mengarah masuk dari luar zona dapat langsung memicu peringatan dini tanpa membuat seluruh ruangan berstatus bahaya.
+- Anda bisa memilih skenario kendaraan vs kendaraan (misalnya **Jenis kendaraan bergerak** diisi `forklift` dan `truck`, lalu **Objek target** diisi `truck`) untuk area bongkar muat.
+- Jika kamera dipasang tegak lurus dari atas dengan target `person`, periksa hasil deteksi di mode debug untuk memastikan pengemudi kabin terabaikan dengan baik.
+
+## Batasan
+
+- Peringatan kendaraan mendekat dihitung dari arah gerak dan skala piksel pada bidang gambar kamera; kamera bersudut sangat miring mungkin membutuhkan penyesuaian **Batas jarak dekat (skala objek)** per zona.
+- Kendaraan dan objek target harus terdeteksi dengan jelas dan tidak tertutup penuh oleh rak atau muatan tinggi.
+
+## Lihat juga
+
+- [Cara memasang modul](/modul/cara-memasang-modul)
+- [Cara membuat aturan alarm](/aturan/cara-membuat-aturan-alarm)
+- [Penyusupan Zona](/modul/penyusupan-zona)
+- [Cara kerja notifikasi](/notifikasi/cara-kerja-notifikasi)
